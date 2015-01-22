@@ -4,4 +4,4 @@
 
 **19.1.2015-21.1.2015:** satunnaista pelimekaniikan ja korttien pitchausta
 
-**22.1.2015:** xh ensimmäisen viikkopalautteen perusteella tehdyt korjaukset, alustavan luokkakaavion tekeminen, koodausta
+**22.1.2015:** 3h ensimmäisen viikkopalautteen perusteella tehdyt korjaukset, alustavan luokkakaavion tekeminen, koodausta, ideointia
