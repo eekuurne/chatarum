@@ -25,6 +25,7 @@ public class Minion {
     }
     
     public int takeDamage(int amount) {
-        return health - amount;
+        health -= amount;
+        return health;
     }
 }
