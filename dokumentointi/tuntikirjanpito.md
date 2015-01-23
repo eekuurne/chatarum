@@ -2,6 +2,8 @@
 
 **15.1.2015:** 4h GitHubin asentelua ja opettelua, ideointia ja aihemäärittelyn kirjoittaminen
 
-**19.1.2015-21.1.2015:** satunnaista pelimekaniikan ja korttien pitchausta
+**19.1.2015-21.1.2015:** satunnaista pelimekaniikan ja korttien ideointia
 
 **22.1.2015:** 3h ensimmäisen viikkopalautteen perusteella tehdyt korjaukset, alustavan luokkakaavion tekeminen, koodausta, ideointia
+
+**23.1.2015:** 1,5h koodausta ja pieniä muutoksia luokkakaavioon
