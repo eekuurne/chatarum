@@ -14,4 +14,9 @@ public class Skill implements Card {
     public void playCard() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    @Override
+    public String getName() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

@@ -4,12 +4,7 @@ package cards;
 public class PuppetMaster extends Minion implements Card {
 
     public PuppetMaster() {
-        super(3, 5, 1);
-    }
-
-    @Override
-    public int getFaction() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        super(3, 5, 1, "Puppet Master");
     }
 
     @Override
@@ -17,6 +12,4 @@ public class PuppetMaster extends Minion implements Card {
         // Takes control of a random enemy minion
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
-    
 }

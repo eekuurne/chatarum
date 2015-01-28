@@ -3,7 +3,10 @@ package cards;
 
 public interface Card {
     
-    int getFaction(); // Returns faction number.
+    int getFaction();
+    String getName();
+    
+    
     
     void playCard();
     
