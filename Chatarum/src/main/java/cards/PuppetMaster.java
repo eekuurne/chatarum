@@ -1,10 +1,10 @@
 
 package cards;
 
-public class PuppetMaster extends Minion implements Card {
+public class PuppetMaster extends Minion {
 
     public PuppetMaster() {
-        super(3, 5, 1, "Puppet Master");
+        super(3, 5, 1, "Puppet Master", 15);
     }
 
     @Override

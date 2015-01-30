@@ -1,0 +1,23 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+#	modified:   Chatarum/pom.xml
+#	modified:   Chatarum/src/main/java/cards/Card.java
+#	new file:   Chatarum/src/main/java/cards/Militia.java
+#	modified:   Chatarum/src/main/java/cards/Minion.java
+#	modified:   Chatarum/src/main/java/cards/PuppetMaster.java
+#	modified:   Chatarum/src/main/java/cards/Skill.java
+#	modified:   Chatarum/src/main/java/game/logic/Deck.java
+#	modified:   Chatarum/src/main/java/game/logic/Hand.java
+#	modified:   Chatarum/src/main/java/ludus/chatarum/App.java
+#	modified:   Chatarum/src/test/java/cards/MinionTest.java
+#	modified:   Chatarum/src/test/java/game/logic/DeckTest.java
+#	modified:   Chatarum/src/test/java/game/logic/HandTest.java
+#	modified:   Chatarum/src/test/java/game/logic/TableTest.java
+#
+
+Hand etc

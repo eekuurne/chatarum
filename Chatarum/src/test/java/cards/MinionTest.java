@@ -31,21 +31,21 @@ public class MinionTest {
     
     @Test
     public void takeDamageStayAlive() {
-        Minion minion = new Minion(2, 3, 1, "Puppet Master");
+        Minion minion = new Minion(2, 3, 1, "Puppet Master", 15);
         minion.takeDamage(2);
         assertEquals(1, minion.getHealth());
     }
     
     @Test
     public void takeDamageGoZero() {
-        Minion minion = new Minion(2, 3, 1, "Puppet Master");
+        Minion minion = new Minion(2, 3, 1, "Puppet Master", 15);
         minion.takeDamage(3);
         assertEquals(0, minion.getHealth());
     }
     
     @Test
     public void takeDamageGoNegative() {
-        Minion minion = new Minion(2, 3, 1, "Puppet Master");
+        Minion minion = new Minion(2, 3, 1, "Puppet Master", 15);
         minion.takeDamage(4);
         assertEquals(-1, minion.getHealth());
     }

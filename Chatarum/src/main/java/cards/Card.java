@@ -5,6 +5,7 @@ public interface Card {
     
     int getFaction();
     String getName();
+    int getCost();
     
     
     

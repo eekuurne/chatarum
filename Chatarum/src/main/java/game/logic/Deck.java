@@ -1,15 +1,17 @@
 package game.logic;
 
 import cards.Card;
+import cards.Militia;
+import cards.Minion;
 import java.util.ArrayList;
 import java.util.Random;
 
 /* 
  Deck constists of 0-30 cards. Player composes his deck in the menu before the 
  game starts and the Deck object will then be transfered into the game. The
- Deck object's role in the game is to give its player 1 card per turn until
- it's empty.
- */
+ Deck object's role in the game is to be a container of cards where the player
+ picks 1 from per turn to his hand.
+*/
 
 public class Deck {
 
@@ -34,6 +36,10 @@ public class Deck {
     public int getMaxSingle() {
         return maxSingle;
     }
+    
+    public int getRemaining() {
+        return cards.size();
+    }
 
     public boolean addCard(Card card1) {
         // If the deck is full, don't add, return false.
@@ -55,6 +61,11 @@ public class Deck {
     }
 
     public Card takeCard() {
+        // If the deck is empty, take militia card.
+        if (cards.isEmpty()) {
+            return new Militia();
+        }
+        // Else pick random card from the deck.
         Random rand = new Random();
         int slot = rand.nextInt(cards.size());
 
@@ -63,5 +74,4 @@ public class Deck {
 
         return card;
     }
-
 }
