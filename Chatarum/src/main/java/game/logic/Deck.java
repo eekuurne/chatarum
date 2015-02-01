@@ -18,11 +18,13 @@ public class Deck {
     private ArrayList<Card> cards;
     private final int maxSize;
     private final int maxSingle;
+    private Hero hero;
 
     public Deck() {
         this.cards = new ArrayList<Card>();
         this.maxSize = 30;
         this.maxSingle = 5;
+        this.hero = new Hero();
     }
 
     public ArrayList<Card> getCards() {

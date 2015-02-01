@@ -1,4 +1,4 @@
-package ludus.chatarum;
+package menu;
 
 import cards.Minion;
 import game.logic.Deck;
