@@ -1,5 +1,7 @@
 
-package cards;
+package cards.minions;
+
+import cards.Minion;
 
 public class PuppetMaster extends Minion {
 

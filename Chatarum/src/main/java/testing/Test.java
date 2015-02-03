@@ -1,9 +1,9 @@
-package menu;
+package testing;
 
 import cards.Minion;
 import game.logic.Deck;
 
-public class App {
+public class Test {
 
     public static void main(String[] args) {
 

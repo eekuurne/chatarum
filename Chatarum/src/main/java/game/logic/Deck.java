@@ -1,7 +1,7 @@
 package game.logic;
 
 import cards.Card;
-import cards.Militia;
+import cards.minions.Militia;
 import cards.Minion;
 import java.util.ArrayList;
 import java.util.Random;
@@ -18,13 +18,13 @@ public class Deck {
     private ArrayList<Card> cards;
     private final int maxSize;
     private final int maxSingle;
-    private Hero hero;
+    private Champion hero;
 
     public Deck() {
         this.cards = new ArrayList<Card>();
         this.maxSize = 30;
         this.maxSingle = 5;
-        this.hero = new Hero();
+        this.hero = new Champion();
     }
 
     public ArrayList<Card> getCards() {
