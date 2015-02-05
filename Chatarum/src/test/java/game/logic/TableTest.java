@@ -33,7 +33,7 @@ public class TableTest {
     @Test
     public void insertMinion() {
         Table table1 = new Table();
-        Minion minion = new Minion(1, 3, 1, "Puppet Master", 15);
+        Minion minion = new Minion(1, 3, 1, "Puppet Master", 15, false, false, false , 0);
         table1.insertMinion(minion, 1);
         
         assertEquals(3, table1.chooseMinion(1).getHealth());

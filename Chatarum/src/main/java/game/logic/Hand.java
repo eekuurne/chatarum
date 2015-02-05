@@ -4,6 +4,12 @@ package game.logic;
 import cards.Card;
 import java.util.ArrayList;
 
+/**
+ * Class for the player's hand. Gets cards from Deck, which can then be
+ * played.
+ *
+ * @author Eero Kuurne
+ */
 public class Hand {
     
     private ArrayList<Card> cards;
@@ -26,6 +32,13 @@ public class Hand {
         return cards.size();
     }
     
+    /**
+     * Method for adding card to hand.
+     *
+     * @param card The card added to the hand.
+     *
+     * @return Was the hand full.
+     */
     public boolean addCard(Card card) {
         // If the hand is full, don't add, return false.
         if (cards.size() >= maxSize) {
@@ -35,6 +48,13 @@ public class Hand {
         return true;
     }
     
+    /**
+     * Method for taking card from hand.
+     *
+     * @param slot Which card will be taken from the hand.
+     *
+     * @return The card taken.
+     */
     public Card takeCard(int slot) {
         if (cards.isEmpty()) {
             return null;

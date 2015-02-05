@@ -35,8 +35,8 @@ public class HandTest {
     public void getRemainingRight() {
         Hand hand = new Hand();
 
-        hand.addCard(new Minion(1, 2, 2, "Paladin", 15));
-        hand.addCard(new Minion(1, 2, 2, "Berserker", 15));
+        hand.addCard(new Minion(1, 2, 2, "Paladin", 15, false, false, false , 0));
+        hand.addCard(new Minion(1, 2, 2, "Berserker", 15, false, false, false , 0));
         
         assertEquals(2, hand.getRemaining());
     }
@@ -52,7 +52,7 @@ public class HandTest {
     public void addSingleCard() {
         Hand hand = new Hand();
         
-        hand.addCard(new Minion(1, 2, 2, "Puppet Master", 15));
+        hand.addCard(new Minion(1, 2, 2, "Puppet Master", 15, false, false, false , 0));
  
         assertEquals(1, hand.getRemaining());
         assertEquals(2, hand.getCards().get(0).getFaction());
@@ -63,9 +63,9 @@ public class HandTest {
         Hand hand = new Hand();
 
         for (int i = 0; i < 10; i++) {
-            hand.addCard(new Minion(1, 2, 2, "Puppet Master", 15));
-            hand.addCard(new Minion(1, 2, 2, "Shadowcat", 15));
-            hand.addCard(new Minion(1, 2, 2, "Bounty Hunter", 15));
+            hand.addCard(new Minion(1, 2, 2, "Puppet Master", 15, false, false, false , 0));
+            hand.addCard(new Minion(1, 2, 2, "Shadowcat", 15, false, false, false , 0));
+            hand.addCard(new Minion(1, 2, 2, "Bounty Hunter", 15, false, false, false , 0));
         }
         
         assertEquals(hand.getMaxSize(), hand.getRemaining());
@@ -75,8 +75,8 @@ public class HandTest {
     public void takeCardSizeRight() {
         Hand hand = new Hand();
         
-        hand.addCard(new Minion(1, 2, 2, "Paladin", 15));
-        hand.addCard(new Minion(1, 2, 2, "Berserker", 15));
+        hand.addCard(new Minion(1, 2, 2, "Paladin", 15, false, false, false , 0));
+        hand.addCard(new Minion(1, 2, 2, "Berserker", 15, false, false, false , 0));
         
         Card card = hand.takeCard(0);
         
@@ -87,7 +87,7 @@ public class HandTest {
     public void takeCardSizeZero() {
         Hand hand = new Hand();
         
-        hand.addCard(new Minion(1, 2, 2, "Paladin", 15));
+        hand.addCard(new Minion(1, 2, 2, "Paladin", 15, false, false, false , 0));
         
         Card card = hand.takeCard(0);
         

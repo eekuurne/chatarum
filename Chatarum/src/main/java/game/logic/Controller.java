@@ -1,6 +1,11 @@
 
 package game.logic;
 
+/**
+ * Temporary class to handle the gameplay.
+ * 
+ * @author Eero Kuurne
+ */
 public class Controller {
     
     private boolean singleplayer;

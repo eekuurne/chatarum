@@ -34,8 +34,8 @@ public class DeckTest {
     public void getRemainingRight() {
         Deck deck = new Deck();
 
-        deck.addCard(new Minion(1, 2, 2, "Paladin", 15));
-        deck.addCard(new Minion(1, 2, 2, "Berserker", 15));
+        deck.addCard(new Minion(1, 2, 2, "Paladin", 15, false, false, false , 0));
+        deck.addCard(new Minion(1, 2, 2, "Berserker", 15, false, false, false , 0));
         
         assertEquals(2, deck.getRemaining());
     }
@@ -51,7 +51,7 @@ public class DeckTest {
     public void addSingleCard() {
         Deck deck = new Deck();
         
-        deck.addCard(new Minion(1, 2, 2, "Puppet Master", 15));
+        deck.addCard(new Minion(1, 2, 2, "Puppet Master", 15, false, false, false , 0));
  
         assertEquals(1, deck.getRemaining());
         assertEquals(2, deck.getCards().get(0).getFaction());
@@ -62,7 +62,7 @@ public class DeckTest {
         Deck deck = new Deck();
 
         for (int i = 0; i < 10; i++) {
-            deck.addCard(new Minion(1, 2, 2, "Puppet Master", 15));
+            deck.addCard(new Minion(1, 2, 2, "Puppet Master", 15, false, false, false , 0));
         }
         
         assertEquals(deck.getMaxSingle(), deck.getRemaining());
@@ -73,13 +73,13 @@ public class DeckTest {
         Deck deck = new Deck();
 
         for (int i = 0; i < 10; i++) {
-            deck.addCard(new Minion(1, 2, 2, "Puppet Master", 15));
-            deck.addCard(new Minion(1, 2, 2, "Shadowcat", 15));
-            deck.addCard(new Minion(1, 2, 2, "Bounty Hunter", 15));
-            deck.addCard(new Minion(1, 2, 2, "Paladin", 15));
-            deck.addCard(new Minion(1, 2, 2, "Moonblade", 15));
-            deck.addCard(new Minion(1, 2, 2, "Berserker", 15));
-            deck.addCard(new Minion(1, 2, 2, "Plague Monk", 15));
+            deck.addCard(new Minion(1, 2, 2, "Puppet Master", 15, false, false, false , 0));
+            deck.addCard(new Minion(1, 2, 2, "Shadowcat", 15, false, false, false , 0));
+            deck.addCard(new Minion(1, 2, 2, "Bounty Hunter", 15, false, false, false , 0));
+            deck.addCard(new Minion(1, 2, 2, "Paladin", 15, false, false, false , 0));
+            deck.addCard(new Minion(1, 2, 2, "Moonblade", 15, false, false, false , 0));
+            deck.addCard(new Minion(1, 2, 2, "Berserker", 15, false, false, false , 0));
+            deck.addCard(new Minion(1, 2, 2, "Plague Monk", 15, false, false, false , 0));
         }
         
         assertEquals(deck.getMaxSize(), deck.getRemaining());
@@ -89,8 +89,8 @@ public class DeckTest {
     public void takeCardSizeRight() {
         Deck deck = new Deck();
         
-        deck.addCard(new Minion(1, 2, 2, "Paladin", 15));
-        deck.addCard(new Minion(1, 2, 2, "Berserker", 15));
+        deck.addCard(new Minion(1, 2, 2, "Paladin", 15, false, false, false , 0));
+        deck.addCard(new Minion(1, 2, 2, "Berserker", 15, false, false, false , 0));
         
         Card card = deck.takeCard();
         
@@ -101,7 +101,7 @@ public class DeckTest {
     public void takeCardSizeZero() {
         Deck deck = new Deck();
         
-        deck.addCard(new Minion(1, 2, 2, "Paladin", 15));
+        deck.addCard(new Minion(1, 2, 2, "Paladin", 15, false, false, false , 0));
         
         Card card = deck.takeCard();
         

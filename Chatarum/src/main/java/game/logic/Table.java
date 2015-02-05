@@ -3,6 +3,14 @@ package game.logic;
 
 import cards.Minion;
 
+/**
+ * (The class will be changed a bit, that's why no comments for methods.)
+ * 
+ * Contains the minions a player has placed on table. Can be targeted by the
+ * enemy player on his turn.
+ *
+ * @author Eero Kuurne
+ */
 public class Table {
     
     private Minion[] minions;
@@ -35,6 +43,7 @@ public class Table {
         slots[slot] = 0;
     }
     
+    /*
     public void minionAttack(Minion attacker, int attackerSlot, 
             Minion defender, int defenderSlot, Table enemyTable) {
         
@@ -47,5 +56,5 @@ public class Table {
         if (attacker.getHealth() <= 0) {
             removeMinion(attackerSlot);
         }
-    }
+    }*/
 }

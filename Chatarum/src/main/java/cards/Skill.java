@@ -1,10 +1,16 @@
 
 package cards;
 
+/**
+ * (Will be included in a later iteration.)
+ * 
+ * - Spells for The Cult
+ * - Commands for The Brotherhood
+ * 
+ * @author Eero Kuurne
+ */
 public class Skill implements Card {
 
-    // Will be included in a later iteration.
-    
     @Override
     public int getFaction() {
         throw new UnsupportedOperationException("Not supported yet.");
