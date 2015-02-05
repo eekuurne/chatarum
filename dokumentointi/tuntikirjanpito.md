@@ -1,15 +1,34 @@
-**14.1.2015:** satunnaista ideointia päivän mittaan
+**14.1.2015:** 
+- Satunnaista ideointia päivän mittaan
 
-**15.1.2015:** 4h GitHubin asentelua ja opettelua, ideointia ja aihemäärittelyn kirjoittaminen
+**15.1.2015:** 4h 
+- GitHubin asentelua ja opettelua, ideointia ja aihemäärittelyn kirjoittaminen
 
-**19.1.2015-21.1.2015:** satunnaista pelimekaniikan ja korttien ideointia
+**19.1.2015-21.1.2015:** 
+- Satunnaista pelimekaniikan ja korttien ideointia
 
-**22.1.2015:** 3h ensimmäisen viikkopalautteen perusteella tehdyt korjaukset, alustavan luokkakaavion tekeminen, koodausta, ideointia
+**22.1.2015:** 3h 
+- Ensimmäisen viikkopalautteen perusteella tehdyt korjaukset, alustavan luokkakaavion tekeminen, koodausta, ideointia
 
-**23.1.2015:** 1,5h koodausta ja pieniä muutoksia luokkakaavioon
+**23.1.2015:** 1,5h 
+- Koodausta ja pieniä muutoksia luokkakaavioon
 
-**28.1.2015:** 3h koodausta (Deck-luokka jne) ja pitin fiksaaminen toimimaan
+**28.1.2015:** 3h 
+- Koodausta (Deck-luokka jne) ja pitin fiksaaminen toimimaan
 
-**29.1.2015:** 4h koodausta (Hand-luokka jne) ja githubin kanssa taistelua (Windows sovellus - never again)
+**29.1.2015:** 4h 
+- Koodausta (Hand-luokka jne) ja githubin kanssa taistelua (Windows sovellus - never again)
 
-**30.1.2015:** 2h uuden luokkakaavion tekeminen ja koodausta
+**30.1.2015:** 2h 
+- Uuden luokkakaavion tekeminen ja koodausta
+
+**31.1.2015-2.2.2015:** 4-6h?
+- Satunnaista korttien, pelimekaniikan ja pelilaudan ideointia ja piirtelyä
+
+**3.2.2015:** 4h
+- Korttibalanssin ja pelimekaniikan suunnittelua
+- Käyttöliittymän tekemisen opettelua, valmiin frameworkin lisääminen projektiin myöhempää käyttöä varten
+
+**4.2.2015:** 4h
+- Satunnaista koodausta, JavaDocin lisääminen luokkiin, uusia luokkia
+
