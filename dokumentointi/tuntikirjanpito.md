@@ -32,3 +32,5 @@
 **4.2.2015:** 4h
 - Satunnaista koodausta, JavaDocin lisääminen luokkiin, uusia luokkia
 
+**8.2.2015:** 7h
+- Perus graafisen käyttöliittymän ja siihen liittyvän logiikan harjoittelua ja koodaamista
