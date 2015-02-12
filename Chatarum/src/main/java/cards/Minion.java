@@ -1,5 +1,7 @@
 package cards;
 
+import entities.Entity;
+
 /**
  * Class for the basic behaviour of all the minions. Every single minion extends
  * this class.
