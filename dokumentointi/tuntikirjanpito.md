@@ -34,3 +34,6 @@
 
 **8.2.2015:** 7h
 - Perus graafisen käyttöliittymän ja siihen liittyvän logiikan harjoittelua ja koodaamista
+
+**12.2.2015:** 5h
+- Lisää käyttöliittymän ja logiikan koodaamista, ensimmäisen spritesheetin tekeminen ja niihin liittyvän logiikan lisääminen jne.
