@@ -1,5 +1,5 @@
 
-package game.logic;
+package cards.containers;
 
 import cards.Minion;
 

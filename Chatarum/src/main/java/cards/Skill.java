@@ -1,6 +1,10 @@
 
 package cards;
 
+import graphics.Entity;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+
 /**
  * (Will be included in a later iteration.)
  * 
@@ -9,13 +13,20 @@ package cards;
  * 
  * @author Eero Kuurne
  */
-public class Skill implements Card {
+public class Skill extends Entity implements Card {
 
-    @Override
-    public int getFaction() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Skill() {
+        super(0, 0);
     }
 
+    public void setX(float x) {
+        this.x = x;
+    }
+
+    public void setY(float y) {
+        this.y = y;
+    }
+    
     @Override
     public void playCard() {
         throw new UnsupportedOperationException("Not supported yet.");
@@ -27,7 +38,17 @@ public class Skill implements Card {
     }
 
     @Override
-    public int getCost() {
+    public void tick() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void render(Graphics g) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public BufferedImage getBigPic() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }

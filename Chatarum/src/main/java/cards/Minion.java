@@ -1,6 +1,7 @@
 package cards;
 
-import entities.Entity;
+import graphics.Entity;
+import java.awt.image.BufferedImage;
 
 /**
  * Class for the basic behaviour of all the minions. Every single minion extends
@@ -8,7 +9,7 @@ import entities.Entity;
  *
  * @author Eero Kuurne
  */
-public class Minion implements Card {
+public abstract class Minion extends Entity implements Card {
 
     private String name;
     private int damage;
@@ -19,9 +20,12 @@ public class Minion implements Card {
     private boolean ranged; // Can the minion attack without taking damage
     private boolean guardian; // Does the minion protect adjacent minions
     private int production; // Amount of resource production for workers
+    private BufferedImage bigPic; // Zoomed picture of the card.
 
     public Minion(int damage, int health, int faction, String name, int cost, 
-            boolean mounted, boolean ranged, boolean guardian, int production) {
+            boolean mounted, boolean ranged, boolean guardian, int production,
+            BufferedImage bigPic) {
+        super(-1, -1); // -1 means it's not on the screen yet (= it's in the deck)
         this.damage = damage;
         this.health = health;
         this.faction = faction;
@@ -31,6 +35,7 @@ public class Minion implements Card {
         this.ranged = ranged;
         this.guardian = guardian;
         this.production = production;
+        this.bigPic = bigPic;
     }
 
     public int getDamage() {
@@ -50,7 +55,6 @@ public class Minion implements Card {
         return name;
     }
 
-    @Override
     public int getCost() {
         return cost;
     }
@@ -70,6 +74,11 @@ public class Minion implements Card {
     public int getProduction() {
         return production;
     }
+
+    @Override
+    public BufferedImage getBigPic() {
+        return bigPic;
+    }
     
     /**
      * Method for taking damage.
@@ -83,6 +92,16 @@ public class Minion implements Card {
         return health;
     }
 
+    @Override
+    public void setX(float x) {
+        this.x = x;
+    }
+
+    @Override
+    public void setY(float y) {
+        this.y = y;
+    }
+    
     /**
      * (Implemented soon)
      * 
@@ -94,5 +113,4 @@ public class Minion implements Card {
     public void playCard() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-
 }

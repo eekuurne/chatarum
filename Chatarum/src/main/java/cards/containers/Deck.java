@@ -1,4 +1,4 @@
-package game.logic;
+package cards.containers;
 
 import cards.Card;
 import cards.minions.Militia;
@@ -24,7 +24,7 @@ public class Deck {
 
     public Deck() {
         this.cards = new ArrayList<Card>();
-        this.maxSize = 30;
+        this.maxSize = 20;
         this.maxSingle = 5;
         // this.hero = new Champion();
     }

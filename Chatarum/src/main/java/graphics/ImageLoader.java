@@ -6,12 +6,18 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 /**
- * Method for loading images.
+ * Class for loading images.
  *
  * @author Eero
  */
 public class ImageLoader {
 
+    /**
+     * Method for loading png image and returning it as BufferedImage.
+     *
+     * @param path Location of the file.
+     * @return BufferedImage made of the file.
+     */
     public static BufferedImage loadImage(String path) {
         try {
             return ImageIO.read(new File(path));

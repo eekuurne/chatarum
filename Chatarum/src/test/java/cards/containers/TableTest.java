@@ -1,7 +1,9 @@
 
-package game.logic;
+package cards.containers;
 
+import cards.containers.Table;
 import cards.Minion;
+import cards.minions.Swordman;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -33,10 +35,10 @@ public class TableTest {
     @Test
     public void insertMinion() {
         Table table1 = new Table();
-        Minion minion = new Minion(1, 3, 1, "Puppet Master", 15, false, false, false , 0);
+        Minion minion = new Swordman();
         table1.insertMinion(minion, 1);
         
-        assertEquals(3, table1.chooseMinion(1).getHealth());
+        assertEquals(2, table1.chooseMinion(1).getHealth());
     }
     
     /*@Test

@@ -3,6 +3,7 @@ package states;
 import java.awt.Graphics;
 
 /**
+ * State for the menu. Not supported yet.
  *
  * @author Eero
  */

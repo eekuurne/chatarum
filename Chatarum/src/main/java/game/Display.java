@@ -52,7 +52,8 @@ public class Display {
     }
 
     /**
-     * Method for all the frame and canvas setup.
+     * Method which can change if fullscreen or windowed mode is used. Can be
+     * done from settings later, now manually by changing parameter.
      *
      * @param full Is fullscreen mode used.
      */

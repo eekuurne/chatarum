@@ -3,6 +3,7 @@ package graphics;
 import java.awt.image.BufferedImage;
 
 /**
+ * Class for cropping from the sprite sheet.
  *
  * @author Eero
  */
@@ -15,12 +16,12 @@ public class SpriteSheet {
     }
 
     /**
-     *
+     * Crop item from the sprite sheet.
      *
      * @param x X of upper left corner of the item to be cropped.
      * @param y Y of upper left corner of the item to be cropped.
-     * @param width
-     * @param height
+     * @param width Width of the item to be cropped.
+     * @param height Height of the item to be cropped.
      */
     public BufferedImage crop(int x, int y, int width, int height) {
         return sheet.getSubimage(x, y, width, height);

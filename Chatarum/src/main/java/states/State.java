@@ -3,6 +3,7 @@ package states;
 import java.awt.Graphics;
 
 /**
+ * Abstract class for states.
  *
  * @author Eero
  */

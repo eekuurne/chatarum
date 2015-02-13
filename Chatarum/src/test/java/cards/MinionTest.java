@@ -1,6 +1,7 @@
 
 package cards;
 
+import cards.minions.Swordman;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -31,22 +32,22 @@ public class MinionTest {
     
     @Test
     public void takeDamageStayAlive() {
-        Minion minion = new Minion(2, 3, 1, "Puppet Master", 15, false, false, false , 0);
-        minion.takeDamage(2);
+        Minion minion = new Swordman();
+        minion.takeDamage(1);
         assertEquals(1, minion.getHealth());
     }
     
     @Test
     public void takeDamageGoZero() {
-        Minion minion = new Minion(2, 3, 1, "Puppet Master", 15, false, false, false , 0);
-        minion.takeDamage(3);
+        Minion minion = new Swordman();
+        minion.takeDamage(2);
         assertEquals(0, minion.getHealth());
     }
     
     @Test
     public void takeDamageGoNegative() {
-        Minion minion = new Minion(2, 3, 1, "Puppet Master", 15, false, false, false , 0);
-        minion.takeDamage(4);
+        Minion minion = new Swordman();
+        minion.takeDamage(3);
         assertEquals(-1, minion.getHealth());
     }
 }

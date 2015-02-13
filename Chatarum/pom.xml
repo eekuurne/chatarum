@@ -45,11 +45,9 @@
 			<configuration>
 				<targetClasses>
 					<param>cards.*</param>
-					<param>game.logic.*</param>
 				</targetClasses>
 				<targetTests>
 					<param>cards.*</param>
-					<param>game.logic.*</param>
 				</targetTests>
 			</configuration>
         </plugin>

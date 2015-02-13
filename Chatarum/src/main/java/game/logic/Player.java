@@ -1,5 +1,9 @@
 package game.logic;
 
+import cards.containers.Table;
+import cards.containers.Deck;
+import cards.containers.Hand;
+
 /**
  * Contains the deck, hand and table of a player. Every game has 2 players, who
  * can either be controlled by a player or AI.
@@ -12,6 +16,7 @@ public class Player {
     private Hand hand;
     private Table table;
     // private Champion champion;
+    
     private int health;
 
     public Player(Deck deck) {
