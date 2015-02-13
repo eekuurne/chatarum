@@ -1,6 +1,8 @@
 package states;
 
+import cards.containers.Deck;
 import cards.minions.Swordman;
+import game.logic.Player;
 import graphics.Assets;
 import java.awt.Graphics;
 

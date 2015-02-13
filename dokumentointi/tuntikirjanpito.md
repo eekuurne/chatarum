@@ -35,5 +35,8 @@
 **8.2.2015:** 7h
 - Perus graafisen käyttöliittymän ja siihen liittyvän logiikan harjoittelua ja koodaamista
 
-**12.2.2015:** 5h
+**12.2.2015:** 7h
 - Lisää käyttöliittymän ja logiikan koodaamista, ensimmäisen spritesheetin tekeminen ja niihin liittyvän logiikan lisääminen jne.
+
+**13.2.2015:** 4h
+- JavaDocit ajan tasalle, sekvenssikaaviot pelin aloittamiselle ja (alustava) matsin aloittamiselle, pieniä lisäyksiä koodiin ja testeihin
