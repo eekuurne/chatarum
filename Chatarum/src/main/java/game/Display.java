@@ -33,7 +33,7 @@ public class Display {
         frame = new JFrame(title);
 
         // Change this to true to switch to fullscreen mode.
-        fullscreen(false);
+        fullscreen(true);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Program closes down properly when you close the window.
         frame.setVisible(true);
@@ -42,9 +42,14 @@ public class Display {
         canvas.setPreferredSize(new Dimension(width, height));
         canvas.setMaximumSize(new Dimension(width, height));
         canvas.setMinimumSize(new Dimension(width, height));
+        canvas.setFocusable(false);
 
         frame.add(canvas);
         frame.pack(); // Sizes the canvas properly compared to frame.
+    }
+
+    public JFrame getFrame() {
+        return frame;
     }
 
     public Canvas getCanvas() {

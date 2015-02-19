@@ -13,7 +13,7 @@ import java.awt.Graphics;
 public class Archer extends Minion {
 
     public Archer() {
-        super(1, 1, 0, "Archer", 15, false, true, false , 0, Assets.swordmanBig);
+        super(1, 1, 0, "Archer", 15, false, true, false , 0, Assets.archerBig);
     }
 
     @Override
@@ -23,6 +23,6 @@ public class Archer extends Minion {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.swordmanSmall, (int) x, (int) y, null);
+        g.drawImage(Assets.archerSmall, (int) x, (int) y, null);
     }
 }

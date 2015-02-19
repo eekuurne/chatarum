@@ -3,6 +3,8 @@ package game.logic;
 import cards.containers.Table;
 import cards.containers.Deck;
 import cards.containers.Hand;
+import graphics.Assets;
+import java.awt.Graphics;
 
 /**
  * Contains the deck, hand and table of a player. Every game has 2 players, who
@@ -15,7 +17,7 @@ public class Player {
     private Deck deck;
     private Hand hand;
     private Table table;
-    // private Champion champion;
+    private Champion champion;
     
     private int health;
 
@@ -23,7 +25,7 @@ public class Player {
         this.deck = deck;
         this.hand = new Hand();
         this.table = new Table();
-        // this.champion = deck.getChampion();
+        this.champion = deck.getChampion();
         this.health = 30;
     }
 
@@ -42,6 +44,10 @@ public class Player {
     public Table getTable() {
         return table;
     }
+    
+    public int getFaction() {
+        return deck.getFaction();
+    }
 
     /**
      * Method for taking damage.
@@ -56,5 +62,11 @@ public class Player {
             return true;
         }
         return false;
+    }
+    
+    public void render(Graphics g, int player, int turn) {
+        hand.render(g, player, getFaction(), turn);
+        deck.render(g, player);
+        champion.render(g, player, getFaction());
     }
 }

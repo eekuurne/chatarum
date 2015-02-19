@@ -1,6 +1,7 @@
 package game;
 
 import cards.containers.Deck;
+import game.input.KeyManager;
 import graphics.Assets;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -33,10 +34,14 @@ public class Game implements Runnable {
     private State menuState;
     private State settingsState;
 
+    // Input
+    private KeyManager keyManager;
+
     public Game(String title, int width, int height) {
         this.width = width;
         this.height = height;
         this.title = title;
+        this.keyManager = new KeyManager();
     }
 
     /**
@@ -45,15 +50,18 @@ public class Game implements Runnable {
      */
     private void init() {
         display = new Display(title, width, height);
+        display.getFrame().addKeyListener(keyManager);
         Assets.init();
-        
-        gameState = new GameState();
-        menuState = new MenuState();
-        settingsState = new SettingsState();
+
+        gameState = new GameState(this);
+        menuState = new MenuState(this);
+        settingsState = new SettingsState(this);
         State.setState(gameState);
     }
 
     private void tick() {
+        keyManager.tick();
+
         if (State.getState() != null) {
             State.getState().tick();
         }
@@ -102,14 +110,14 @@ public class Game implements Runnable {
             delta += (now - lastTime) / timePerTick;
             timer += now - lastTime;
             lastTime = now;
-            
+
             if (delta >= 1) {
                 tick();
                 render();
                 delta--;
                 ticks++;
             }
-            
+
             if (timer >= 1000000000) {
                 System.out.println("FPS: " + ticks);
                 ticks = 0;
@@ -117,6 +125,10 @@ public class Game implements Runnable {
             }
         }
         stop();
+    }
+
+    public KeyManager getKeyManager() {
+        return keyManager;
     }
 
     /**

@@ -13,7 +13,7 @@ import java.awt.Graphics;
 public class Peasant extends Minion {
 
     public Peasant() {
-        super(0, 2, 0, "Peasant", 5, false, false, false , 5, Assets.swordmanBig);
+        super(0, 1, 0, "Peasant", 5, false, false, false , 5, Assets.peasantBig);
     }
 
     @Override
@@ -23,6 +23,6 @@ public class Peasant extends Minion {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.swordmanSmall, (int) x, (int) y, null);
+        g.drawImage(Assets.peasantSmall, (int) x, (int) y, null);
     }
 }

@@ -20,11 +20,11 @@ public abstract class Minion extends Entity implements Card {
     private boolean ranged; // Can the minion attack without taking damage
     private boolean guardian; // Does the minion protect adjacent minions
     private int production; // Amount of resource production for workers
-    private BufferedImage bigPic; // Zoomed picture of the card.
+    private BufferedImage zoomedPic; // Zoomed picture of the card.
 
     public Minion(int damage, int health, int faction, String name, int cost, 
             boolean mounted, boolean ranged, boolean guardian, int production,
-            BufferedImage bigPic) {
+            BufferedImage zoomedPic) {
         super(-1, -1); // -1 means it's not on the screen yet (= it's in the deck)
         this.damage = damage;
         this.health = health;
@@ -35,7 +35,7 @@ public abstract class Minion extends Entity implements Card {
         this.ranged = ranged;
         this.guardian = guardian;
         this.production = production;
-        this.bigPic = bigPic;
+        this.zoomedPic = zoomedPic;
     }
 
     public int getDamage() {
@@ -76,8 +76,8 @@ public abstract class Minion extends Entity implements Card {
     }
 
     @Override
-    public BufferedImage getBigPic() {
-        return bigPic;
+    public BufferedImage getZoomedPic() {
+        return zoomedPic;
     }
     
     /**

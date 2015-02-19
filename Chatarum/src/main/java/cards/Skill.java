@@ -13,8 +13,7 @@ import java.awt.image.BufferedImage;
  * 
  * @author Eero Kuurne
  */
-public class Skill extends Entity implements Card {
-
+/*public class Skill extends Entity implements Card {
     public Skill() {
         super(0, 0);
     }
@@ -48,7 +47,8 @@ public class Skill extends Entity implements Card {
     }
 
     @Override
-    public BufferedImage getBigPic() {
+    public BufferedImage getZoomedPic() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-}
+    
+}*/

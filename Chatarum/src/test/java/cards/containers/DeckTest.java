@@ -39,7 +39,7 @@ public class DeckTest {
 
     @Test
     public void getRemainingRight() {
-        Deck deck = new Deck();
+        Deck deck = new Deck(1);
 
         deck.addCard(new Swordman());
         deck.addCard(new Swordman());
@@ -49,14 +49,14 @@ public class DeckTest {
     
     @Test
     public void getRemainingZero() {
-        Deck deck = new Deck();
+        Deck deck = new Deck(1);
 
         assertEquals(0, deck.getRemaining());
     }
     
     @Test
     public void addSingleCard() {
-        Deck deck = new Deck();
+        Deck deck = new Deck(1);
         
         deck.addCard(new Swordman());
  
@@ -65,7 +65,7 @@ public class DeckTest {
     
     @Test
     public void addTooManySameCards() {
-        Deck deck = new Deck();
+        Deck deck = new Deck(1);
 
         for (int i = 0; i < 10; i++) {
             deck.addCard(new Swordman());
@@ -76,7 +76,7 @@ public class DeckTest {
     
     @Test
     public void addTooManyCards() {
-        Deck deck = new Deck();
+        Deck deck = new Deck(1);
 
         for (int i = 0; i < 10; i++) {
             deck.addCard(new Swordman());
@@ -92,7 +92,7 @@ public class DeckTest {
     
     @Test
     public void takeCardSizeRight() {
-        Deck deck = new Deck();
+        Deck deck = new Deck(1);
         
         deck.addCard(new Swordman());
         deck.addCard(new Swordman());
@@ -104,7 +104,7 @@ public class DeckTest {
     
     @Test
     public void takeCardSizeZero() {
-        Deck deck = new Deck();
+        Deck deck = new Deck(1);
         
         deck.addCard(new Swordman());
         
@@ -115,7 +115,7 @@ public class DeckTest {
     
     @Test
     public void takeCardFromEmptyDeck() {
-        Deck deck = new Deck();
+        Deck deck = new Deck(1);
 
         Card card = deck.takeCard();
         

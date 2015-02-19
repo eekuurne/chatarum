@@ -1,5 +1,6 @@
 package states;
 
+import game.Game;
 import java.awt.Graphics;
 
 /**
@@ -10,7 +11,12 @@ import java.awt.Graphics;
 public abstract class State {
 
     private static State currentState = null;
-    
+    protected Game game;
+
+    public State(Game game) {
+        this.game = game;
+    }
+
     public static State getState() {
         return currentState;
     }

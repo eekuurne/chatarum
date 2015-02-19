@@ -14,7 +14,7 @@ import java.awt.Graphics;
 public class Militia extends Minion {
     
     public Militia() {
-        super(1, 1, 0, "Militia", 10, false, false, false, 0, Assets.swordmanBig);
+        super(1, 1, 0, "Militia", 10, false, false, false, 0, Assets.militiaBig);
     }
 
     @Override
@@ -24,6 +24,6 @@ public class Militia extends Minion {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.swordmanSmall, (int) x, (int) y, null);
+        g.drawImage(Assets.militiaSmall, (int) x, (int) y, null);
     }
 }

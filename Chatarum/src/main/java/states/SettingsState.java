@@ -1,5 +1,6 @@
 package states;
 
+import game.Game;
 import java.awt.Graphics;
 
 /**
@@ -8,6 +9,10 @@ import java.awt.Graphics;
  * @author Eero
  */
 public class SettingsState extends State {
+
+    public SettingsState(Game game) {
+        super(game);
+    }
 
     @Override
     public void tick() {

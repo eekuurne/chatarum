@@ -1,5 +1,6 @@
 package cards;
 
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 /**
@@ -29,9 +30,10 @@ public interface Card {
      *
      * @return bigPic of the card.
      */
-    BufferedImage getBigPic();
+    BufferedImage getZoomedPic();
 
     // What happens when the card is played from hand.
     void playCard();
 
+    void render(Graphics g);
 }

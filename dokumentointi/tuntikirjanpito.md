@@ -41,3 +41,15 @@
 **13.2.2015:** 6h
 - JavaDocit ajan tasalle, sekvenssikaaviot pelin aloittamiselle ja (alustava) matsin aloittamiselle, pieniä lisäyksiä koodiin ja testeihin
 - Ensimmäisen version spritejen piirtäminen spritesheettiin
+
+**16.2.2015:** 1h
+- Suunnittelua paperille
+
+**18.2.2015:** 1h
+- Assettien toiminnan testausta ja lisäilyä
+
+**19.2.2015:** 9,5h
+- Keyboardin toiminnallisuuden lisääminen (esc-näppäin sulkee pelin, q-näppäin omaa testausta varten)
+- Alussa tapahtuvan korttienjaon koodaaminen
+- Player, hand, deck, champion, background, end turn -button ja table slotsien renderöinnin koodaaminen ja puuttuvien kuvien piirtäminen
+- Pientä refaktorointia

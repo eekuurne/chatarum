@@ -8,7 +8,7 @@ package game;
 public class Launcher {
 
     public static void main(String[] args) {
-        Game game = new Game("Chatarum", 1728, 972);
+        Game game = new Game("Chatarum", 1920, 1080);
         game.start();
     }
 }
