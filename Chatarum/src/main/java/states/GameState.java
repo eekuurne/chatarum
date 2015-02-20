@@ -31,6 +31,13 @@ public class GameState extends State {
         init();
     }
 
+    /**
+     * What happens when tick() is called in game -> all the changes in the game
+     * that need to be updated realtime (within the 60fps game loop).
+     * 
+     * Will be used mainly for input listeners (and animations later).
+     *
+     */
     @Override
     public void tick() {
         keyBoard();
@@ -46,6 +53,7 @@ public class GameState extends State {
         g.drawImage(Assets.background, 0, 0, null);
         g.drawImage(Assets.tableSlots, 285, 306, null);
         g.drawImage(Assets.endTurn, 1590, 510, null);
+        g.drawString("" + turn, 1850, 530);
         
         
         controller.getPlayer1().render(g, 1, turn);

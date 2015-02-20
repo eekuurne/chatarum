@@ -7,9 +7,11 @@ import graphics.Assets;
 import java.awt.Graphics;
 
 /**
- * Contains the deck, hand and table of a player. Every game has 2 players, who
- * can either be controlled by a player or AI.
- *
+ * Contains the deck, hand, table and champion of a player. Every game has 2 
+ * players, who can either be controlled by a player or AI.
+ * 
+ * Player number 1 is at bottom, 2 is at top. Bottom player always starts.
+ * 
  * @author Eero Kuurne
  */
 public class Player {
@@ -45,6 +47,11 @@ public class Player {
         return table;
     }
     
+    /**
+     * Gets the player's faction from player's deck.
+
+     * @return Player's faction.
+     */
     public int getFaction() {
         return deck.getFaction();
     }
@@ -64,9 +71,18 @@ public class Player {
         return false;
     }
     
+    /**
+     * Renders the player's deck, hand, table and champion.
+     *
+     * 
+     * @param g Graphics tool.
+     * @param player 1 for player at bottom, 2 for top.
+     * @param turn Current turn.
+     */
     public void render(Graphics g, int player, int turn) {
-        hand.render(g, player, getFaction(), turn);
         deck.render(g, player);
+        hand.render(g, player, getFaction(), turn);
+        // table.render();
         champion.render(g, player, getFaction());
     }
 }

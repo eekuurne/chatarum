@@ -3,7 +3,7 @@ package graphics;
 import java.awt.Graphics;
 
 /**
- * Abstract class for every single item that is drawn in the screen during a 
+ * Abstract class for every single (movable) item that is drawn in the screen during a 
  * match. Tells where to draw and what happens on tick and render.
  *
  * @author Eero

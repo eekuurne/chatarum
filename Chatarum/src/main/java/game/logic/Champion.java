@@ -15,6 +15,14 @@ import java.awt.Graphics;
  */
 public class Champion {
 
+    /**
+     * Method for taking damage.
+     *
+     * @param g Graphics tool.
+     * @param player 1 for player at bottom, 2 for top.
+     * @param faction Defines the frame decorations. Will probably be changed
+     * later when the champion itself will contain it's faction.
+     */
     public void render(Graphics g, int player, int faction) {
         int x = 1540;
         int y;

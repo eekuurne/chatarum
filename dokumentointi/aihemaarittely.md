@@ -7,7 +7,7 @@ ominaisuuksiltaan Hearthstonea, Magic the Gatheringiä ja vastaavia korttipelej�
 Kortteina on sekä erilaisia pöydälle laitettavia hahmoja että kertakäyttöisiä taitokortteja. Hahmoilla on sekä hyökkäys että 
 puolustusarvot, joilla määritellään niiden tekemä vahinko sekä kestävyys, ja jokainen hahmo voi hyökätä toista hahmoa tai 
 pelaajan sankaria kerran vuorossa. Toista hahmoa hyökätessä molemmat osapuolet menettävät kestävyyttään toisen hyökkäysarvon 
-verran, ja kestävyyden laskiessa nollaan hahmo poistetaan pöydästä. Hahmoilla voi lisäksi olla erityisominaisuuksia, jotka 
+verran, ja kestävyyden laskiessa nollaan hahmo poistetaan pöydästä. Hahmoilla voi lisäksi olla erikoisominaisuuksia, jotka 
 määritellään myöhemmin. Taitokortit voivat tehdä erinäisiä myöhemmin määriteltäviä asioita. Korttien pelaaminen maksaa myös 
 resurssia, jonka toiminta määritellään myöhemmin tarkemmin.
 
@@ -18,6 +18,12 @@ Tavoitteena on, että harjoitustyön päätteeksi olisi vähintään 2 ryhmittym
 kortteja pelin pelaamiseksi, ja ne olisi toteutettu niin, että uusien lisääminen olisi helppoa. Peliä tulisi pystyä pelaamaan
 vähintään lokaalisti kahdella pelaajalla tai yksin tekoälyä vastaan. Pelattavuutta voidaan myöhemmin laajentaa verkon yli
 tapahtuvaksi.
+
+Yleisiä hahmojen erikoisominaisuuksia:
+- Ranged: ei menetä kestävyyttä hyökätessä
+- Mounted: voi hyökätä samalla vuorolla, kun pelataan pöytään
+- Guardian: vierekkäisiä hahmoja ei voi hyökätä, niin kauan kuin Guardian-hahmo on hengissä
+- Production (int x): hahmo tuottaa resursseja joka vuoro
 
 **Käyttäjät:** pelaaja, tekoäly
 

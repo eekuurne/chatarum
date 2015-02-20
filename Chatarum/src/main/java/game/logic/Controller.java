@@ -5,26 +5,30 @@ import cards.containers.Deck;
 import graphics.Assets;
 
 /**
- * Temporary class to handle the gameplay.
+ * Temporary class to handle the gameplay. This could all probably be moved to
+ * game state or game state could move things here... We'll see when mouse
+ * controller is implemented.
  *
  * @author Eero Kuurne
  */
 public class Controller {
 
     private boolean singleplayer;
-    private int turn;
     private Player player1;
     private Player player2;
     private DeckBuilder deckBuilder;
 
     public Controller(boolean singleplayer) {
         this.singleplayer = singleplayer;
-        this.turn = 1;
         this.deckBuilder = new DeckBuilder();
 
         init();
     }
 
+    /**
+     * Creates players at the start of the match.
+     *
+     */
     public void init() {
         Deck deck1 = deckBuilder.getDeck1();
         Deck deck2 = deckBuilder.getDeck2();
@@ -36,7 +40,7 @@ public class Controller {
             player1.getHand().addCard(player1.getDeck().takeCard());
             player2.getHand().addCard(player2.getDeck().takeCard());
         }
-        
+
         player1.getHand().cardPositions(1);
         player2.getHand().cardPositions(2);
     }
@@ -48,6 +52,4 @@ public class Controller {
     public Player getPlayer2() {
         return player2;
     }
-    
-    
 }

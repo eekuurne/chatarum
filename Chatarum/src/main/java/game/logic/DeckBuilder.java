@@ -9,22 +9,28 @@ import cards.minions.Swordman;
 import cards.minions.Watchman;
 
 /**
- * Temporary class for making the decks for gameplay programming tests.
+ * Temporary class for making the decks for gameplay programming tests. In final
+ * version the decks will be built and saved to file using the deck builder in
+ * the menu and then loaded from the file to the match.
  *
  * @author Eero
  */
 public class DeckBuilder {
-    
+
     private Deck deck1;
     private Deck deck2;
 
     public DeckBuilder() {
         deck1 = new Deck(1);
         deck2 = new Deck(2);
-        
+
         init();
     }
-    
+
+    /**
+     * Builds 2 decks for test usage.
+     *
+     */
     public void init() {
         for (int i = 0; i < 4; i++) {
             deck1.addCard(new Swordman());
@@ -34,7 +40,7 @@ public class DeckBuilder {
             deck1.addCard(new Raider());
             deck1.addCard(new Watchman());
         }
-        
+
         for (int i = 0; i < 4; i++) {
             deck2.addCard(new Swordman());
             deck2.addCard(new Archer());
@@ -52,6 +58,4 @@ public class DeckBuilder {
     public Deck getDeck2() {
         return deck2;
     }
-    
-    
 }

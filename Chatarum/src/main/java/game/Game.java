@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import javafx.scene.canvas.GraphicsContext;
 import states.GameState;
 import states.MenuState;
 import states.SettingsState;
@@ -28,6 +29,7 @@ public class Game implements Runnable {
 
     private BufferStrategy bs;
     private Graphics g;
+    // private GraphicsContext gc;
     
     // States
     private State gameState;
@@ -52,6 +54,8 @@ public class Game implements Runnable {
         display = new Display(title, width, height);
         display.getFrame().addKeyListener(keyManager);
         Assets.init();
+        
+        // gc = display.getCanvas().getGraphicsContext2D();
 
         gameState = new GameState(this);
         menuState = new MenuState(this);
@@ -59,6 +63,11 @@ public class Game implements Runnable {
         State.setState(gameState);
     }
 
+    /**
+     * What needs to happen on every game loop (60/s). Input controllers and
+     * animations mostly.
+     *
+     */
     private void tick() {
         keyManager.tick();
 
@@ -90,7 +99,8 @@ public class Game implements Runnable {
     }
 
     /**
-     * Method which starts, runs and stops the game loop.
+     * Method which starts, runs and stops the game loop. The frames per second
+     * is hardcoded to 60.
      *
      */
     @Override

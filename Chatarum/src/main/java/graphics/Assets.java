@@ -38,6 +38,8 @@ public class Assets {
      * Method which loads all the images and crops all the single items from the 
      * sprite sheets. (I will divide it to more methods if it gets too messy.)
      *
+     * (REFACTOR! Split to logical pieces for better readability. Like neutral
+     * crops, brotherhood crops, cult crops etc.)
      */
     public static void init() {
         SpriteSheet neutralBig = new SpriteSheet(ImageLoader.loadImage("resources/textures/neutral_cards_big.png"));

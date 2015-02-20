@@ -6,6 +6,7 @@ import cards.Minion;
 import game.logic.Champion;
 import graphics.Assets;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -86,7 +87,7 @@ public class Deck {
 
     /**
      * Method for taking card from deck.
-
+     * 
      * @return Random card from deck.
      */
     public Card takeCard() {
@@ -104,6 +105,14 @@ public class Deck {
         return card;
     }
     
+    /**
+     * Method for rendering the remaining deck at the left side of table.
+     * 
+     * (Will be changed to render based on remaining cards)
+     * 
+     * @param g Graphics tool
+     * @param player 1 for player at bottom, 2 for top.
+     */
     public void render(Graphics g, int player) {
         int x = 75; 
         int y;
@@ -123,7 +132,6 @@ public class Deck {
             g.drawImage(Assets.cultBack, x + 6, y - 6, null);
         }
         
-        
         // If cards.size > 20 
         
         // else if cards.size > 10 show 5 cards
@@ -133,7 +141,5 @@ public class Deck {
         // else if cards.size == 2, show 2 cards
         
         // else if cards.size == 1, show 1 card
-
-        
     }
 }

@@ -53,3 +53,7 @@
 - Alussa tapahtuvan korttienjaon koodaaminen
 - Player, hand, deck, champion, background, end turn -button ja table slotsien renderöinnin koodaaminen ja puuttuvien kuvien piirtäminen
 - Pientä refaktorointia
+
+**20.2.2015:** 3h
+- Uusia sekvenssikaavioita: Rendering Game State, 
+- JavaDoc päivittämistä
