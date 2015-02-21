@@ -2,6 +2,9 @@ package game.logic;
 
 import cards.Card;
 import cards.containers.Deck;
+import cards.minions.Archer;
+import cards.minions.Peasant;
+import cards.minions.Swordman;
 import graphics.Assets;
 
 /**
@@ -40,9 +43,18 @@ public class Controller {
             player1.getHand().addCard(player1.getDeck().takeCard());
             player2.getHand().addCard(player2.getDeck().takeCard());
         }
+        
+        
+        player1.getTable().insertMinion(new Swordman(), 1);
+        player2.getTable().insertMinion(new Swordman(), 5);
+        player1.getTable().insertMinion(new Archer(), 3);
+        player2.getTable().insertMinion(new Peasant(), 4);
 
         player1.getHand().cardPositions(1);
         player2.getHand().cardPositions(2);
+        
+        player1.getTable().cardPositions(1);
+        player2.getTable().cardPositions(2);
     }
 
     public Player getPlayer1() {

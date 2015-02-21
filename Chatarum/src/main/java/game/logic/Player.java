@@ -82,7 +82,7 @@ public class Player {
     public void render(Graphics g, int player, int turn) {
         deck.render(g, player);
         hand.render(g, player, getFaction(), turn);
-        // table.render();
+        table.render(g);
         champion.render(g, player, getFaction());
     }
 }

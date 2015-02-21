@@ -40,21 +40,4 @@ public class TableTest {
         
         assertEquals(2, table1.chooseMinion(1).getHealth());
     }
-    
-    /*@Test
-    public void minionAttackOneDies() {
-        Table table1 = new Table();
-        Table table2 = new Table();
-        
-        Minion attacker = new Minion(1, 3, 1);
-        Minion defender = new Minion(5, 6, 2);
-        
-        table1.insertMinion(attacker, 1);
-        table2.insertMinion(defender, 1);
-        
-        table1.minionAttack(attacker, 1, defender, 1, table2);
-        
-        //assertEquals(null, table1.chooseMinion(1));
-        assertEquals(5, table2.chooseMinion(5).getHealth());
-    }*/
 }

@@ -54,6 +54,11 @@
 - Player, hand, deck, champion, background, end turn -button ja table slotsien renderöinnin koodaaminen ja puuttuvien kuvien piirtäminen
 - Pientä refaktorointia
 
-**20.2.2015:** 3h
+**20.2.2015:** 4h
 - Uusia sekvenssikaavioita: Rendering Game State, 
 - JavaDoc päivittämistä
+- Render Table
+
+**21.2.2015:**
+- 13.00-14.30 Refaktorointia, Font-luokkaan tutustuminen ja hyödyntäminen vuoron renderöinnissä, Locations luokka koordinaattien hallintaan
+- 16.15-17.30 Mouse controller

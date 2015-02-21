@@ -2,12 +2,14 @@ package game;
 
 import cards.containers.Deck;
 import game.input.KeyManager;
+import game.input.MouseManager;
 import graphics.Assets;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseEvent;
 import states.GameState;
 import states.MenuState;
 import states.SettingsState;
@@ -38,6 +40,7 @@ public class Game implements Runnable {
 
     // Input
     private KeyManager keyManager;
+    private MouseManager mouseManager;
 
     public Game(String title, int width, int height) {
         this.width = width;
@@ -53,6 +56,7 @@ public class Game implements Runnable {
     private void init() {
         display = new Display(title, width, height);
         display.getFrame().addKeyListener(keyManager);
+        display.getFrame().addMouseListener(mouseManager);
         Assets.init();
         
         // gc = display.getCanvas().getGraphicsContext2D();
@@ -64,12 +68,19 @@ public class Game implements Runnable {
     }
 
     /**
-     * What needs to happen on every game loop (60/s). Input controllers and
+     * What needs to happen on every game loop (30/s). Input controllers and
      * animations mostly.
      *
      */
     private void tick() {
         keyManager.tick();
+        
+        
+        if (true) {
+            
+        }
+        
+        
 
         if (State.getState() != null) {
             State.getState().tick();
@@ -100,14 +111,14 @@ public class Game implements Runnable {
 
     /**
      * Method which starts, runs and stops the game loop. The frames per second
-     * is hardcoded to 60.
+     * is hardcoded to 30.
      *
      */
     @Override
     public void run() {
         init();
 
-        int fps = 60;
+        int fps = 30;
         double timePerTick = 1000000000 / fps;
         double delta = 0; // Time left before we have to render again
         long now;
@@ -129,7 +140,7 @@ public class Game implements Runnable {
             }
 
             if (timer >= 1000000000) {
-                System.out.println("FPS: " + ticks);
+                // System.out.println("FPS: " + ticks); // prints FPS to output
                 ticks = 0;
                 timer = 0;
             }
@@ -139,6 +150,10 @@ public class Game implements Runnable {
 
     public KeyManager getKeyManager() {
         return keyManager;
+    }
+
+    public MouseManager getMouseManager() {
+        return mouseManager;
     }
 
     /**
