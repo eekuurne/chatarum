@@ -1,39 +1,46 @@
 package cards;
 
+import java.awt.Component;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
+import java.awt.event.MouseListener;
 
 /**
- * Interface for cards to allow Skill and Minion cards to be stored to the same
- * lists.
  *
  * @author Eero Kuurne
  */
-public interface Card {
+public abstract class Card {
 
-    String getName();
+    private String name;
+    private int cost;
+    private int x, y;
 
-    /**
-     * Change the x coordinate of the card.
-     *
-     */
-    void setX(float x);
+    public Card(String name, int cost) {
+        this.name = name;
+        this.cost = cost;
+        this.x = 0;
+        this.y = 0;
+    }
 
-    /**
-     * Change the y coordinate of the card.
-     *
-     */
-    void setY(float y);
+    public String getName() {
+        return name;
+    }
 
-    /**
-     * Get the zoomed picture of a card to help reading it.
-     *
-     * @return bigPic of the card.
-     */
-    BufferedImage getZoomedPic();
+    public int getCost() {
+        return cost;
+    }
 
-    // What happens when the card is played from hand.
-    void playCard();
+    public int getX() {
+        return x;
+    }
 
-    void render(Graphics g);
+    public int getY() {
+        return y;
+    }
+
+    public void setLocation(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+    
+    public abstract void paintComponent(Graphics g);
 }

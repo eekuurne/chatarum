@@ -1,9 +1,9 @@
 package cards.minions;
 
 import cards.Minion;
-import graphics.Assets;
+import game.assets.Assets;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
+import java.awt.event.MouseEvent;
 
 /**
  * Simple warrior minion.
@@ -13,16 +13,11 @@ import java.awt.image.BufferedImage;
 public class Swordman extends Minion {
 
     public Swordman() {
-        super(3, 2, 0, "Swordman", 25, false, false, false, 0, Assets.swordmanBig);
+        super("Swordman", 25, 3, 2, false, false, false, 0);
     }
 
     @Override
-    public void tick() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void render(Graphics g) {
-        g.drawImage(Assets.swordmanSmall, (int) x, (int) y, null);
+    public void paintComponent(Graphics g) {
+        g.drawImage(Assets.swordmanSmall, super.getX(), super.getY(), null);
     }
 }

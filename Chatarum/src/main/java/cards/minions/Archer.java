@@ -1,28 +1,23 @@
-
 package cards.minions;
 
 import cards.Minion;
-import graphics.Assets;
+import game.assets.Assets;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
 
 /**
- * Simple ranged minion.
- * 
- * @author Eero
+ * Basic warrior class.
+ *
+ * @author Eero Kuurne
  */
 public class Archer extends Minion {
 
     public Archer() {
-        super(1, 1, 0, "Archer", 15, false, true, false , 0, Assets.archerBig);
+        super("Archer", 15, 1, 1, false, true, false, 0);
     }
 
     @Override
-    public void tick() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void render(Graphics g) {
-        g.drawImage(Assets.archerSmall, (int) x, (int) y, null);
+    public void paintComponent(Graphics g) {
+        g.drawImage(Assets.archerSmall, super.getX(), super.getY(), null);
     }
 }

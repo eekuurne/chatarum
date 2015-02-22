@@ -59,6 +59,15 @@
 - JavaDoc päivittämistä
 - Render Table
 
-**21.2.2015:**
-- 13.00-14.30 Refaktorointia, Font-luokkaan tutustuminen ja hyödyntäminen vuoron renderöinnissä, Locations luokka koordinaattien hallintaan
-- 16.15-17.30 Mouse controller
+**21.2.2015:** 6h
+- Refaktorointia, Font-luokkaan tutustuminen ja hyödyntäminen vuoron renderöinnissä
+- Locations luokka koordinaattien hallintaan
+- Mouse controllerin koodaamisen yrittämistä, ei onnistunut
+
+**22.2.2015:** 9h
+- Aloitin projektin koodaamisen alusta, kuitenkin hyödyntämällä joitain aiemmin tekemiäni komponentteja 
+- Päivän päätteeksi projekti oli samassa kunnossa kuin edellisessä toteutuksessa, paitsi että siinä on toimiva
+mouse input, parempi keyboard input, moni luokka on selkeämpi ja ruudulle piirretään vain kun jotain tapahtuu
+jatkuvan loopin sijaan
+- Aihemäärittely meni uusiksi kurssin osalta: Factionit, championit ja skill-cardit jää pois kokonaan, ainoa pelimuoto
+tulee olemaan local multiplayer jne. (kirjoitan määrittelyn tarkemmin huomenna)

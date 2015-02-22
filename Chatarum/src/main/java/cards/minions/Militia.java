@@ -1,29 +1,23 @@
-
 package cards.minions;
 
 import cards.Minion;
-import graphics.Assets;
+import game.assets.Assets;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
 
 /**
- * Simple warrior minion, which can be drawn from an empty deck or converted 
- * from the cheapest worker or gained with some Skills.
+ * Simple warrior minion, which can be drawn from an empty deck.
  * 
  * @author Eero Kuurne
  */
 public class Militia extends Minion {
-    
+
     public Militia() {
-        super(1, 1, 0, "Militia", 10, false, false, false, 0, Assets.militiaBig);
+        super("Militia", 10, 1, 1, false, false, false, 0);
     }
 
     @Override
-    public void tick() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void render(Graphics g) {
-        g.drawImage(Assets.militiaSmall, (int) x, (int) y, null);
+    public void paintComponent(Graphics g) {
+        g.drawImage(Assets.militiaSmall, super.getX(), super.getY(), null);
     }
 }

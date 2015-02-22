@@ -3,6 +3,20 @@ The working title comes from the Latin word for a card game (ludus chatarum).
 
 (Currently the sourcecode is in English and the documentation is in Finnish - will change it all to English when I have time)
 
+**23.2.2015, 00:20:**
+Statuspäivitys: olen koodannut tänään koko projektin alusta, hyödyntäen joitain komponentteja edellisestä
+toteutuksesta. Uusi toteutus pohjautuu periaatteeseen, että ruutu päivitetään vain kun jotain tapahtuu. Pelistä
+tuli näin huomattavasti kevyempi ja loogisemmin käsiteltävä kokonaisuus koodattavaksi.
+
+Koska aikaa ei ole liikaa ja projektista oli tulossa erittäin laaja, päätin jättää suosiolla muutamia ominaisuuksia
+kokonaan kurssin aikana tehtävästä toteutuksesta. Niiden lisäämisen mahdollisuus on kuitenkin otettu huomioon
+pelin toteutuksessa.
+- Factionit, championit ja skill-cardit jää pois kokonaan
+- Pelimuotona ainoastaan local multiplayer
+
+Tällä hetkellä vuoroa voi vaihtaa painamalla hiirellä End turn -nappia ja pelaaja1 voi nostaa kortteja Q:lla ja
+tuhota kortteja kädestään E:llä. Näin nähdään miten korttien piirtäminen käsiin tapahtuu pöydällä.
+
 **20.2.2015, 12:00:** 
 Peli ei ole vielä aivan demottavassa kunnossa ja JUnit testit laahaa jäljessä, 
 mutta viikonlopun jälkeen pelin pitäisi olla pelattavissa ja testit kunnossa. Tällä hetkellä peli

@@ -3,12 +3,11 @@ package game.logic;
 import cards.containers.Table;
 import cards.containers.Deck;
 import cards.containers.Hand;
-import graphics.Assets;
 import java.awt.Graphics;
 
 /**
- * Contains the deck, hand, table and champion of a player. Every game has 2 
- * players, who can either be controlled by a player or AI.
+ * Contains the deck, hand and table of a player. Every game has 2 
+ * players.
  * 
  * Player number 1 is at bottom, 2 is at top. Bottom player always starts.
  * 
@@ -19,7 +18,6 @@ public class Player {
     private Deck deck;
     private Hand hand;
     private Table table;
-    private Champion champion;
     
     private int health;
 
@@ -27,7 +25,6 @@ public class Player {
         this.deck = deck;
         this.hand = new Hand();
         this.table = new Table();
-        this.champion = deck.getChampion();
         this.health = 30;
     }
 
@@ -39,32 +36,24 @@ public class Player {
         return hand;
     }
 
-    public int getHealth() {
-        return health;
-    }
-
     public Table getTable() {
         return table;
     }
     
-    /**
-     * Gets the player's faction from player's deck.
-
-     * @return Player's faction.
-     */
-    public int getFaction() {
-        return deck.getFaction();
+    public int getHealth() {
+        return health;
     }
 
     /**
-     * Method for taking damage.
+     * Changes the health of the player based on parameter amount. Negative
+     * values for taking damage.
      *
-     * @param amount The damage done to the player's hero.
+     * @param amount The amount of health to change.
      *
      * @return Did the player's health go under zero.
      */
-    public boolean takeDamage(int amount) {
-        health -= amount;
+    public boolean changeHealth(int amount) {
+        health += amount;
         if (health <= 0) {
             return true;
         }
@@ -72,17 +61,16 @@ public class Player {
     }
     
     /**
-     * Renders the player's deck, hand, table and champion.
+     * Paints the player's deck, hand and table.
      *
      * 
-     * @param g Graphics tool.
+     * @param g Graphics drawing tool.
      * @param player 1 for player at bottom, 2 for top.
      * @param turn Current turn.
      */
-    public void render(Graphics g, int player, int turn) {
-        deck.render(g, player);
-        hand.render(g, player, getFaction(), turn);
-        table.render(g);
-        champion.render(g, player, getFaction());
+    public void paintComponent(Graphics g, int player, int turn) {
+        deck.paintComponent(g, player);
+        hand.paintComponent(g, player, turn);
+        // table.paintComponent(g);
     }
 }

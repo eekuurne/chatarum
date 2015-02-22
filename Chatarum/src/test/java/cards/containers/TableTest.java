@@ -32,12 +32,5 @@ public class TableTest {
     public void tearDown() {
     }
 
-    @Test
-    public void insertMinion() {
-        Table table1 = new Table();
-        Minion minion = new Swordman();
-        table1.insertMinion(minion, 1);
-        
-        assertEquals(2, table1.chooseMinion(1).getHealth());
-    }
+    
 }

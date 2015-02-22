@@ -2,19 +2,19 @@ package cards.containers;
 
 import cards.Card;
 import cards.minions.Militia;
-import cards.Minion;
-import game.logic.Champion;
-import graphics.Assets;
+import game.assets.Assets;
+import game.ui.Locations;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Deck constists of 0-30 cards and a Champion. Player composes his deck in the 
- * menu before the game starts and the Deck object will then be transfered into 
- * the game. The Deck object's role in the game is to be a container of cards 
- * where the player picks 1 from per turn to his hand.
+ * Deck is the container for player's cards before they are drawn to his hand.
+ * The variable "maxSize" defines the maximum amount of cards in a deck and the
+ * variable "maxSingle" defines the maximum amount of single card in a deck.
+ * 
+ * The deck object contains methods for adding card, drawing card and rendering
+ * the deck to the screen based on remaining cards.
  * 
  * @author Eero Kuurne
  */
@@ -24,15 +24,11 @@ public class Deck {
     private ArrayList<Card> cards;
     private final int maxSize;
     private final int maxSingle;
-    private Champion champion;
-    private int faction;
 
-    public Deck(int faction) {
+    public Deck() {
         this.cards = new ArrayList<Card>();
-        this.maxSize = 20;
-        this.maxSingle = 5;
-        this.faction = faction;
-        this.champion = new Champion();
+        this.maxSize = 30;
+        this.maxSingle = 6;
     }
 
     public ArrayList<Card> getCards() {
@@ -46,21 +42,13 @@ public class Deck {
     public int getMaxSingle() {
         return maxSingle;
     }
-    
+
     public int getRemaining() {
         return cards.size();
     }
 
-    public int getFaction() {
-        return faction;
-    }
-
-    public Champion getChampion() {
-        return champion;
-    }
-
     /**
-     * Method for adding card to deck.
+     * Method for adding a card to the deck.
      *
      * @param card1 The card added to the deck.
      *
@@ -86,9 +74,9 @@ public class Deck {
     }
 
     /**
-     * Method for taking card from deck.
+     * Method for taking a card from the deck.
      * 
-     * @return Random card from deck.
+     * @return A random card from the deck.
      */
     public Card takeCard() {
         // If the deck is empty, take militia card.
@@ -113,33 +101,30 @@ public class Deck {
      * @param g Graphics tool
      * @param player 1 for player at bottom, 2 for top.
      */
-    public void render(Graphics g, int player) {
-        int x = 75; 
+    public void paintComponent(Graphics g, int player) {
+        int x = Locations.deckX; 
         int y;
         if (player == 1) {
-            y = 565;
+            y = Locations.player1DeckY;
         } else {
-            y = 317;
+            y = Locations.player2DeckY;
         }
 
-        if (faction == 1) { // Faction brotherhood
-            g.drawImage(Assets.brotherhoodBack, x, y, null);
-            g.drawImage(Assets.brotherhoodBack, x + 3, y - 3, null);
-            g.drawImage(Assets.brotherhoodBack, x + 6, y - 6, null);
-        } else if (faction == 2) { // Faction cult
-            g.drawImage(Assets.cultBack, x, y, null);
-            g.drawImage(Assets.cultBack, x + 3, y - 3, null);
-            g.drawImage(Assets.cultBack, x + 6, y - 6, null);
+        // Draws cardbacks on top of each based on cards remaining.
+        if (cards.size() >= 1) {
+            g.drawImage(Assets.neutralCardBack, x, y, null);
         }
-        
-        // If cards.size > 20 
-        
-        // else if cards.size > 10 show 5 cards
-        
-        // else if cards.size > 3 show 3 cards
-        
-        // else if cards.size == 2, show 2 cards
-        
-        // else if cards.size == 1, show 1 card
+        if (cards.size() >= 2) {
+            g.drawImage(Assets.neutralCardBack, x + 3, y - 3, null);
+        }
+        if (cards.size() >= 5) {
+            g.drawImage(Assets.neutralCardBack, x + 6, y - 6, null);
+        }
+        if (cards.size() >= 10) {
+            g.drawImage(Assets.neutralCardBack, x + 9, y - 9, null);
+        }
+        if (cards.size() >= 20) {
+            g.drawImage(Assets.neutralCardBack, x + 12, y - 12, null);
+        }
     }
 }

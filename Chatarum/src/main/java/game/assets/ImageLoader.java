@@ -1,4 +1,4 @@
-package graphics;
+package game.assets;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -8,12 +8,12 @@ import javax.imageio.ImageIO;
 /**
  * Class for loading images.
  *
- * @author Eero
+ * @author Eero Kuurne
  */
 public class ImageLoader {
 
     /**
-     * Method for loading png image and returning it as BufferedImage.
+     * Method for loading a png-file and returning it as BufferedImage.
      *
      * @param path Location of the file.
      * @return BufferedImage made of the file.

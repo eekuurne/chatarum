@@ -1,28 +1,23 @@
-
 package cards.minions;
 
 import cards.Minion;
-import graphics.Assets;
+import game.assets.Assets;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
 
 /**
- * Simple guardian minion.
- * 
- * @author Eero
+ * Simple warrior minion.
+ *
+ * @author Eero Kuurne
  */
 public class Watchman extends Minion {
 
     public Watchman() {
-        super(2, 3, 0, "Watchman", 30, false, false, false , 0, Assets.watchmanBig);
+        super("Watchman", 30, 2, 3, false, false, true, 0);
     }
 
     @Override
-    public void tick() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void render(Graphics g) {
-        g.drawImage(Assets.watchmanSmall, (int) x, (int) y, null);
+    public void paintComponent(Graphics g) {
+        g.drawImage(Assets.watchmanSmall, super.getX(), super.getY(), null);
     }
 }

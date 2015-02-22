@@ -1,187 +1,66 @@
 package game;
 
-import cards.containers.Deck;
-import game.input.KeyManager;
-import game.input.MouseManager;
-import graphics.Assets;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.image.BufferStrategy;
+import game.assets.Assets;
+import game.assets.ImageLoader;
+import game.input.KeyboardInput;
+import game.input.MouseInput;
+import game.ui.Locations;
+import game.ui.UserInterface;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.MouseEvent;
-import states.GameState;
-import states.MenuState;
-import states.SettingsState;
-import states.State;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 
 /**
- * "Main" class of the game.
  *
- * @author Eero
+ * @author Eero Kuurne
  */
 public class Game implements Runnable {
 
-    private Display display;
-    public int width, height;
-    public String title;
+    private JFrame frame;
 
-    private Thread thread;
-    private boolean running = false;
-
-    private BufferStrategy bs;
-    private Graphics g;
-    // private GraphicsContext gc;
-    
-    // States
-    private State gameState;
-    private State menuState;
-    private State settingsState;
-
-    // Input
-    private KeyManager keyManager;
-    private MouseManager mouseManager;
+    private String title;
+    private int width, height;
 
     public Game(String title, int width, int height) {
+        this.title = title;
         this.width = width;
         this.height = height;
-        this.title = title;
-        this.keyManager = new KeyManager();
     }
 
-    /**
-     * Method which handles the things that happen at start of the game only.
-     *
-     */
-    private void init() {
-        display = new Display(title, width, height);
-        display.getFrame().addKeyListener(keyManager);
-        display.getFrame().addMouseListener(mouseManager);
-        Assets.init();
-        
-        // gc = display.getCanvas().getGraphicsContext2D();
-
-        gameState = new GameState(this);
-        menuState = new MenuState(this);
-        settingsState = new SettingsState(this);
-        State.setState(gameState);
-    }
-
-    /**
-     * What needs to happen on every game loop (30/s). Input controllers and
-     * animations mostly.
-     *
-     */
-    private void tick() {
-        keyManager.tick();
-        
-        
-        if (true) {
-            
-        }
-        
-        
-
-        if (State.getState() != null) {
-            State.getState().tick();
-        }
-    }
-
-    /**
-     * The base method for rendering what the state has to render.
-     *
-     */
-    private void render() {
-        bs = display.getCanvas().getBufferStrategy();
-        if (bs == null) {
-            display.getCanvas().createBufferStrategy(3);
-            return;
-        }
-        g = bs.getDrawGraphics();
-        // Clear screen.
-        g.clearRect(0, 0, width, height);
-
-        if (State.getState() != null) {
-            State.getState().render(g);
-        }
-
-        bs.show();
-        g.dispose();
-    }
-
-    /**
-     * Method which starts, runs and stops the game loop. The frames per second
-     * is hardcoded to 30.
-     *
-     */
-    @Override
     public void run() {
-        init();
+        frame = new JFrame(title);
+        fullscreen(true);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        int fps = 30;
-        double timePerTick = 1000000000 / fps;
-        double delta = 0; // Time left before we have to render again
-        long now;
-        long lastTime = System.nanoTime();
-        long timer = 0;
-        int ticks = 0;
+        Assets.init();
+        Locations.init();
+        createComponents(frame.getContentPane());
 
-        while (running) {
-            now = System.nanoTime();
-            delta += (now - lastTime) / timePerTick;
-            timer += now - lastTime;
-            lastTime = now;
-
-            if (delta >= 1) {
-                tick();
-                render();
-                delta--;
-                ticks++;
-            }
-
-            if (timer >= 1000000000) {
-                // System.out.println("FPS: " + ticks); // prints FPS to output
-                ticks = 0;
-                timer = 0;
-            }
-        }
-        stop();
+        frame.pack();
+        frame.setVisible(true);
     }
 
-    public KeyManager getKeyManager() {
-        return keyManager;
-    }
-
-    public MouseManager getMouseManager() {
-        return mouseManager;
-    }
-
-    /**
-     * Method for starting the thread.
-     *
-     */
-    public synchronized void start() {
-        if (running) {
-            return;
-        }
-        running = true;
-        thread = new Thread(this);
-        thread.start();
-    }
-
-    /**
-     * Method for stopping the thread.
-     *
-     */
-    public synchronized void stop() {
-        if (!running) {
-            return;
-        }
-        running = false;
-        try {
-            thread.join();
-        } catch (Exception e) {
-            e.printStackTrace();
+    public void fullscreen(boolean full) {
+        if (full) {
+            frame.setUndecorated(true); // Disables decorations for frame.
+            frame.setExtendedState(frame.MAXIMIZED_BOTH); // Puts the frame to full screen.
+        } else {
+            frame.setSize(width, height);
+            frame.setLocationRelativeTo(null); // Frame starts at middle.
+            frame.setResizable(false); // The window isn't resizable by user.
         }
     }
+
+    private void createComponents(Container container) {
+        UserInterface ui = new UserInterface();
+        container.add(ui);
+        
+        frame.addKeyListener(new KeyboardInput(ui));
+        frame.addMouseListener(new MouseInput(ui));
+    }
+
 }

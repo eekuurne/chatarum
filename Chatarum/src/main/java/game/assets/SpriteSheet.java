@@ -1,11 +1,11 @@
-package graphics;
+package game.assets;
 
 import java.awt.image.BufferedImage;
 
 /**
- * Class for cropping from the sprite sheet.
+ * Class for cropping from a sprite sheet.
  *
- * @author Eero
+ * @author Eero Kuurne
  */
 public class SpriteSheet {
 

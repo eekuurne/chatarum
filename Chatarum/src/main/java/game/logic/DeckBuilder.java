@@ -21,8 +21,8 @@ public class DeckBuilder {
     private Deck deck2;
 
     public DeckBuilder() {
-        deck1 = new Deck(1);
-        deck2 = new Deck(2);
+        deck1 = new Deck();
+        deck2 = new Deck();
 
         init();
     }
@@ -32,7 +32,7 @@ public class DeckBuilder {
      *
      */
     public void init() {
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 5; i++) {
             deck1.addCard(new Swordman());
             deck1.addCard(new Archer());
             deck1.addCard(new Militia());
@@ -41,7 +41,7 @@ public class DeckBuilder {
             deck1.addCard(new Watchman());
         }
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 5; i++) {
             deck2.addCard(new Swordman());
             deck2.addCard(new Archer());
             deck2.addCard(new Militia());

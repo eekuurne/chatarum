@@ -33,21 +33,21 @@ public class MinionTest {
     @Test
     public void takeDamageStayAlive() {
         Minion minion = new Swordman();
-        minion.takeDamage(1);
+        minion.changeHealth(-1);
         assertEquals(1, minion.getHealth());
     }
     
     @Test
     public void takeDamageGoZero() {
         Minion minion = new Swordman();
-        minion.takeDamage(2);
+        minion.changeHealth(-2);
         assertEquals(0, minion.getHealth());
     }
     
     @Test
     public void takeDamageGoNegative() {
         Minion minion = new Swordman();
-        minion.takeDamage(3);
+        minion.changeHealth(-3);
         assertEquals(-1, minion.getHealth());
     }
 }
