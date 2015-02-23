@@ -18,7 +18,7 @@ public class UserInterface extends JPanel {
     public UserInterface() {
         super.setBackground(Color.WHITE);
         
-        this.handler = new LogicHandler();
+        this.handler = new LogicHandler(this);
     }
 
     @Override

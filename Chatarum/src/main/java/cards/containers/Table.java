@@ -1,6 +1,5 @@
 package cards.containers;
 
-import cards.Card;
 import cards.Minion;
 import game.ui.Locations;
 import java.awt.Graphics;
@@ -13,7 +12,7 @@ import java.awt.Graphics;
  */
 public class Table {
 
-    private Card[] minions;
+    private Minion[] minions;
 
     public Table() {
         this.minions = new Minion[8];
@@ -27,11 +26,11 @@ public class Table {
         return true;
     }
 
-    public Card chooseMinion(int slot) {
+    public Minion chooseMinion(int slot) {
         if (minions[slot] == null) {
             return null;
         }
-        Card minion = minions[slot];
+        Minion minion = minions[slot];
         return minion;
     }
 
@@ -59,4 +58,10 @@ public class Table {
             }
         }
     }
+
+    public Minion[] getMinions() {
+        return minions;
+    }
+    
+    
 }

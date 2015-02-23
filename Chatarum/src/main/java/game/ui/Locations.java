@@ -25,18 +25,16 @@ public class Locations {
     public static int[] tableX;
     public static int player1TableY, player2TableY;
     
-    // Health and resources.
-    public static int healthTextX, healthBarX, resourceTextX, resourceBarX,
-            player1HealthTextY, player2HealthTextY, player1HealthBarY, 
-            player2HealthBarY, player1ResourceTextY, player2ResourceTextY,
-            player1ResourceBarY, player2ResourceBarY;
+    public static int statX, player1InfluenceTextY, player2InfluenceTextY, 
+            player1InfluenceBarY, player2InfluenceBarY, player1ResourceTextY, 
+            player2ResourceTextY, player1ResourceBarY, player2ResourceBarY;
 
     public static void init() {
         backgroundObjectLocations();
         deckLocations();
         handLocations();
         tableLocations();
-        healthAndResourceLocations();
+        influenceAndResourceLocations();
     }
 
     public static void backgroundObjectLocations() {
@@ -82,21 +80,21 @@ public class Locations {
         }
     }
     
-    public static void healthAndResourceLocations() {
-        healthBarX = 1920 - 100;
-        player1HealthBarY = 1;
-        player2HealthBarY = 1;
+    public static void influenceAndResourceLocations() {
+        statX = endTurnX;
         
-        healthTextX = 1920 - 100;
-        player1HealthTextY = 1;
-        player2HealthTextY = 1;
+        player1InfluenceTextY = tableSlotsY + 468 - 108;
+        player1ResourceTextY = player1InfluenceTextY + 80;
+        
+        player1InfluenceBarY = player1InfluenceTextY - 18 - 35;
+        player1ResourceBarY = player1ResourceTextY - 18 - 35;
+        
+        
+        player2InfluenceTextY = tableSlotsY + 108 + 18;
+        player2ResourceTextY = player2InfluenceTextY - 80;
+        
+        player2InfluenceBarY = player2InfluenceTextY - 18 + 35;
+        player2ResourceBarY = player2ResourceTextY - 18 + 35;
 
-        resourceBarX = 1;
-        player1ResourceBarY = 1;
-        player2ResourceBarY = 1;
-        
-        resourceTextX = 1;
-        player1ResourceTextY = 1;
-        player2ResourceTextY = 1;
     }
 }

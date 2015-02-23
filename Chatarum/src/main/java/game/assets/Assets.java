@@ -37,6 +37,10 @@ public class Assets {
 
     // Cardbacks.
     public static BufferedImage neutralCardBack;
+    
+    // Statistic bar.
+    public static BufferedImage statBar;
+   
 
     /**
      * Method which loads all the images and crops all the single items from the
@@ -53,6 +57,7 @@ public class Assets {
         background = ImageLoader.loadImage("resources/textures/background_1920x1080.png");
         tableSlots = ImageLoader.loadImage("resources/textures/table_slots.png");
         endTurn = ImageLoader.loadImage("resources/textures/end_turn.png");
+        statBar = ImageLoader.loadImage("resources/textures/stat_bar.png");
     }
 
     private static void neutralCrops() {

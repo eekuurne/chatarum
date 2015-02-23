@@ -74,3 +74,5 @@ tulee olemaan local multiplayer jne. (kirjoitan määrittelyn tarkemmin huomenna
 
 **23.2.2015:** 
 - 02.00-04.00: Tablen koodaus, korttien valitseminen kädestä, piirtelyä
+- 11.30-14.00: Vuoron vaihtumiseen ja pelaajien statteihin liittyvää koodailua, piirtelyä ja säätämistä
+- 15.00-17.30: Vuoron vaihtumiseen ja pelaajien statteihin liittyvää koodailua, piirtelyä ja säätämistä
