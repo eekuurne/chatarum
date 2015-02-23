@@ -38,7 +38,7 @@ public class UserInterface extends JPanel {
     }
     
     private void paintTurn(Graphics g) {
-        Font font = new Font("Segoe Script", Font.PLAIN, 48);
+        Font font = new Font("Segoe Script", Font.PLAIN, 36);
         g.setFont(font);
         g.setColor(Color.black);
         g.drawString("" + handler.getTurn(), Locations.turnNumberX, Locations.turnNumberY);

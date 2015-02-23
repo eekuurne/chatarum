@@ -1,5 +1,6 @@
 package game.input;
 
+import cards.Card;
 import game.assets.Assets;
 import game.ui.Locations;
 import game.ui.UserInterface;
@@ -25,6 +26,10 @@ public class MouseInput implements MouseListener {
         if (mx >= Locations.endTurnX && mx <= Locations.endTurnX + Assets.endTurnWidth
                 && my >= Locations.endTurnY && my <= Locations.endTurnY + Assets.endTurnHeight) {
             ui.getHandler().changeTurn();
+            ui.getHandler().clearChosen();
+            ui.getHandler().updateCardPositions();
+        } else {
+            ui.getHandler().clearChosen();
         }
         
         ui.repaint();

@@ -1,5 +1,6 @@
 package cards;
 
+import game.logic.LogicHandler;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.event.MouseListener;
@@ -43,4 +44,5 @@ public abstract class Card {
     }
     
     public abstract void paintComponent(Graphics g);
+    public abstract void clickInHand(LogicHandler handler);
 }

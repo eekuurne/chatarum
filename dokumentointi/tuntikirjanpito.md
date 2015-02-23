@@ -71,3 +71,6 @@ mouse input, parempi keyboard input, moni luokka on selkeämpi ja ruudulle piirr
 jatkuvan loopin sijaan
 - Aihemäärittely meni uusiksi kurssin osalta: Factionit, championit ja skill-cardit jää pois kokonaan, ainoa pelimuoto
 tulee olemaan local multiplayer jne. (kirjoitan määrittelyn tarkemmin huomenna)
+
+**23.2.2015:** 
+- 02.00-04.00: Tablen koodaus, korttien valitseminen kädestä, piirtelyä

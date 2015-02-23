@@ -100,10 +100,8 @@ public class Hand {
      * @param player 1 for player at bottom, 2 for top.
      */
     public void cardPositions(int player) {
-        int y;
-        if (player == 1) {
-            y = Locations.player1HandY;
-        } else {
+        int y = Locations.player1HandY;
+        if (player == 2) {
             y = Locations.player2HandY;
         }
 

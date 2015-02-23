@@ -24,12 +24,19 @@ public class Locations {
     // Tables.
     public static int[] tableX;
     public static int player1TableY, player2TableY;
+    
+    // Health and resources.
+    public static int healthTextX, healthBarX, resourceTextX, resourceBarX,
+            player1HealthTextY, player2HealthTextY, player1HealthBarY, 
+            player2HealthBarY, player1ResourceTextY, player2ResourceTextY,
+            player1ResourceBarY, player2ResourceBarY;
 
     public static void init() {
         backgroundObjectLocations();
         deckLocations();
         handLocations();
         tableLocations();
+        healthAndResourceLocations();
     }
 
     public static void backgroundObjectLocations() {
@@ -39,7 +46,7 @@ public class Locations {
         endTurnX = 1610; // Width: 200
         endTurnY = 510; // Height: 60
         turnNumberX = 1830;
-        turnNumberY = 555;
+        turnNumberY = 551;
     }
 
     public static void deckLocations() {
@@ -73,5 +80,23 @@ public class Locations {
         for (int i = 0; i < 8; i++) {
             tableX[i] = 372 + i * (Assets.smallWidth + 25);
         }
+    }
+    
+    public static void healthAndResourceLocations() {
+        healthBarX = 1920 - 100;
+        player1HealthBarY = 1;
+        player2HealthBarY = 1;
+        
+        healthTextX = 1920 - 100;
+        player1HealthTextY = 1;
+        player2HealthTextY = 1;
+
+        resourceBarX = 1;
+        player1ResourceBarY = 1;
+        player2ResourceBarY = 1;
+        
+        resourceTextX = 1;
+        player1ResourceTextY = 1;
+        player2ResourceTextY = 1;
     }
 }

@@ -1,8 +1,10 @@
 package game.logic;
 
+import cards.Card;
 import cards.containers.Deck;
 import cards.minions.Archer;
 import cards.minions.Swordman;
+import game.ui.Locations;
 
 /**
  *
@@ -12,11 +14,14 @@ public class LogicHandler {
 
     private int turn;
     
+    private Card chosenCard;
+    
     private Player player1;
     private Player player2;
 
     public LogicHandler() {
         this.turn = 1;
+        this.chosenCard = null;
 
         init();
     }
@@ -48,6 +53,9 @@ public class LogicHandler {
     public void changeTurn() {
         turn++;
         
+        for (int i = 0; i < 8; i++) {
+            
+        }
     }
     
     public int getTurn() {
@@ -65,5 +73,34 @@ public class LogicHandler {
     public Player getPlayer2() {
         return player2;
     }
+
+    public Card getChosenCard() {
+        return chosenCard;
+    }
+
+    public void setChosenCard(Card chosenCard) {
+        this.chosenCard = chosenCard;
+    }
+
+    public void clearChosen() {
+        if (chosenCard != null) {
+            Card chosen = chosenCard;
+            if (turn % 2 != 0) {
+                chosen.setLocation(chosen.getX(), Locations.player1HandY);
+            } else {
+                chosen.setLocation(chosen.getX(), Locations.player2HandY);
+            }
+            chosenCard = null;
+        }
+    }
     
+    public void updateCardPositions() {
+        // Update hands.
+        player1.getHand().cardPositions(1);
+        player2.getHand().cardPositions(2);
+        
+        // Update tables.
+        player1.getTable().cardPositions(1);
+        player2.getTable().cardPositions(2);
+    }
 }

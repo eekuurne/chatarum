@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
 /**
+ * The base class of the game. 
  *
  * @author Eero Kuurne
  */
@@ -31,6 +32,7 @@ public class Game implements Runnable {
         this.height = height;
     }
 
+    @Override
     public void run() {
         frame = new JFrame(title);
         fullscreen(true);

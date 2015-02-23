@@ -71,6 +71,10 @@ public class Player {
     public void paintComponent(Graphics g, int player, int turn) {
         deck.paintComponent(g, player);
         hand.paintComponent(g, player, turn);
-        // table.paintComponent(g);
+        table.paintComponent(g);
+    }
+    
+    public void paintHealth(Graphics g, int player, int turn) {
+        
     }
 }

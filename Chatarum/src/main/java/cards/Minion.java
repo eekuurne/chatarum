@@ -1,5 +1,8 @@
 package cards;
 
+import game.logic.LogicHandler;
+import game.ui.Locations;
+
 /**
  *
  * @author Eero Kuurne
@@ -57,4 +60,15 @@ public abstract class Minion extends Card {
     public void changeHealth(int amount) {
         this.health += amount;
     }
+
+    @Override
+    public void clickInHand(LogicHandler handler) {
+        handler.setChosenCard(this);
+        if (handler.getTurn() % 2 != 0) {
+            setLocation(getX(), Locations.player1HandY - 25);
+        } else {
+            setLocation(getX(), Locations.player2HandY + 25);
+        }
+    }
+    
 }

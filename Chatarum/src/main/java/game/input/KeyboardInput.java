@@ -29,13 +29,17 @@ public class KeyboardInput implements KeyListener {
         else if (ke.getKeyCode() == KeyEvent.VK_Q) {
             Card drawCard = ui.getHandler().getPlayer1().getDeck().takeCard();
             ui.getHandler().getPlayer1().getHand().addCard(drawCard);
+            ui.getHandler().updateCardPositions();
         }
-        // E: Player 1 remove card from hand.
+        // W: Player 1 remove card from hand.
+        else if (ke.getKeyCode() == KeyEvent.VK_W) {
+            ui.getHandler().getPlayer2().getHand().getCards().get(1).clickInHand(ui.getHandler());
+        }
+        // E: Click in hand
         else if (ke.getKeyCode() == KeyEvent.VK_E) {
-            Card takeCard = ui.getHandler().getPlayer1().getHand().takeCard(0);
+            ui.getHandler().getPlayer1().getHand().getCards().get(1).clickInHand(ui.getHandler());
         }
-        
-        ui.getHandler().getPlayer1().getHand().cardPositions(1);
+
         ui.repaint();
     }
 
