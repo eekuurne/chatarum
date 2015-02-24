@@ -3,6 +3,11 @@ The working title comes from the Latin word for a card game (ludus chatarum).
 
 (Currently the sourcecode is in English and the documentation is in Finnish - will change it all to English when I have time)
 
+**24.2.2015, 03:31:**
+Pelaajien influence (ent. health) ja resources toimii sekä tekstinä että palkkina niin kuin pitää. Kortteja voi valita kädestä ja pelata pöytään. Vielä kun lisään huomenna toiminnallisuuden minioneiden välisille hyökkäyksille niin peli on valmis pelattavaksi. Sen jälkeen tulee vuorojen välinen ruutu (End turn -> Start turn -> Vuoro alkaa), pelin lopetus, menu, korttien zoomaus kun hiiri päällä, äänet, deckbuilder, lisää kortteja jne. Muita uusia toiminnallisuuksia lisään kurssin jälkeen.
+
+Korttien käsittely toimii hiirellä. Esc-illä pääsee pois pelistä. END TURN -nappi vaihtaa vuoroa. Näppäimet Q, W, E, A, S, D, Z ja X on ollut testauskäytössä, tällä hetkellä vaihtaa pelaajien influencea ja resourceja molempiin suuntiin.
+
 **23.2.2015, 00:20:**
 Statuspäivitys: olen koodannut tänään koko projektin alusta, hyödyntäen joitain komponentteja edellisestä
 toteutuksesta. Uusi toteutus pohjautuu periaatteeseen, että ruutu päivitetään vain kun jotain tapahtuu. Pelistä
@@ -14,23 +19,4 @@ pelin toteutuksessa.
 - Factionit, championit ja skill-cardit jää pois kokonaan
 - Pelimuotona ainoastaan local multiplayer
 
-Tällä hetkellä vuoroa voi vaihtaa painamalla hiirellä End turn -nappia ja pelaaja1 voi nostaa kortteja Q:lla ja
-tuhota kortteja kädestään E:llä. Näin nähdään miten korttien piirtäminen käsiin tapahtuu pöydällä.
-
-**20.2.2015, 12:00:** 
-Peli ei ole vielä aivan demottavassa kunnossa ja JUnit testit laahaa jäljessä, 
-mutta viikonlopun jälkeen pelin pitäisi olla pelattavissa ja testit kunnossa. Tällä hetkellä peli
-renderöi 1920x1080 resoluutiolla pelin alkutilanteen, pelistä pääsee pois escillä ja vuoroa voi
-vaihtaa Q:lla (simuloi kumpi pelaajista näkyy local multiplayerissä).
-
-Koodaus jatkuu perjantai-illalla, kun muiden kurssien deadlinet on alta pois. Lauantai varattu kokonaan
-tälle, jolloin viimeistään lisätään mouse controller ja aletaan koodaamaan korttien pelaamista pöytään
-jne. Sunnuntai ja maanantai myös melkein koko päivät omistettu tälle. Teen lisää sekvenssikaavioita
-ja päivitän luokkakaavion, kun lopullinen toiminnallisuus on selkeä.
-
-= uskon että saan projektin valmiiksi deadlineen ja demoon mennessä, vaikka olen hieman jäljessä.
-
-**Koodikatselmoija:** 
-Projekti tulee etenemään paljon päivittäin deadlineen asti eli valitse itse kuinka
-valmista projektia haluat kommentoida. Jos kuitenkin teet katselmoinnin aikaisessa vaiheessa, toivoisin
-saavani palautteen heti, eikä esim. palautetta pelin perjantaisesta kunnosta tiistaina... Kiitos :)
+Pitää vielä päivittää aihemäärittelyyn ja luokkakaavioon muutokset.
