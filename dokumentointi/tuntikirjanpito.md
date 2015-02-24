@@ -72,7 +72,12 @@ jatkuvan loopin sijaan
 - Aihemäärittely meni uusiksi kurssin osalta: Factionit, championit ja skill-cardit jää pois kokonaan, ainoa pelimuoto
 tulee olemaan local multiplayer jne. (kirjoitan määrittelyn tarkemmin huomenna)
 
-**23.2.2015:** 
-- 02.00-04.00: Tablen koodaus, korttien valitseminen kädestä, piirtelyä
-- 11.30-14.00: Vuoron vaihtumiseen ja pelaajien statteihin liittyvää koodailua, piirtelyä ja säätämistä
-- 15.00-17.30: Vuoron vaihtumiseen ja pelaajien statteihin liittyvää koodailua, piirtelyä ja säätämistä
+**23.2.2015:** 14h
+- Tablen koodaus, korttien valitseminen kädestä, piirtelyä, 
+- Vuoron vaihtumiseen ja pelaajien statteihin liittyvää koodailua, resource ja influence metodien ja baarien säätämistä
+- Korttien pelaaminen kädestä pöytään, vuoron vaihtuessa vuoronsa käyttämättömät minionit pöydällä vähentävät
+vastustajan influencea, testattu että production ja mounted minionit toimii niin kuin pitää
+- Päivän päätteeksi pelaajat pystyvät valitsemaan kädestään kortteja joihin riittää resurssit ja asettamaan sen pöydälle.
+Kortin valinta peruuntuu, jos pelaaja painaa minne vain muualle kuin kyseistä korttia tai pöytää. Vuoroa voi vaihtaa 
+END TURN -napilla, jolloin resurssit ja influencet päivittyy niin kuin pitää. Esc sulkee pelin.
+- Testinäppäimiä Q, W, E, A, S, D, Z, X, C - muuttelevat influenceja ja resourceja tällä hetkellä.

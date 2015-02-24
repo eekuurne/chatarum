@@ -24,22 +24,32 @@ public class KeyboardInput implements KeyListener {
         // ESC: Close the program.
         if (ke.getKeyCode() == KeyEvent.VK_ESCAPE) {
             System.exit(0);
-        } 
-        // Q: Player 1 draw card.
+        } // Q: 
         else if (ke.getKeyCode() == KeyEvent.VK_Q) {
-            Card drawCard = ui.getHandler().getPlayer1().getDeck().takeCard();
-            ui.getHandler().getPlayer1().getHand().addCard(drawCard);
-            ui.getHandler().updateCardPositions();
-        }
-        // W: Player 1 remove card from hand.
+            ui.getHandler().getPlayer1().changeRemainingInfluence(-1);
+        } // W:
         else if (ke.getKeyCode() == KeyEvent.VK_W) {
-            ui.getHandler().getPlayer2().getHand().getCards().get(1).clickInHand(ui.getHandler());
-        }
-        // E: Click in hand
+            ui.getHandler().getPlayer1().changeRemainingInfluence(1);
+        } // E: 
         else if (ke.getKeyCode() == KeyEvent.VK_E) {
-            ui.getHandler().getPlayer1().getHand().getCards().get(1).clickInHand(ui.getHandler());
+            ui.getHandler().getPlayer1().changeRemainingResources(-5);
+        } // A: 
+        else if (ke.getKeyCode() == KeyEvent.VK_A) {
+            ui.getHandler().getPlayer1().changeRemainingResources(5);
+        } // S:
+        else if (ke.getKeyCode() == KeyEvent.VK_S) {
+            ui.getHandler().getPlayer2().changeRemainingInfluence(-1);
+        } // D:
+        else if (ke.getKeyCode() == KeyEvent.VK_D) {
+            ui.getHandler().getPlayer2().changeRemainingInfluence(1);
+        } // Z:
+        else if (ke.getKeyCode() == KeyEvent.VK_Z) {
+            ui.getHandler().getPlayer2().changeRemainingResources(-5);
+        } // X: 
+        else if (ke.getKeyCode() == KeyEvent.VK_X) {
+            ui.getHandler().getPlayer2().changeRemainingResources(5);
         }
-
+        
         ui.repaint();
     }
 

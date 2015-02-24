@@ -22,7 +22,8 @@ public class Player {
     private Hand hand;
     private Table table;
 
-    private int influence;
+    private int maxInfluence;
+    private int remainingInfluence;
     private int maxResources; // Max. resources of the turn.
     private int remainingResources; // Remaining resources of the turn.
 
@@ -30,7 +31,8 @@ public class Player {
         this.deck = deck;
         this.hand = new Hand();
         this.table = new Table();
-        this.influence = 30; // Starting influence defined here.
+        this.maxInfluence = 30;
+        this.remainingInfluence = 30; // Starting influence defined here.
         this.maxResources = 0;
         this.remainingResources = 0;
     }
@@ -41,14 +43,14 @@ public class Player {
      *
      * @param amount The amount of influence to change.
      *
-     * @return Did the player's influence go under zero.
      */
-    public boolean changeInfluence(int amount) {
-        influence += amount;
-        if (influence <= 0) {
-            return true;
+    public void changeRemainingInfluence(int amount) {
+        remainingInfluence += amount;
+        if (remainingInfluence >= maxInfluence) {
+            remainingInfluence = maxInfluence;
+        } else if (remainingInfluence <= 0) {
+            remainingInfluence = 0;
         }
-        return false;
     }
 
     /**
@@ -105,11 +107,13 @@ public class Player {
         Font font = new Font("Serif", Font.BOLD, 20); // Segoe Script?
         g.setFont(font);
         g.setColor(Color.black);
-        g.drawString("INFLUENCE: " + influence + "/30", Locations.statX, textY);
+        g.drawString("INFLUENCE: " + remainingInfluence + "/30", Locations.statX, textY);
         
         g.drawImage(Assets.statBar, Locations.statX, barY, null);
         g.setColor(Color.RED);
-        fillBar(g, Locations.statX + 1, barY + 1);
+        
+        double barWidth = ((double)remainingInfluence / maxInfluence) * 197;
+        g.fillRect(Locations.statX + 1, barY + 1, (int)barWidth, 17);
     }
 
     public void paintResources(Graphics g, int player) {
@@ -127,14 +131,10 @@ public class Player {
         
         g.drawImage(Assets.statBar, Locations.statX, barY, null);
         g.setColor(Color.DARK_GRAY);
-        fillBar(g, Locations.statX + 1, barY + 1);
+        double barWidth = ((double)remainingResources / (double)maxResources) * 197;
+        g.fillRect(Locations.statX + 1, barY + 1, (int)barWidth, 17);
     }
-    
-    public void fillBar(Graphics g, int x, int y) {
-        int barWidth = (remainingResources / maxResources) * 197;
-        g.fillRect(x, y, barWidth, 17);
-    }
-    
+
     public Deck getDeck() {
         return deck;
     }
@@ -148,7 +148,7 @@ public class Player {
     }
 
     public int getInfluence() {
-        return influence;
+        return remainingInfluence;
     }
 
     public int getMaxResources() {

@@ -44,5 +44,6 @@ public abstract class Card {
     }
     
     public abstract void paintComponent(Graphics g);
-    public abstract void clickInHand(LogicHandler handler);
+    public abstract void clickInHand(LogicHandler handler, int slot);
+    // public abstract void playToTable(LogicHandler handler, int slot);
 }

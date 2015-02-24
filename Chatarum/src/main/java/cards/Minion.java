@@ -51,6 +51,11 @@ public abstract class Minion extends Card {
         return production;
     }
 
+    public void setTurnLeft(boolean turnLeft) {
+        this.turnLeft = turnLeft;
+    }
+
+    
     /**
      * Changes the minion's health when attacked or healed. Negative amount
      * when taking damage, positive for heal.
@@ -62,8 +67,10 @@ public abstract class Minion extends Card {
     }
 
     @Override
-    public void clickInHand(LogicHandler handler) {
+    public void clickInHand(LogicHandler handler, int slot) {
+        handler.clearChosen();
         handler.setChosenCard(this);
+        handler.setChosenHandSlot(slot);
         if (handler.getTurn() % 2 != 0) {
             setLocation(getX(), Locations.player1HandY - 25);
         } else {

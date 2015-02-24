@@ -2,6 +2,7 @@ package cards.minions;
 
 import cards.Minion;
 import game.assets.Assets;
+import game.logic.LogicHandler;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
