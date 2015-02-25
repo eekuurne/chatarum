@@ -16,7 +16,7 @@ public abstract class Minion extends Card {
     private boolean guardian; // Does the minion protect adjacent minions.
     private int production; // Amount of resource production for workers
 
-    public Minion(String name, int cost, int damage, int health, 
+    public Minion(String name, int cost, int damage, int health,
             boolean turnLeft, boolean ranged, boolean guardian, int production) {
         super(name, cost);
         this.damage = damage;
@@ -38,11 +38,11 @@ public abstract class Minion extends Card {
     public boolean getTurnleft() {
         return turnLeft;
     }
-    
+
     public boolean getRanged() {
         return ranged;
     }
-    
+
     public boolean getGuardian() {
         return guardian;
     }
@@ -55,10 +55,9 @@ public abstract class Minion extends Card {
         this.turnLeft = turnLeft;
     }
 
-    
     /**
-     * Changes the minion's health when attacked or healed. Negative amount
-     * when taking damage, positive for heal.
+     * Changes the minion's health when attacked or healed. Negative amount when
+     * taking damage, positive for heal.
      *
      * @param amount The amount of health changed.
      */
@@ -69,7 +68,7 @@ public abstract class Minion extends Card {
     @Override
     public void clickInHand(LogicHandler handler, int slot) {
         handler.clearChosen();
-        handler.setChosenCard(this);
+        handler.setChosenHandCard(this);
         handler.setChosenHandSlot(slot);
         if (handler.getTurn() % 2 != 0) {
             setLocation(getX(), Locations.player1HandY - 25);
@@ -77,5 +76,18 @@ public abstract class Minion extends Card {
             setLocation(getX(), Locations.player2HandY + 25);
         }
     }
-    
+
+    public void clickInTable(LogicHandler handler, int slot) {
+        handler.clearChosen();
+        if (this.turnLeft) {
+            handler.setChosenTableCard(this);
+            handler.setChosenTableSlot(slot);
+            if (handler.getTurn() % 2 != 0) {
+                setLocation(getX(), Locations.player1TableY - 25);
+            } else {
+                setLocation(getX(), Locations.player2TableY + 25);
+            }
+        }
+    }
+
 }

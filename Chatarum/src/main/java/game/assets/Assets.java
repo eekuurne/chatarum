@@ -15,23 +15,25 @@ import java.awt.image.BufferedImage;
 public class Assets {
 
     // Background objects.
+    public static int backgroundWidth = 1920, backgroundHeight = 1080;
     public static BufferedImage background;
+    
+    // Table slots.
+    public static int tableSlotsWidth = 1194, tableSlotsHeight = 468;
+    public static int tableSlotWidth = 144, tableSlotHeight = 217;
     public static BufferedImage tableSlots;
     
-    public static final int endTurnWidth = 200, endTurnHeight = 60;
+    // End turn -button.
+    public static int endTurnWidth = 200, endTurnHeight = 60;
     public static BufferedImage endTurn;
 
-    // Width and height of the big cards.
-    public static final int bigWidth = 224, bigHeight = 355;
-
     // Big pictures of cards.
+    public static int bigWidth = 224, bigHeight = 355;
     public static BufferedImage swordmanBig, archerBig, watchmanBig, militiaBig,
             raiderBig, peasantBig;
 
-    // Width and height of the small cards.
-    public static final int smallWidth = 125, smallHeight = 198;
-
     // Small pictures of cards.
+    public static int smallWidth = 125, smallHeight = 198;
     public static BufferedImage swordmanSmall, archerSmall, watchmanSmall,
             militiaSmall, raiderSmall, peasantSmall;
 

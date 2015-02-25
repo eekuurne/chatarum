@@ -26,14 +26,6 @@ public class Table {
         return true;
     }
 
-    public Minion chooseMinion(int slot) {
-        if (minions[slot] == null) {
-            return null;
-        }
-        Minion minion = minions[slot];
-        return minion;
-    }
-
     public void removeMinion(int slot) {
         minions[slot] = null;
     }
@@ -62,6 +54,4 @@ public class Table {
     public Minion[] getMinions() {
         return minions;
     }
-    
-    
 }

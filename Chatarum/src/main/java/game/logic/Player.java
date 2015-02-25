@@ -18,6 +18,8 @@ import java.awt.Graphics;
  */
 public class Player {
 
+    private int playerNumber;
+    
     private Deck deck;
     private Hand hand;
     private Table table;
@@ -27,7 +29,8 @@ public class Player {
     private int maxResources; // Max. resources of the turn.
     private int remainingResources; // Remaining resources of the turn.
 
-    public Player(Deck deck) {
+    public Player(Deck deck, int number) {
+        this.playerNumber = number;
         this.deck = deck;
         this.hand = new Hand();
         this.table = new Table();
@@ -133,6 +136,10 @@ public class Player {
         g.setColor(Color.DARK_GRAY);
         double barWidth = ((double)remainingResources / (double)maxResources) * 197;
         g.fillRect(Locations.statX + 1, barY + 1, (int)barWidth, 17);
+    }
+
+    public int getPlayerNumber() {
+        return playerNumber;
     }
 
     public Deck getDeck() {

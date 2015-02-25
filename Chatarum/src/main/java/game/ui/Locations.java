@@ -14,6 +14,9 @@ public class Locations {
     public static int tableSlotsX, tableSlotsY, endTurnX, endTurnY, 
             turnNumberX, turnNumberY;
 
+    public static int player1TableSlotY, player2TableSlotY;
+    public static int[] tableSlotX;
+    
     // Decks.
     public static int deckX, player1DeckY, player2DeckY;
 
@@ -45,6 +48,14 @@ public class Locations {
         endTurnY = 510; // Height: 60
         turnNumberX = 1830;
         turnNumberY = 551;
+        
+        player1TableSlotY = tableSlotsY + Assets.tableSlotHeight + 34;
+        player2TableSlotY = tableSlotsY;
+        
+        tableSlotX = new int[8];
+        for (int i = 0; i < 8; i++) {
+            tableSlotX[i] = tableSlotsX + i * (Assets.tableSlotWidth + 6);
+        }
     }
 
     public static void deckLocations() {

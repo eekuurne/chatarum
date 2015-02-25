@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import java.awt.event.MouseListener;
 
 /**
+ * Absract class for all cards. Cards can be contained in decks and hands, and
+ * they can be played from hand. The cards will be divided to minions and skills.
  *
  * @author Eero Kuurne
  */
@@ -45,5 +47,5 @@ public abstract class Card {
     
     public abstract void paintComponent(Graphics g);
     public abstract void clickInHand(LogicHandler handler, int slot);
-    // public abstract void playToTable(LogicHandler handler, int slot);
+    
 }

@@ -81,3 +81,12 @@ vastustajan influencea, testattu että production ja mounted minionit toimii nii
 Kortin valinta peruuntuu, jos pelaaja painaa minne vain muualle kuin kyseistä korttia tai pöytää. Vuoroa voi vaihtaa 
 END TURN -napilla, jolloin resurssit ja influencet päivittyy niin kuin pitää. Esc sulkee pelin.
 - Testinäppäimiä Q, W, E, A, S, D, Z, X, C - muuttelevat influenceja ja resourceja tällä hetkellä.
+
+**24.2.2015:** 6h
+- Koodikatselmointi
+- Minioneiden attackin suunnittelu ja koodausta
+
+**25.2.2015:**
+- 4h korttien käsittely hiirellä ohjelmoitu uudestaan ja viimeistelty: nyt kortteja voi valita kädestä tai pöydästä ja minionit 
+voivat hyökätä. Korttia ei voi valita kädestä, jos resurssit ei riitä. Korttia ei voi valita pöydästä, jos sillä ei ole vuoroa
+käytettävissä. 

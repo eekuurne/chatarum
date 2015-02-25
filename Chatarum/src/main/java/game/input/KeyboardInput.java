@@ -26,28 +26,28 @@ public class KeyboardInput implements KeyListener {
             System.exit(0);
         } // Q: 
         else if (ke.getKeyCode() == KeyEvent.VK_Q) {
-            ui.getHandler().getPlayer1().changeRemainingInfluence(-1);
+            ui.getHandler().getPlayer1().getTable().getMinions()[0].clickInTable(ui.getHandler(), 0);
         } // W:
         else if (ke.getKeyCode() == KeyEvent.VK_W) {
-            ui.getHandler().getPlayer1().changeRemainingInfluence(1);
+            ui.getHandler().getPlayer1().getTable().getMinions()[1].clickInTable(ui.getHandler(), 1);
         } // E: 
         else if (ke.getKeyCode() == KeyEvent.VK_E) {
-            ui.getHandler().getPlayer1().changeRemainingResources(-5);
+            ui.getHandler().getPlayer1().getTable().getMinions()[2].clickInTable(ui.getHandler(), 2);
         } // A: 
         else if (ke.getKeyCode() == KeyEvent.VK_A) {
-            ui.getHandler().getPlayer1().changeRemainingResources(5);
+            ui.getHandler().getPlayer1().getTable().getMinions()[3].clickInTable(ui.getHandler(), 3);
         } // S:
         else if (ke.getKeyCode() == KeyEvent.VK_S) {
-            ui.getHandler().getPlayer2().changeRemainingInfluence(-1);
+            ui.getHandler().getPlayer1().getTable().getMinions()[4].clickInTable(ui.getHandler(), 4);
         } // D:
         else if (ke.getKeyCode() == KeyEvent.VK_D) {
-            ui.getHandler().getPlayer2().changeRemainingInfluence(1);
+            ui.getHandler().getPlayer1().getTable().getMinions()[5].clickInTable(ui.getHandler(), 5);
         } // Z:
         else if (ke.getKeyCode() == KeyEvent.VK_Z) {
-            ui.getHandler().getPlayer2().changeRemainingResources(-5);
+            ui.getHandler().getPlayer1().getTable().getMinions()[6].clickInTable(ui.getHandler(), 6);
         } // X: 
         else if (ke.getKeyCode() == KeyEvent.VK_X) {
-            ui.getHandler().getPlayer2().changeRemainingResources(5);
+            ui.getHandler().getPlayer1().getTable().getMinions()[7].clickInTable(ui.getHandler(), 7);
         }
         
         ui.repaint();
