@@ -42,6 +42,10 @@ public class Assets {
     
     // Statistic bar.
     public static BufferedImage statBar;
+    
+    // Icons.
+    public static BufferedImage guardianIcon;
+    public static BufferedImage turnLeftIcon;
    
 
     /**
@@ -51,6 +55,7 @@ public class Assets {
      */
     public static void init() {
         loadBackgroundObjects();
+        loadIcons();
 
         neutralCrops();
     }
@@ -81,5 +86,10 @@ public class Assets {
         militiaSmall = neutralSmall.crop(smallWidth * 3, 0, smallWidth, smallHeight);
         raiderSmall = neutralSmall.crop(smallWidth * 4, 0, smallWidth, smallHeight);
         peasantSmall = neutralSmall.crop(smallWidth * 5, 0, smallWidth, smallHeight);
+    }
+
+    private static void loadIcons() { // MAKES SPRITESHEET LATER AND CROP
+        guardianIcon = ImageLoader.loadImage("resources/textures/guardian_icon.png");
+        turnLeftIcon = ImageLoader.loadImage("resources/textures/turn_left_icon.png");
     }
 }

@@ -86,7 +86,10 @@ END TURN -napilla, jolloin resurssit ja influencet päivittyy niin kuin pitää.
 - Koodikatselmointi
 - Minioneiden attackin suunnittelu ja koodausta
 
-**25.2.2015:**
-- 4h korttien käsittely hiirellä ohjelmoitu uudestaan ja viimeistelty: nyt kortteja voi valita kädestä tai pöydästä ja minionit 
+**25.2.2015:** 8h
+- Korttien käsittely hiirellä ohjelmoitu uudestaan ja viimeistelty: nyt kortteja voi valita kädestä tai pöydästä ja minionit 
 voivat hyökätä. Korttia ei voi valita kädestä, jos resurssit ei riitä. Korttia ei voi valita pöydästä, jos sillä ei ole vuoroa
-käytettävissä. 
+käytettävissä.
+- Guardianien suojaamille minioneille ilmestyy kilven kuva kortin vasempaan yläreunaan. Minionit, joilla on vuoro käyttämättä näkyy
+miekan kuva kortin oikeassa yläreunassa. Jos minion on menettänyt healthia, mutta ei kuollut, näkyy healthin yläpuolella punaisella
+menetetty määrä.

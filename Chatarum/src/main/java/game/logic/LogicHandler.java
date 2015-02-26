@@ -252,6 +252,7 @@ public class LogicHandler {
             if (endingPlayer.getTable().getMinions()[i] != null
                     && endingPlayer.getTable().getMinions()[i].getTurnleft()) {
                 influenceLost += endingPlayer.getTable().getMinions()[i].getDamage();
+                endingPlayer.getTable().getMinions()[i].setTurnLeft(false);
             }
         }
         startingPlayer.changeRemainingInfluence(-influenceLost);
@@ -259,7 +260,8 @@ public class LogicHandler {
 
     public void setMinionTurnLeftsTrue(Player startingPlayer) {
         for (int i = 0; i < 8; i++) {
-            if (startingPlayer.getTable().getMinions()[i] != null) {
+            if (startingPlayer.getTable().getMinions()[i] != null
+                    && startingPlayer.getTable().getMinions()[i].getProduction() == 0) {
                 startingPlayer.getTable().getMinions()[i].setTurnLeft(true);
             }
         }
@@ -321,6 +323,7 @@ public class LogicHandler {
             if (chosenTableCard != null && playerB.getTable().getMinions()[i] != null
                     && x >= Locations.tableSlotX[i] && x <= Locations.tableSlotX[i] + Assets.tableSlotWidth) {
                 minionAttack(chosenTableSlot, i, playerA, playerB);
+                clearChosen();
                 return;
             }
         }

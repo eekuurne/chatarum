@@ -10,6 +10,7 @@ import game.ui.Locations;
 public abstract class Minion extends Card {
 
     private int damage;
+    private int maxHealth;
     private int health;
     private boolean turnLeft; // Can the minion attack on this turn.
     private boolean ranged; // Can the minion attack without taking damage.
@@ -20,6 +21,7 @@ public abstract class Minion extends Card {
             boolean turnLeft, boolean ranged, boolean guardian, int production) {
         super(name, cost);
         this.damage = damage;
+        this.maxHealth = health;
         this.health = health;
         this.turnLeft = turnLeft;
         this.ranged = ranged;
@@ -33,6 +35,10 @@ public abstract class Minion extends Card {
 
     public int getHealth() {
         return health;
+    }
+
+    public int getMaxHealth() {
+        return maxHealth;
     }
 
     public boolean getTurnleft() {
