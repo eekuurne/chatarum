@@ -37,6 +37,7 @@ public class Assets {
     // End turn -button.
     public static int endTurnWidth = 200, endTurnHeight = 60;
     public static BufferedImage endTurn;
+    public static BufferedImage startTurn;
 
     // Big pictures of cards.
     public static int bigWidth = 224, bigHeight = 355;
@@ -85,6 +86,7 @@ public class Assets {
         background = ImageLoader.loadImage("resources/textures/background_1920x1080.png");
         tableSlots = ImageLoader.loadImage("resources/textures/table_slots.png");
         endTurn = ImageLoader.loadImage("resources/textures/end_turn.png");
+        startTurn = ImageLoader.loadImage("resources/textures/start_turn.png");
         statBar = ImageLoader.loadImage("resources/textures/stat_bar.png");
     }
 
@@ -151,6 +153,7 @@ public class Assets {
         background = resize(background, scale);
         tableSlots = resize(tableSlots, scale);
         endTurn = resize(endTurn, scale);
+        startTurn = resize(startTurn, scale);
         statBar = resize(statBar, scale);
         
         neutralCardBack = resize(neutralCardBack, scale);

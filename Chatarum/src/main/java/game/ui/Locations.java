@@ -121,8 +121,8 @@ public class Locations {
         turnLeftY = 7;
         protectedX = 7;
         protectedY = 7;
-        damageTakenX = 35; 
-        damageTakenY = 35;
+        damageTakenX = 20; 
+        damageTakenY = 30;
     }
     
     public static void scaleLocations(double scale) {
@@ -166,5 +166,12 @@ public class Locations {
         for (int i = 0; i < handX.length; i++) {
             handX[i] *= scale;
         }
+        
+        turnLeftX *= scale;
+        turnLeftY *= scale;
+        protectedX *= scale;
+        protectedY *= scale;
+        damageTakenX *= scale;
+        damageTakenY *= scale;
     }
 }

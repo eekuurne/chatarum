@@ -17,12 +17,10 @@ public class MouseInput implements MouseListener {
 
     private UserInterface ui;
     private LogicHandler handler;
-    private boolean fullscreen;
 
-    public MouseInput(UserInterface ui, boolean full) {
+    public MouseInput(UserInterface ui) {
         this.ui = ui;
         this.handler = ui.getHandler();
-        this.fullscreen = full;
     }
 
     /**
@@ -37,12 +35,7 @@ public class MouseInput implements MouseListener {
     public void mousePressed(MouseEvent me) {
         int mx = me.getX(); // Mouse Y coordinate when pressed.
         int my = me.getY(); // Mouse X coordinate when pressed.
-        
-        if (!fullscreen) {
-            mx -= 3;
-            my -= 25;
-        }
-        
+
         System.out.println(mx + ", " + my);
         
         Player playerA = handler.checkPlayerTurn()[0]; // Player whose turn it is.

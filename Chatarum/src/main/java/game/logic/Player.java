@@ -90,9 +90,9 @@ public class Player {
      * @param player 1 for player at bottom, 2 for top.
      * @param turn Current turn.
      */
-    public void paintComponent(Graphics g, int player, int turn) {
+    public void paintComponent(Graphics g, int player, int turn, boolean betweenTurns) {
         deck.paintComponent(g, player);
-        hand.paintComponent(g, player, turn);
+        hand.paintComponent(g, player, turn, betweenTurns);
         table.paintComponent(g);
 
         paintInfluence(g, player);

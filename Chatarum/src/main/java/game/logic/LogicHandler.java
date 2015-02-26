@@ -17,6 +17,8 @@ import java.util.ArrayList;
 public class LogicHandler {
 
     private UserInterface ui;
+    
+    private boolean betweenTurns;
 
     private int turn;
     private Player player1;
@@ -33,6 +35,7 @@ public class LogicHandler {
         this.chosenHandCard = null;
         this.chosenHandSlot = -1;
         this.ui = ui;
+        this.betweenTurns = false;
 
         init();
     }
@@ -65,27 +68,42 @@ public class LogicHandler {
      *
      */
     public void changeTurn() {
-        turn++;
+        if (!betweenTurns) {
+            endTurn();
+        } else {
+            startTurn();
+        }
+        clearChosen();
+        updateCardPositions();
+        ui.repaint();
+    }
 
+    public void endTurn() {
         Player endingPlayer;
         Player startingPlayer;
-        if (turn % 2 != 0) {
+        if (turn % 2 == 0) {
             endingPlayer = player2;
             startingPlayer = player1;
         } else {
             endingPlayer = player1;
             startingPlayer = player2;
         }
-
         influenceChange(startingPlayer, endingPlayer);
-
+        betweenTurns = true;
+    }
+    
+    public void startTurn() {
+        turn++;
+        Player startingPlayer;
+        if (turn % 2 != 0) {
+            startingPlayer = player1;
+        } else {
+            startingPlayer = player2;
+        }
         drawCard(startingPlayer);
         updateResources(startingPlayer);
         setMinionTurnLeftsTrue(startingPlayer);
-
-        clearChosen();
-
-        updateCardPositions();
+        betweenTurns = false;
     }
 
     public void clearChosen() {
@@ -335,4 +353,11 @@ public class LogicHandler {
         this.chosenTableSlot = chosenTableSlot;
     }
 
+    public boolean getBetweenTurns() {
+        return betweenTurns;
+    }
+
+    public void setBetweenTurns(boolean betweenTurns) {
+        this.betweenTurns = betweenTurns;
+    }
 }

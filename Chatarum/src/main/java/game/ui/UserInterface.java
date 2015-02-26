@@ -19,7 +19,7 @@ public class UserInterface extends JPanel {
     private LogicHandler handler;
 
     public UserInterface() {
-        super.setBackground(Color.WHITE);
+        super.setBackground(Color.black);
 
         this.handler = new LogicHandler(this);
     }
@@ -31,8 +31,8 @@ public class UserInterface extends JPanel {
         paintBackgroundObjects(g);
         paintTurn(g);
 
-        handler.getPlayer1().paintComponent(g, 1, handler.getTurn());
-        handler.getPlayer2().paintComponent(g, 2, handler.getTurn());
+        handler.getPlayer1().paintComponent(g, 1, handler.getTurn(), handler.getBetweenTurns());
+        handler.getPlayer2().paintComponent(g, 2, handler.getTurn(), handler.getBetweenTurns());
 
         paintProtected(g, handler.getPlayer1());
         paintProtected(g, handler.getPlayer2());
@@ -45,7 +45,13 @@ public class UserInterface extends JPanel {
     private void paintBackgroundObjects(Graphics g) {
         g.drawImage(Assets.background, 0, 0, null);
         g.drawImage(Assets.tableSlots, Locations.tableSlotsX, Locations.tableSlotsY, null);
-        g.drawImage(Assets.endTurn, Locations.endTurnX, Locations.endTurnY, null);
+        
+        if (handler.getBetweenTurns()) {
+            g.drawImage(Assets.startTurn, Locations.endTurnX, Locations.endTurnY, null);
+        } else {
+            g.drawImage(Assets.endTurn, Locations.endTurnX, Locations.endTurnY, null);
+        }
+        
     }
 
     private void paintTurn(Graphics g) {

@@ -70,7 +70,7 @@ public class Game implements Runnable {
             frame.setExtendedState(frame.MAXIMIZED_BOTH); // Puts the frame to full screen.
         } else {
             frame.setPreferredSize(new Dimension(width, height));
-            frame.setLocationRelativeTo(null); // Frame starts at middle.
+            //frame.setLocationRelativeTo(null); // Frame starts at middle.
             frame.setResizable(false); // The window isn't resizable by user.
             
         }
@@ -78,10 +78,11 @@ public class Game implements Runnable {
 
     private void createComponents(Container container) {
         UserInterface ui = new UserInterface();
+        ui.addMouseListener(new MouseInput(ui));
         container.add(ui);
 
         frame.addKeyListener(new KeyboardInput(ui));
-        frame.addMouseListener(new MouseInput(ui, fullscreen));
+        //frame.addMouseListener(new MouseInput(ui, fullscreen));
     }
 
     public double getScale() {
