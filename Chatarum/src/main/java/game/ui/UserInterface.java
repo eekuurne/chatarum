@@ -49,7 +49,7 @@ public class UserInterface extends JPanel {
     }
 
     private void paintTurn(Graphics g) {
-        Font font = new Font("Segoe Script", Font.PLAIN, 36);
+        Font font = new Font("Segoe Script", Font.PLAIN, Assets.turnTextFont);
         g.setFont(font);
         g.setColor(Color.black);
         g.drawString("" + handler.getTurn(), Locations.turnNumberX, Locations.turnNumberY);
@@ -66,13 +66,13 @@ public class UserInterface extends JPanel {
             // Paint minions left to guardians.
             if (player.getTable().getMinions()[guardians.get(i) - 1] != null) {
                 g.drawImage(Assets.guardianIcon,
-                        player.getTable().getMinions()[guardians.get(i) - 1].getX() + 7,
-                        player.getTable().getMinions()[guardians.get(i) - 1].getY() + 7, null);
+                        player.getTable().getMinions()[guardians.get(i) - 1].getX() + Locations.protectedX,
+                        player.getTable().getMinions()[guardians.get(i) - 1].getY() + Locations.protectedY, null);
             } // Paint minions right to guardians.
             if (player.getTable().getMinions()[guardians.get(i) + 1] != null) {
                 g.drawImage(Assets.guardianIcon,
-                        player.getTable().getMinions()[guardians.get(i) + 1].getX() + 7,
-                        player.getTable().getMinions()[guardians.get(i) + 1].getY() + 7, null);
+                        player.getTable().getMinions()[guardians.get(i) + 1].getX() + Locations.protectedX,
+                        player.getTable().getMinions()[guardians.get(i) + 1].getY() + Locations.protectedY, null);
             }
         }
     }
@@ -84,8 +84,8 @@ public class UserInterface extends JPanel {
                     && player.getTable().getMinions()[i].getTurnleft()) {
 
                 g.drawImage(Assets.turnLeftIcon,
-                        player.getTable().getMinions()[i].getX() + Assets.smallWidth - 15,
-                        player.getTable().getMinions()[i].getY() + 7, null);
+                        player.getTable().getMinions()[i].getX() + Assets.smallWidth - Locations.turnLeftX,
+                        player.getTable().getMinions()[i].getY() + Locations.turnLeftY, null);
             }
         }
     }
@@ -98,11 +98,11 @@ public class UserInterface extends JPanel {
                 minion = player.getTable().getMinions()[i];
                 healthLost = minion.getMaxHealth() - minion.getHealth();
                 if (healthLost != 0) {
-                    Font font = new Font("Segoe Script", Font.PLAIN, 18);
+                    Font font = new Font("Segoe Script", Font.PLAIN, Assets.healthLostFont);
                     g.setFont(font);
                     g.setColor(Color.red);
-                    g.drawString("-" + healthLost, minion.getX() + Assets.smallWidth - 35,
-                            minion.getY() + Assets.smallHeight - 35);
+                    g.drawString("-" + healthLost, minion.getX() + Assets.smallWidth - Locations.damageTakenX,
+                            minion.getY() + Assets.smallHeight - Locations.damageTakenY);
                 }
             }
         }

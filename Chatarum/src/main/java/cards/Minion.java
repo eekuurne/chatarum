@@ -77,9 +77,9 @@ public abstract class Minion extends Card {
         handler.setChosenHandCard(this);
         handler.setChosenHandSlot(slot);
         if (handler.getTurn() % 2 != 0) {
-            setLocation(getX(), Locations.player1HandY - 25);
+            setLocation(getX(), Locations.player1HandY - Locations.chooseCardDelta);
         } else {
-            setLocation(getX(), Locations.player2HandY + 25);
+            setLocation(getX(), Locations.player2HandY + Locations.chooseCardDelta);
         }
     }
 
@@ -89,11 +89,10 @@ public abstract class Minion extends Card {
             handler.setChosenTableCard(this);
             handler.setChosenTableSlot(slot);
             if (handler.getTurn() % 2 != 0) {
-                setLocation(getX(), Locations.player1TableY - 25);
+                setLocation(getX(), Locations.player1TableY - Locations.chooseCardDelta);
             } else {
-                setLocation(getX(), Locations.player2TableY + 25);
+                setLocation(getX(), Locations.player2TableY + Locations.chooseCardDelta);
             }
         }
     }
-
 }

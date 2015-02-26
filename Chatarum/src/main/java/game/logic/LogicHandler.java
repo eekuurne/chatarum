@@ -88,54 +88,6 @@ public class LogicHandler {
         updateCardPositions();
     }
 
-    public int getTurn() {
-        return turn;
-    }
-
-    public void setTurn(int turn) {
-        this.turn = turn;
-    }
-
-    public Player getPlayer1() {
-        return player1;
-    }
-
-    public Player getPlayer2() {
-        return player2;
-    }
-
-    public Minion getChosenHandCard() {
-        return chosenHandCard;
-    }
-
-    public void setChosenHandCard(Minion chosenCard) {
-        this.chosenHandCard = chosenCard;
-    }
-
-    public int getChosenHandSlot() {
-        return chosenHandSlot;
-    }
-
-    public Minion getChosenTableCard() {
-        return chosenTableCard;
-    }
-
-    public int getChosenTableSlot() {
-        return chosenTableSlot;
-    }
-
-    public void setChosenHandSlot(int chosenHandSlot) {
-        this.chosenHandSlot = chosenHandSlot;
-    }
-
-    public void setChosenTableCard(Minion chosenTableCard) {
-        this.chosenTableCard = chosenTableCard;
-    }
-
-    public void setChosenTableSlot(int chosenTableSlot) {
-        this.chosenTableSlot = chosenTableSlot;
-    }
-
     public void clearChosen() {
         if (chosenHandCard != null) {
             Minion chosenH = chosenHandCard;
@@ -213,7 +165,7 @@ public class LogicHandler {
         Minion attacker = attackingPlayer.getTable().getMinions()[attackingSlot];
         Minion defender = defendingPlayer.getTable().getMinions()[defendingSlot];
 
-         // If there are adjacent guardians, guide the attack to them. If both
+        // If there are adjacent guardians, guide the attack to them. If both
         // sides are guardians, attack left one.
         ArrayList<Integer> guardianSlots = checkGuardians(defendingPlayer);
         if (guardianSlots.contains(defendingSlot - 1)) {
@@ -297,8 +249,6 @@ public class LogicHandler {
     }
 
     public void playerATableClicked(int x, int y, Player player) {
-        System.out.println("Player A table clicked!");
-
         for (int i = 0; i < 8; i++) {
 
             if (x >= Locations.tableSlotX[i] && x <= Locations.tableX[i] + Assets.tableSlotWidth
@@ -307,18 +257,14 @@ public class LogicHandler {
                 return;
             } else if (player.getTable().getMinions()[i] != null && x >= player.getTable().getMinions()[i].getX()
                     && x <= player.getTable().getMinions()[i].getX() + Assets.smallWidth) {
-                System.out.println("Tudum!");
                 player.getTable().getMinions()[i].clickInTable(this, i);
                 return;
             }
         }
-
         clearChosen();
     }
 
     public void playerBTableClicked(int x, int y, Player playerA, Player playerB) {
-        System.out.println("Player B table clicked!");
-
         for (int i = 0; i < 8; i++) {
             if (chosenTableCard != null && playerB.getTable().getMinions()[i] != null
                     && x >= Locations.tableSlotX[i] && x <= Locations.tableSlotX[i] + Assets.tableSlotWidth) {
@@ -328,11 +274,9 @@ public class LogicHandler {
             }
         }
         clearChosen();
-
     }
 
     public void playerAHandClicked(int x, int y, Player player) {
-        System.out.println("Player A hand clicked!");
         for (int i = 0; i < player.getHand().getRemaining(); i++) {
             if (x >= player.getHand().getCards().get(i).getX()
                     && x <= player.getHand().getCards().get(i).getX() + Assets.smallWidth) {
@@ -341,6 +285,54 @@ public class LogicHandler {
             }
         }
         clearChosen();
+    }
+
+    public int getTurn() {
+        return turn;
+    }
+
+    public void setTurn(int turn) {
+        this.turn = turn;
+    }
+
+    public Player getPlayer1() {
+        return player1;
+    }
+
+    public Player getPlayer2() {
+        return player2;
+    }
+
+    public Minion getChosenHandCard() {
+        return chosenHandCard;
+    }
+
+    public void setChosenHandCard(Minion chosenCard) {
+        this.chosenHandCard = chosenCard;
+    }
+
+    public int getChosenHandSlot() {
+        return chosenHandSlot;
+    }
+
+    public Minion getChosenTableCard() {
+        return chosenTableCard;
+    }
+
+    public int getChosenTableSlot() {
+        return chosenTableSlot;
+    }
+
+    public void setChosenHandSlot(int chosenHandSlot) {
+        this.chosenHandSlot = chosenHandSlot;
+    }
+
+    public void setChosenTableCard(Minion chosenTableCard) {
+        this.chosenTableCard = chosenTableCard;
+    }
+
+    public void setChosenTableSlot(int chosenTableSlot) {
+        this.chosenTableSlot = chosenTableSlot;
     }
 
 }

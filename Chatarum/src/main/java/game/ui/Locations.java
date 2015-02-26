@@ -11,26 +11,32 @@ import game.assets.Assets;
 public class Locations {
 
     // Background objects.
-    public static int tableSlotsX, tableSlotsY, endTurnX, endTurnY, 
+    public static int tableSlotsX, tableSlotsY, endTurnX, endTurnY,
             turnNumberX, turnNumberY;
 
     public static int player1TableSlotY, player2TableSlotY;
     public static int[] tableSlotX;
-    
+
     // Decks.
     public static int deckX, player1DeckY, player2DeckY;
+    public static int deckCardDelta;
 
     // Hands.
     public static int[] handX;
     public static int player1HandY, player2HandY;
+    public static int chooseCardDelta;
 
     // Tables.
     public static int[] tableX;
     public static int player1TableY, player2TableY;
-    
-    public static int statX, player1InfluenceTextY, player2InfluenceTextY, 
-            player1InfluenceBarY, player2InfluenceBarY, player1ResourceTextY, 
+
+    public static int statX, player1InfluenceTextY, player2InfluenceTextY,
+            player1InfluenceBarY, player2InfluenceBarY, player1ResourceTextY,
             player2ResourceTextY, player1ResourceBarY, player2ResourceBarY;
+    
+    // Icons.
+    public static int turnLeftX, turnLeftY, protectedX, protectedY, damageTakenX, 
+            damageTakenY;
 
     public static void init() {
         backgroundObjectLocations();
@@ -38,6 +44,7 @@ public class Locations {
         handLocations();
         tableLocations();
         influenceAndResourceLocations();
+        iconLocations();
     }
 
     public static void backgroundObjectLocations() {
@@ -48,10 +55,10 @@ public class Locations {
         endTurnY = 510; // Height: 60
         turnNumberX = 1830;
         turnNumberY = 551;
-        
+
         player1TableSlotY = tableSlotsY + Assets.tableSlotHeight + 34;
         player2TableSlotY = tableSlotsY;
-        
+
         tableSlotX = new int[8];
         for (int i = 0; i < 8; i++) {
             tableSlotX[i] = tableSlotsX + i * (Assets.tableSlotWidth + 6);
@@ -62,6 +69,7 @@ public class Locations {
         deckX = 110;
         player1DeckY = 565;
         player2DeckY = 317;
+        deckCardDelta = 3;
     }
 
     public static void handLocations() {
@@ -70,15 +78,16 @@ public class Locations {
 
         handX = new int[10];
         /*for (int i = 0; i < 10; i++) {
-            handX[i] = 1920 - 438 - i * (Assets.smallWidth + 5); // Width: 125
-        }*/
-        
+         handX[i] = 1920 - 438 - i * (Assets.smallWidth + 5); // Width: 125
+         }*/
+
         int[] middleStyle = {832, 962, 702, 1092, 572, 1222, 442, 1352, 312, 1482};
-        
+
         for (int i = 0; i < 10; i++) {
             handX[i] = middleStyle[i];
         }
-        
+
+        chooseCardDelta = 25;
     }
 
     public static void tableLocations() {
@@ -90,22 +99,72 @@ public class Locations {
             tableX[i] = 372 + i * (Assets.smallWidth + 25);
         }
     }
-    
+
     public static void influenceAndResourceLocations() {
         statX = endTurnX;
-        
+
         player1InfluenceTextY = tableSlotsY + 468 - 108;
         player1ResourceTextY = player1InfluenceTextY + 80;
-        
+
         player1InfluenceBarY = player1InfluenceTextY - 18 - 35;
         player1ResourceBarY = player1ResourceTextY - 18 - 35;
-        
-        
+
         player2InfluenceTextY = tableSlotsY + 108 + 18;
         player2ResourceTextY = player2InfluenceTextY - 80;
-        
+
         player2InfluenceBarY = player2InfluenceTextY - 18 + 35;
         player2ResourceBarY = player2ResourceTextY - 18 + 35;
+    }
 
+    private static void iconLocations() {
+        turnLeftX = 15;
+        turnLeftY = 7;
+        protectedX = 7;
+        protectedY = 7;
+        damageTakenX = 35; 
+        damageTakenY = 35;
+    }
+    
+    public static void scaleLocations(double scale) {
+        tableSlotsX *= scale;
+        tableSlotsY *= scale;
+        endTurnX *= scale;
+        endTurnY *= scale;
+        turnNumberX *= scale;
+        turnNumberY *= scale;
+        player1TableSlotY *= scale;
+        player2TableSlotY *= scale;
+
+        deckX *= scale;
+        player1DeckY *= scale;
+        player2DeckY *= scale;
+        deckCardDelta *= scale;
+
+        player1HandY *= scale;
+        player2HandY *= scale;
+        chooseCardDelta *= scale;
+
+        player1TableY *= scale;
+        player2TableY *= scale;
+
+        statX *= scale;
+        player1InfluenceTextY *= scale;
+        player2InfluenceTextY *= scale;
+
+        player1InfluenceBarY *= scale;
+        player2InfluenceBarY *= scale;
+        player1ResourceTextY *= scale;
+
+        player2ResourceTextY *= scale;
+        player1ResourceBarY *= scale;
+        player2ResourceBarY *= scale;
+
+        for (int i = 0; i < tableX.length; i++) {
+            tableX[i] *= scale;
+            tableSlotX[i] *= scale;
+        }
+        for (int i = 0; i < handX.length; i++) {
+            handX[i] *= scale;
+        }
     }
 }

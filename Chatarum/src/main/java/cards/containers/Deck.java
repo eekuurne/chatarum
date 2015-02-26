@@ -109,22 +109,24 @@ public class Deck {
         } else {
             y = Locations.player2DeckY;
         }
+        
+        int d = Locations.deckCardDelta;
 
         // Draws cardbacks on top of each based on cards remaining.
         if (cards.size() >= 1) {
             g.drawImage(Assets.neutralCardBack, x, y, null);
         }
         if (cards.size() >= 2) {
-            g.drawImage(Assets.neutralCardBack, x + 3, y - 3, null);
+            g.drawImage(Assets.neutralCardBack, x + d, y - d, null);
         }
         if (cards.size() >= 5) {
-            g.drawImage(Assets.neutralCardBack, x + 6, y - 6, null);
+            g.drawImage(Assets.neutralCardBack, x + 2 * d, y - 2 * d, null);
         }
         if (cards.size() >= 10) {
-            g.drawImage(Assets.neutralCardBack, x + 9, y - 9, null);
+            g.drawImage(Assets.neutralCardBack, x + 3 * d, y - 3 * d, null);
         }
         if (cards.size() >= 20) {
-            g.drawImage(Assets.neutralCardBack, x + 12, y - 12, null);
+            g.drawImage(Assets.neutralCardBack, x + 4 * d, y - 4 * d, null);
         }
     }
 }

@@ -19,7 +19,7 @@ import java.awt.Graphics;
 public class Player {
 
     private int playerNumber;
-    
+
     private Deck deck;
     private Hand hand;
     private Table table;
@@ -77,7 +77,7 @@ public class Player {
             remainingResources = 0;
         }
     }
-    
+
     public void setRemainingResources(int remainingResources) {
         this.remainingResources = remainingResources;
     }
@@ -106,17 +106,19 @@ public class Player {
             textY = Locations.player2InfluenceTextY;
             barY = Locations.player2InfluenceBarY;
         }
-        
-        Font font = new Font("Serif", Font.BOLD, 20); // Segoe Script?
+
+        Font font = new Font("Serif", Font.BOLD, Assets.statTextFont); // Segoe Script?
         g.setFont(font);
         g.setColor(Color.black);
         g.drawString("INFLUENCE: " + remainingInfluence + "/30", Locations.statX, textY);
-        
+
         g.drawImage(Assets.statBar, Locations.statX, barY, null);
         g.setColor(Color.RED);
-        
-        double barWidth = ((double)remainingInfluence / maxInfluence) * 197;
-        g.fillRect(Locations.statX + 1, barY + 1, (int)barWidth, 17);
+
+        double barWidth = ((double) remainingInfluence / maxInfluence)
+                * (Assets.statBar.getWidth() - Assets.scale * 2.6);
+        g.fillRect(Locations.statX + 1, barY + 1, (int) barWidth,
+                (int) (Assets.statBar.getHeight() - Assets.scale * 2.6));
     }
 
     public void paintResources(Graphics g, int player) {
@@ -126,16 +128,18 @@ public class Player {
             textY = Locations.player2ResourceTextY;
             barY = Locations.player2ResourceBarY;
         }
-        
-        Font font = new Font("Serif", Font.BOLD, 20); // Segoe Script?
+
+        Font font = new Font("Serif", Font.BOLD, Assets.statTextFont); // Segoe Script?
         g.setFont(font);
         g.setColor(Color.black);
         g.drawString("RESOURCES: " + remainingResources + "/" + maxResources, Locations.statX, textY);
-        
+
         g.drawImage(Assets.statBar, Locations.statX, barY, null);
         g.setColor(Color.DARK_GRAY);
-        double barWidth = ((double)remainingResources / (double)maxResources) * 197;
-        g.fillRect(Locations.statX + 1, barY + 1, (int)barWidth, 17);
+        double barWidth = ((double) remainingResources / (double) maxResources)
+                * (Assets.statBar.getWidth() - Assets.scale * 2.6);
+        g.fillRect(Locations.statX + 1, barY + 1, (int) barWidth,
+                (int) (Assets.statBar.getHeight() - Assets.scale * 2.6));
     }
 
     public int getPlayerNumber() {

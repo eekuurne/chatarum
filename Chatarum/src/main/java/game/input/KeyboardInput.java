@@ -1,6 +1,7 @@
 package game.input;
 
 import cards.Card;
+import game.assets.Assets;
 import game.logic.LogicHandler;
 import game.ui.UserInterface;
 import java.awt.Component;
@@ -26,13 +27,24 @@ public class KeyboardInput implements KeyListener {
             System.exit(0);
         } // Q: 
         else if (ke.getKeyCode() == KeyEvent.VK_Q) {
-            ui.getHandler().getPlayer1().getTable().getMinions()[0].clickInTable(ui.getHandler(), 0);
+            if (Assets.scale >= 0.8) {
+                Assets.scale -= 0.05;
+                Assets.scale(Assets.scale);
+                ui.getHandler().updateCardPositions();
+                ui.repaint();
+            }
+
         } // W:
         else if (ke.getKeyCode() == KeyEvent.VK_W) {
             ui.getHandler().getPlayer1().getTable().getMinions()[1].clickInTable(ui.getHandler(), 1);
         } // E: 
         else if (ke.getKeyCode() == KeyEvent.VK_E) {
-            ui.getHandler().getPlayer1().getTable().getMinions()[2].clickInTable(ui.getHandler(), 2);
+            if (Assets.scale <= 1) {
+                Assets.scale += 0.05;
+                Assets.scale(2 - Assets.scale);
+                ui.getHandler().updateCardPositions();
+                ui.repaint();
+            }
         } // A: 
         else if (ke.getKeyCode() == KeyEvent.VK_A) {
             ui.getHandler().getPlayer1().getTable().getMinions()[3].clickInTable(ui.getHandler(), 3);
@@ -49,7 +61,7 @@ public class KeyboardInput implements KeyListener {
         else if (ke.getKeyCode() == KeyEvent.VK_X) {
             ui.getHandler().getPlayer1().getTable().getMinions()[7].clickInTable(ui.getHandler(), 7);
         }
-        
+
         ui.repaint();
     }
 
