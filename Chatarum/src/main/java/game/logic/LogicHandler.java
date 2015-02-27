@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class LogicHandler {
 
     private UserInterface ui;
-    
+
     private boolean betweenTurns;
 
     private int turn;
@@ -50,7 +50,7 @@ public class LogicHandler {
         this.player2 = new Player(deck2, 2);
 
         updateResources(player1);
-        player2.changeMaxResources(15); // Player 2 gets 5 more for turn 1 because he didn't start.
+        player2.changeMaxTurnResources(15); // Player 2 gets 5 more for turn 1 because he didn't start.
 
         for (int i = 1; i < 6; i++) {
             player1.getHand().addCard(player1.getDeck().takeCard());
@@ -91,7 +91,7 @@ public class LogicHandler {
         influenceChange(startingPlayer, endingPlayer);
         betweenTurns = true;
     }
-    
+
     public void startTurn() {
         turn++;
         Player startingPlayer;
@@ -145,9 +145,10 @@ public class LogicHandler {
 
     public void updateResources(Player player) {
         if (turn != 2) { // Fixes the player 2 starting resources.
-            player.changeMaxResources(10);
+            player.changeMaxTurnResources(10);
         }
 
+        player.setMaxResources(player.getMaxTurnResources());
         for (int i = 0; i < 8; i++) {
             if (player.getTable().getMinions()[i] != null) {
                 player.changeMaxResources(player.getTable().getMinions()[i].getProduction());
@@ -203,10 +204,14 @@ public class LogicHandler {
         } else {
             defender.changeHealth(-attacker.getDamage());
         }
-        
+
         // If attacker isn't ranged, he takes damage too.
         if (!attacker.getRanged()) {
-            attacker.changeHealth(-defender.getDamage());
+            if (defender.getDeadly()) {
+                attacker.changeHealth(-attacker.getHealth());
+            } else {
+                attacker.changeHealth(-defender.getDamage());
+            }
         }
 
         // Remove dead minions.

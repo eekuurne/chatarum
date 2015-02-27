@@ -26,7 +26,8 @@ public class Player {
 
     private int maxInfluence;
     private int remainingInfluence;
-    private int maxResources; // Max. resources of the turn.
+    private int maxResources; // Current max. resources.
+    private int maxTurnResources; // Max. resources of the turn without workers.
     private int remainingResources; // Remaining resources of the turn.
 
     public Player(Deck deck, int number) {
@@ -37,6 +38,7 @@ public class Player {
         this.maxInfluence = 30;
         this.remainingInfluence = 30; // Starting influence defined here.
         this.maxResources = 0;
+        this.maxTurnResources = 0;
         this.remainingResources = 0;
     }
 
@@ -66,6 +68,17 @@ public class Player {
         maxResources += amount;
         if (maxResources >= 100) {
             maxResources = 100;
+        }
+    }
+
+    public void setMaxResources(int maxResources) {
+        this.maxResources = maxResources;
+    }
+
+    public void changeMaxTurnResources(int amount) {
+        maxTurnResources += amount;
+        if (maxTurnResources >= 80) {
+            maxTurnResources = 80;
         }
     }
 
@@ -169,4 +182,12 @@ public class Player {
     public int getRemainingResources() {
         return remainingResources;
     }
+
+    public int getMaxTurnResources() {
+        return maxTurnResources;
+    }
+
+    
+    
+    
 }
