@@ -35,8 +35,6 @@ public class MouseInput implements MouseListener {
     public void mousePressed(MouseEvent me) {
         int mx = me.getX(); // Mouse Y coordinate when pressed.
         int my = me.getY(); // Mouse X coordinate when pressed.
-
-        System.out.println(mx + ", " + my);
         
         Player playerA = handler.checkPlayerTurn()[0]; // Player whose turn it is.
         Player playerB = handler.checkPlayerTurn()[1]; // The other player.
@@ -54,7 +52,7 @@ public class MouseInput implements MouseListener {
                 || (turnPlayer == 2 && mx >= Locations.tableSlotsX && mx <= Locations.tableSlotsX + Assets.tableSlotsWidth
                 && my >= Locations.tableSlotsY && my <= Locations.tableSlotsY + Assets.tableSlotHeight)) {
 
-            handler.playerATableClicked(mx, my, playerA);
+            handler.playerATableClicked(mx, my, playerA, playerB);
             
         } // Player B table:
         else if ((turnPlayer == 2 && mx >= Locations.tableSlotsX && mx <= Locations.tableSlotsX + Assets.tableSlotsWidth
@@ -74,7 +72,6 @@ public class MouseInput implements MouseListener {
             
         } // Player clicks anywhere else:
         else {
-            System.out.println("Somewhere else clicked!");
             ui.getHandler().clearChosen();
         }
 

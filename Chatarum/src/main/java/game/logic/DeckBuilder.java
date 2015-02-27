@@ -2,10 +2,15 @@ package game.logic;
 
 import cards.containers.Deck;
 import cards.minions.Archer;
+import cards.minions.Assassin;
+import cards.minions.Axethrower;
 import cards.minions.Militia;
+import cards.minions.Moonblade;
 import cards.minions.Peasant;
+import cards.minions.PuppetMaster;
 import cards.minions.Raider;
 import cards.minions.Swordman;
+import cards.minions.VoodooPriest;
 import cards.minions.Watchman;
 
 /**
@@ -39,6 +44,11 @@ public class DeckBuilder {
             deck1.addCard(new Peasant());
             deck1.addCard(new Raider());
             deck1.addCard(new Watchman());
+            deck1.addCard(new PuppetMaster());
+            deck1.addCard(new Axethrower());
+            deck1.addCard(new Assassin());
+            deck1.addCard(new VoodooPriest());
+            deck1.addCard(new Moonblade());
         }
 
         for (int i = 0; i < 5; i++) {
@@ -48,6 +58,11 @@ public class DeckBuilder {
             deck2.addCard(new Peasant());
             deck2.addCard(new Raider());
             deck2.addCard(new Watchman());
+            deck2.addCard(new PuppetMaster());
+            deck2.addCard(new Axethrower());
+            deck2.addCard(new Assassin());
+            deck2.addCard(new VoodooPriest());
+            deck2.addCard(new Moonblade());
         }
     }
 

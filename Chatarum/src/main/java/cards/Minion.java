@@ -1,6 +1,8 @@
 package cards;
 
+import cards.containers.Table;
 import game.logic.LogicHandler;
+import game.logic.Player;
 import game.ui.Locations;
 
 /**
@@ -15,7 +17,8 @@ public abstract class Minion extends Card {
     private boolean turnLeft; // Can the minion attack on this turn.
     private boolean ranged; // Can the minion attack without taking damage.
     private boolean guardian; // Does the minion protect adjacent minions.
-    private int production; // Amount of resource production for workers
+    private int production; // Amount of resource production for workers.
+    private boolean deadly; // Does the minion always kill its target.
 
     public Minion(String name, int cost, int damage, int health,
             boolean turnLeft, boolean ranged, boolean guardian, int production) {
@@ -27,6 +30,7 @@ public abstract class Minion extends Card {
         this.ranged = ranged;
         this.guardian = guardian;
         this.production = production;
+        this.deadly = false;
     }
 
     public int getDamage() {
@@ -59,6 +63,14 @@ public abstract class Minion extends Card {
 
     public void setTurnLeft(boolean turnLeft) {
         this.turnLeft = turnLeft;
+    }
+
+    public void setDeadly(boolean deadly) {
+        this.deadly = deadly;
+    }
+
+    public boolean getDeadly() {
+        return deadly;
     }
 
     /**
@@ -94,5 +106,13 @@ public abstract class Minion extends Card {
                 setLocation(getX(), Locations.player2TableY + Locations.chooseCardDelta);
             }
         }
+    }
+    
+    public void enterTable(Player ownPlayer, Player enemyPlayer, int slot) {
+        System.out.println(getName() + " played to table!");
+    }
+    
+    public void die() {
+        System.out.println(getName() + " has died!");
     }
 }

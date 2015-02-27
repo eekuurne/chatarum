@@ -166,11 +166,12 @@ public class LogicHandler {
         }
     }
 
-    public void placeChosenMinionToTable(int slot, Player player) {
-        if (player.getTable().getMinions()[slot] == null) {
-            player.getTable().insertMinion(chosenHandCard, slot);
-            player.getHand().takeCard(chosenHandSlot);
-            player.changeRemainingResources(-chosenHandCard.getCost());
+    public void placeChosenMinionToTable(int slot, Player playerA, Player playerB) {
+        if (playerA.getTable().getMinions()[slot] == null) {
+            playerA.getTable().insertMinion(chosenHandCard, slot);
+            playerA.getHand().takeCard(chosenHandSlot);
+            playerA.changeRemainingResources(-chosenHandCard.getCost());
+            chosenHandCard.enterTable(playerA, playerB, slot);
             clearChosen();
             updateCardPositions();
         }
@@ -197,8 +198,12 @@ public class LogicHandler {
         attacker.setTurnLeft(false);
 
         // Defender takes damage.
-        defender.changeHealth(-attacker.getDamage());
-
+        if (attacker.getDeadly()) {
+            defender.changeHealth(-defender.getHealth());
+        } else {
+            defender.changeHealth(-attacker.getDamage());
+        }
+        
         // If attacker isn't ranged, he takes damage too.
         if (!attacker.getRanged()) {
             attacker.changeHealth(-defender.getDamage());
@@ -206,9 +211,11 @@ public class LogicHandler {
 
         // Remove dead minions.
         if (defender.getHealth() <= 0) {
+            defendingPlayer.getTable().getMinions()[defendingSlot].die();
             defendingPlayer.getTable().removeMinion(defendingSlot);
         }
         if (attacker.getHealth() <= 0) {
+            attackingPlayer.getTable().getMinions()[attackingSlot].die();
             attackingPlayer.getTable().removeMinion(attackingSlot);
         }
 
@@ -266,16 +273,16 @@ public class LogicHandler {
         return players;
     }
 
-    public void playerATableClicked(int x, int y, Player player) {
+    public void playerATableClicked(int x, int y, Player playerA, Player playerB) {
         for (int i = 0; i < 8; i++) {
 
             if (x >= Locations.tableSlotX[i] && x <= Locations.tableX[i] + Assets.tableSlotWidth
-                    && chosenHandCard != null && player.getTable().getMinions()[i] == null) {
-                placeChosenMinionToTable(i, player);
+                    && chosenHandCard != null && playerA.getTable().getMinions()[i] == null) {
+                placeChosenMinionToTable(i, playerA, playerB);
                 return;
-            } else if (player.getTable().getMinions()[i] != null && x >= player.getTable().getMinions()[i].getX()
-                    && x <= player.getTable().getMinions()[i].getX() + Assets.smallWidth) {
-                player.getTable().getMinions()[i].clickInTable(this, i);
+            } else if (playerA.getTable().getMinions()[i] != null && x >= playerA.getTable().getMinions()[i].getX()
+                    && x <= playerA.getTable().getMinions()[i].getX() + Assets.smallWidth) {
+                playerA.getTable().getMinions()[i].clickInTable(this, i);
                 return;
             }
         }

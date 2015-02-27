@@ -93,3 +93,12 @@ käytettävissä.
 - Guardianien suojaamille minioneille ilmestyy kilven kuva kortin vasempaan yläreunaan. Minionit, joilla on vuoro käyttämättä näkyy
 miekan kuva kortin oikeassa yläreunassa. Jos minion on menettänyt healthia, mutta ei kuollut, näkyy healthin yläpuolella punaisella
 menetetty määrä.
+
+**26.2.2015:** 11h
+- Pelin resoluution skaalauksen koodaaminen: toimii nyt millä vain resoluutiolla sekä windowed että fullscreenissä.  Vaihdetaan 
+launcherista (toistaiseksi) käsin koodista. Testattu Windowsilla ja Ubuntulla.
+- Uusien korttien lisäämistä (Puppet Master, Assassin, Axethrower, Voodoo Priest, Zombie, Moonblade). Mukana uusia ominaisuuksia
+minioneille: toisten minioneiden summonaaminen viereisiin slotteihin pelatessa kortti pöytään, satunnaisen vastustajan minionin 
+varastaminen, deadly-ominaisuus(tappaa hyökättävän kohteen aina, mutta deadly minion ei tee influence damagea). 
+- Kaikkia on testattu pelaamalla ja kokeilemalla erilaisia skenaarioita (esim. summonerin laittamienn reunoille, muiden korttien 
+viereen jne, Puppet Masterin pelaaminen täyteen omaan pöytään tai vihollisen tyhjään pöytään jne...)

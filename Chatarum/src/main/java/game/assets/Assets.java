@@ -42,12 +42,14 @@ public class Assets {
     // Big pictures of cards.
     public static int bigWidth = 224, bigHeight = 355;
     public static BufferedImage swordmanBig, archerBig, watchmanBig, militiaBig,
-            raiderBig, peasantBig;
+            raiderBig, peasantBig, axethrowerBig, puppetMasterBig, assassinBig, 
+            voodooPriestBig, moonbladeBig, zombieBig;
 
     // Small pictures of cards.
     public static int smallWidth = 125, smallHeight = 198;
     public static BufferedImage swordmanSmall, archerSmall, watchmanSmall,
-            militiaSmall, raiderSmall, peasantSmall;
+            militiaSmall, raiderSmall, peasantSmall, axethrowerSmall, puppetMasterSmall, assassinSmall, 
+            voodooPriestSmall, moonbladeSmall, zombieSmall;
 
     // Cardbacks.
     public static BufferedImage neutralCardBack;
@@ -67,6 +69,7 @@ public class Assets {
     public static int statTextFont = 20;
     public static int turnTextFont = 36;
     public static int healthLostFont = 18;
+    public static int endTextFont = 561;
 
     
     /**
@@ -102,6 +105,12 @@ public class Assets {
         militiaBig = neutralBig.crop(bigWidth * 3, 0, bigWidth, bigHeight);
         raiderBig = neutralBig.crop(bigWidth * 4, 0, bigWidth, bigHeight);
         peasantBig = neutralBig.crop(bigWidth * 5, 0, bigWidth, bigHeight);
+        axethrowerBig = neutralBig.crop(bigWidth * 6, 0, bigWidth, bigHeight);
+        puppetMasterBig = neutralBig.crop(0, bigHeight, bigWidth, bigHeight);
+        assassinBig = neutralBig.crop(bigWidth, bigHeight, bigWidth, bigHeight);
+        voodooPriestBig = neutralBig.crop(bigWidth * 2, bigHeight, bigWidth, bigHeight);
+        moonbladeBig = neutralBig.crop(bigWidth * 3, bigHeight, bigWidth, bigHeight);
+        zombieBig = neutralBig.crop(bigWidth * 4, bigHeight, bigWidth, bigHeight);
 
         swordmanSmall = neutralSmall.crop(0, 0, smallWidth, smallHeight);
         archerSmall = neutralSmall.crop(smallWidth, 0, smallWidth, smallHeight);
@@ -109,6 +118,13 @@ public class Assets {
         militiaSmall = neutralSmall.crop(smallWidth * 3, 0, smallWidth, smallHeight);
         raiderSmall = neutralSmall.crop(smallWidth * 4, 0, smallWidth, smallHeight);
         peasantSmall = neutralSmall.crop(smallWidth * 5, 0, smallWidth, smallHeight);
+        axethrowerSmall = neutralSmall.crop(smallWidth * 6, 0, smallWidth, smallHeight);
+        puppetMasterSmall = neutralSmall.crop(0, smallHeight, smallWidth, smallHeight);
+        assassinSmall = neutralSmall.crop(smallWidth, smallHeight, smallWidth, smallHeight);
+        voodooPriestSmall = neutralSmall.crop(smallWidth * 2, smallHeight, smallWidth, smallHeight);
+        moonbladeSmall = neutralSmall.crop(smallWidth * 3, smallHeight, smallWidth, smallHeight);
+        zombieSmall = neutralSmall.crop(smallWidth * 4, smallHeight, smallWidth, smallHeight);
+        
     }
 
     private static void loadIcons() { // MAKE SPRITESHEET LATER AND CROP
@@ -134,6 +150,7 @@ public class Assets {
         statTextFont *= scale;
         healthLostFont *= scale;
         turnTextFont *= scale;
+        endTextFont *= scale;
     }
 
     public static BufferedImage resize(BufferedImage img, double scale) {
@@ -164,6 +181,12 @@ public class Assets {
         militiaBig = resize(militiaBig, scale);
         raiderBig = resize(raiderBig, scale);
         peasantBig = resize(peasantBig, scale);
+        axethrowerBig = resize(axethrowerBig, scale);
+        puppetMasterBig = resize(puppetMasterBig, scale);
+        assassinBig = resize(assassinBig, scale);
+        voodooPriestBig = resize(voodooPriestBig, scale);
+        moonbladeBig = resize(moonbladeBig, scale);
+        zombieBig = resize(zombieBig, scale);
 
         swordmanSmall = resize(swordmanSmall, scale);
         archerSmall = resize(archerSmall, scale);
@@ -171,6 +194,12 @@ public class Assets {
         militiaSmall = resize(militiaSmall, scale);
         raiderSmall = resize(raiderSmall, scale);
         peasantSmall = resize(peasantSmall, scale);
+        axethrowerSmall = resize(axethrowerSmall, scale);
+        puppetMasterSmall = resize(puppetMasterSmall, scale);
+        assassinSmall = resize(assassinSmall, scale);
+        voodooPriestSmall = resize(voodooPriestSmall, scale);
+        moonbladeSmall = resize(moonbladeSmall, scale);
+        zombieSmall = resize(zombieSmall, scale);
         
         guardianIcon = resize(guardianIcon, scale);
         turnLeftIcon = resize(turnLeftIcon, scale);

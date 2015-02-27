@@ -40,6 +40,10 @@ public class UserInterface extends JPanel {
         paintMinionTurnsLeft(g, handler.getPlayer2());
         paintHealthLosses(g, handler.getPlayer1());
         paintHealthLosses(g, handler.getPlayer2());
+        
+        if (handler.getPlayer1().getInfluence() <= 0 || handler.getPlayer2().getInfluence() <= 0) {
+            paintEndText(g);
+        }
     }
 
     private void paintBackgroundObjects(Graphics g) {
@@ -55,7 +59,7 @@ public class UserInterface extends JPanel {
     }
 
     private void paintTurn(Graphics g) {
-        Font font = new Font("Segoe Script", Font.PLAIN, Assets.turnTextFont);
+        Font font = new Font("Serif", Font.PLAIN, Assets.turnTextFont);
         g.setFont(font);
         g.setColor(Color.black);
         g.drawString("" + handler.getTurn(), Locations.turnNumberX, Locations.turnNumberY);
@@ -104,7 +108,7 @@ public class UserInterface extends JPanel {
                 minion = player.getTable().getMinions()[i];
                 healthLost = minion.getMaxHealth() - minion.getHealth();
                 if (healthLost != 0) {
-                    Font font = new Font("Segoe Script", Font.PLAIN, Assets.healthLostFont);
+                    Font font = new Font("Serif", Font.PLAIN, Assets.healthLostFont);
                     g.setFont(font);
                     g.setColor(Color.red);
                     g.drawString("-" + healthLost, minion.getX() + Assets.smallWidth - Locations.damageTakenX,
@@ -112,5 +116,12 @@ public class UserInterface extends JPanel {
                 }
             }
         }
+    }
+    
+    public void paintEndText(Graphics g) {
+        Font font = new Font("Serif", Font.BOLD, Assets.endTextFont);
+        g.setFont(font);
+        g.setColor(Color.black);
+        g.drawString("GG", Locations.endTextX, Locations.endTextY);
     }
 }

@@ -37,6 +37,10 @@ public class Locations {
     // Icons.
     public static int turnLeftX, turnLeftY, protectedX, protectedY, damageTakenX, 
             damageTakenY;
+    
+    // Ending text.
+    public static int endTextX;
+    public static int endTextY;
 
     public static void init() {
         backgroundObjectLocations();
@@ -63,6 +67,9 @@ public class Locations {
         for (int i = 0; i < 8; i++) {
             tableSlotX[i] = tableSlotsX + i * (Assets.tableSlotWidth + 6);
         }
+        
+        endTextX = Assets.backgroundWidth / 3 - 95;
+        endTextY = 2 * (Assets.backgroundHeight / 3 + 5);
     }
 
     public static void deckLocations() {
@@ -121,8 +128,8 @@ public class Locations {
         turnLeftY = 7;
         protectedX = 7;
         protectedY = 7;
-        damageTakenX = 20; 
-        damageTakenY = 30;
+        damageTakenX = 28; 
+        damageTakenY = 40;
     }
     
     public static void scaleLocations(double scale) {
@@ -173,5 +180,8 @@ public class Locations {
         protectedY *= scale;
         damageTakenX *= scale;
         damageTakenY *= scale;
+        
+        endTextX *= scale;
+        endTextY *= scale;
     }
 }
