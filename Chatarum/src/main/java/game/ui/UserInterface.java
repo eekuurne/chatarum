@@ -74,12 +74,14 @@ public class UserInterface extends JPanel {
 
         for (int i = 0; i < guardians.size(); i++) {
             // Paint minions left to guardians.
-            if (player.getTable().getMinions()[guardians.get(i) - 1] != null) {
+            if (guardians.get(i) - 1 >= 0
+                    && player.getTable().getMinions()[guardians.get(i) - 1] != null) {
                 g.drawImage(Assets.guardianIcon,
                         player.getTable().getMinions()[guardians.get(i) - 1].getX() + Locations.protectedX,
                         player.getTable().getMinions()[guardians.get(i) - 1].getY() + Locations.protectedY, null);
             } // Paint minions right to guardians.
-            if (player.getTable().getMinions()[guardians.get(i) + 1] != null) {
+            if (guardians.get(i) + 1 <= 7
+                    && player.getTable().getMinions()[guardians.get(i) + 1] != null) {
                 g.drawImage(Assets.guardianIcon,
                         player.getTable().getMinions()[guardians.get(i) + 1].getX() + Locations.protectedX,
                         player.getTable().getMinions()[guardians.get(i) + 1].getY() + Locations.protectedY, null);

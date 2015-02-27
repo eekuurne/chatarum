@@ -72,6 +72,7 @@ public class Hand {
      * @param g Graphics g for rendering.
      * @param player 1 for player at bottom, 2 for top.
      * @param turn Current turn.
+     * @param betweenTurns State between end turn and start turn.
      *
      */
     public void paintComponent(Graphics g, int player, int turn, boolean betweenTurns) {

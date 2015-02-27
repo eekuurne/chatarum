@@ -38,8 +38,6 @@ public class PuppetMaster extends Minion {
      */
     @Override
     public void enterTable(Player ownPlayer, Player enemyPlayer, int slot) {
-        System.out.println("Puppet Master played to table!");
-        String report = "Player " + ownPlayer.getPlayerNumber() + "'s Puppet Master took control over a ";
         ArrayList<Integer> enemyMinionSlots = new ArrayList<>();
         for (int i = 0; i < 8; i++) {
             if (enemyPlayer.getTable().getMinions()[i] != null) {
@@ -49,17 +47,20 @@ public class PuppetMaster extends Minion {
         if (enemyMinionSlots.isEmpty()) {
             return;
         }
-        Random rand = new Random();
-        int chosenSlot = rand.nextInt(enemyMinionSlots.size());
-        int chosen = enemyMinionSlots.get(chosenSlot);
+        int chosen = randomSlot(enemyMinionSlots);
 
         for (int i = 0; i < 8; i++) {
             if (ownPlayer.getTable().getMinions()[i] == null) {
-                System.out.println(report + enemyPlayer.getTable().getMinions()[chosen].getName() + "!");
                 ownPlayer.getTable().insertMinion(enemyPlayer.getTable().getMinions()[chosen], i);
                 enemyPlayer.getTable().removeMinion(chosen);
                 return;
             }
         }
+    }
+    
+    private int randomSlot(ArrayList<Integer> enemyMinionSlots) {
+        Random rand = new Random();
+        int chosenSlot = rand.nextInt(enemyMinionSlots.size());
+        return enemyMinionSlots.get(chosenSlot);
     }
 }

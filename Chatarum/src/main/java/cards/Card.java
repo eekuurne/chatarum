@@ -7,7 +7,8 @@ import java.awt.event.MouseListener;
 
 /**
  * Absract class for all cards. Cards can be contained in decks and hands, and
- * they can be played from hand. The cards will be divided to minions and skills.
+ * they can be played from hand. The cards will be divided to minions and
+ * skills.
  *
  * @author Eero Kuurne
  */
@@ -44,8 +45,16 @@ public abstract class Card {
         this.x = x;
         this.y = y;
     }
-    
+
     public abstract void paintComponent(Graphics g);
+
+    /**
+     * What happens when a card is clicked in hand. Minions go to their own
+     * chosen-variable, others will have their own when implemented.
+     *
+     * @param handler LogicHandler.
+     * @param slot Slot in hand.
+     */
     public abstract void clickInHand(LogicHandler handler, int slot);
-    
+
 }

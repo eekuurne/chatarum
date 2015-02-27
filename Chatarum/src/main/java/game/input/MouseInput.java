@@ -8,12 +8,13 @@ import game.ui.Locations;
 import game.ui.UserInterface;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.event.MouseInputAdapter;
 
 /**
  *
  * @author Eero Kuurne
  */
-public class MouseInput implements MouseListener {
+public class MouseInput extends MouseInputAdapter {
 
     private UserInterface ui;
     private LogicHandler handler;
@@ -79,15 +80,71 @@ public class MouseInput implements MouseListener {
         ui.repaint();
     }
 
+    @Override
     public void mouseReleased(MouseEvent me) {
     }
 
+    @Override
     public void mouseEntered(MouseEvent me) {
+        System.out.println("Mouse entered!");
     }
 
+    @Override
     public void mouseExited(MouseEvent me) {
+        System.out.println("Mouse exited!");
     }
 
+    @Override
     public void mouseClicked(MouseEvent me) {
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent me) {
+        int mx = me.getX(); // Mouse Y coordinate when pressed.
+        int my = me.getY(); // Mouse X coordinate when pressed.
+        
+        System.out.println(mx + ", " + my);
+        /*
+        Player playerA = handler.checkPlayerTurn()[0]; // Player whose turn it is.
+        Player playerB = handler.checkPlayerTurn()[1]; // The other player.
+        int turnPlayer = playerA.getPlayerNumber(); // Player number of A.
+
+        // End turn button:
+        if (mx >= Locations.endTurnX && mx <= Locations.endTurnX + Assets.endTurnWidth
+                && my >= Locations.endTurnY && my <= Locations.endTurnY + Assets.endTurnHeight) {
+            
+            handler.changeTurn();
+
+        } // Player A table:
+        else if ((turnPlayer == 1 && mx >= Locations.tableSlotsX && mx <= Locations.tableSlotsX + Assets.tableSlotsWidth
+                && my >= Locations.player1TableSlotY && my <= Locations.tableSlotsY + Assets.tableSlotsHeight) 
+                || (turnPlayer == 2 && mx >= Locations.tableSlotsX && mx <= Locations.tableSlotsX + Assets.tableSlotsWidth
+                && my >= Locations.tableSlotsY && my <= Locations.tableSlotsY + Assets.tableSlotHeight)) {
+
+            handler.playerATableClicked(mx, my, playerA, playerB);
+            
+        } // Player B table:
+        else if ((turnPlayer == 2 && mx >= Locations.tableSlotsX && mx <= Locations.tableSlotsX + Assets.tableSlotsWidth
+                && my >= Locations.player1TableSlotY && my <= Locations.tableSlotsY + Assets.tableSlotsHeight) 
+                || (turnPlayer == 1 && mx >= Locations.tableSlotsX && mx <= Locations.tableSlotsX + Assets.tableSlotsWidth
+                && my >= Locations.tableSlotsY && my <= Locations.tableSlotsY + Assets.tableSlotHeight)) {
+
+            handler.playerBTableClicked(mx, my, playerA, playerB);
+            
+        }// Player A hand:
+        else if ((turnPlayer == 1 && my >= Locations.player1HandY 
+                && my <= Locations.player1HandY + Assets.smallHeight) 
+                || (turnPlayer == 2 && my >= Locations.player2HandY 
+                && my <= Locations.player2HandY + Assets.smallHeight)) {
+            
+            handler.playerAHandClicked(mx, my, playerA);
+            
+        } // Player clicks anywhere else:
+        else {
+            ui.getHandler().clearChosen();
+        }
+
+        // Repaint no matter what happened.
+        ui.repaint();*/
     }
 }

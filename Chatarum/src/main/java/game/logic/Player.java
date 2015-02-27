@@ -10,7 +10,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 /**
- * Contains the deck, hand and table of a player. Every game has 2 players.
+ * Contains the deck, hand and table of a player. Keeps track of the player's
+ * influence and resources. Every game has 2 players.
  *
  * Player number 1 is at bottom, 2 is at top. Bottom player always starts.
  *
@@ -68,20 +69,30 @@ public class Player {
         maxResources += amount;
         if (maxResources >= 100) {
             maxResources = 100;
+        } else if (maxResources <= 0) {
+            maxResources = 0;
         }
     }
 
-    public void setMaxResources(int maxResources) {
-        this.maxResources = maxResources;
-    }
-
+    /**
+     * Changes the maximum possible resources without workers on this turn.
+     *
+     * @param amount The amount of resources to change.
+     */
     public void changeMaxTurnResources(int amount) {
         maxTurnResources += amount;
         if (maxTurnResources >= 80) {
             maxTurnResources = 80;
+        } else if (maxTurnResources <= 0) {
+            maxTurnResources = 0;
         }
     }
 
+    /**
+     * Changes remaining resources.
+     *
+     * @param amount The amount of resources to change.
+     */
     public void changeRemainingResources(int amount) {
         remainingResources += amount;
         if (remainingResources >= maxResources) {
@@ -91,10 +102,6 @@ public class Player {
         }
     }
 
-    public void setRemainingResources(int remainingResources) {
-        this.remainingResources = remainingResources;
-    }
-
     /**
      * Paints the player's deck, hand and table.
      *
@@ -102,6 +109,7 @@ public class Player {
      * @param g Graphics drawing tool.
      * @param player 1 for player at bottom, 2 for top.
      * @param turn Current turn.
+     * @param betweenTurns State between endturn and startturn.
      */
     public void paintComponent(Graphics g, int player, int turn, boolean betweenTurns) {
         deck.paintComponent(g, player);
@@ -112,6 +120,14 @@ public class Player {
         paintResources(g, player);
     }
 
+    /**
+     * Paints the influence text and bar based on maximum and remaining
+     * influence.
+     *
+     * @param g Graphics painting tool.
+     * @param player The player whose influence is being painted.
+     *
+     */
     public void paintInfluence(Graphics g, int player) {
         int textY = Locations.player1InfluenceTextY;
         int barY = Locations.player1InfluenceBarY;
@@ -134,6 +150,14 @@ public class Player {
                 (int) (Assets.statBar.getHeight() - Assets.scale * 2.6));
     }
 
+    /**
+     * Paints the resources text and bar based on maximum and remaining
+     * resources.
+     *
+     * @param g Graphics painting tool.
+     * @param player The player whose resources is being painted.
+     *
+     */
     public void paintResources(Graphics g, int player) {
         int textY = Locations.player1ResourceTextY;
         int barY = Locations.player1ResourceBarY;
@@ -187,7 +211,20 @@ public class Player {
         return maxTurnResources;
     }
 
-    
-    
-    
+    public int getMaxInfluence() {
+        return maxInfluence;
+    }
+
+    public int getRemainingInfluence() {
+        return remainingInfluence;
+    }
+
+    public void setRemainingResources(int remainingResources) {
+        this.remainingResources = remainingResources;
+    }
+
+    public void setMaxResources(int maxResources) {
+        this.maxResources = maxResources;
+    }
+
 }

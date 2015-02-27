@@ -40,18 +40,15 @@ public class Game implements Runnable {
     @Override
     public void run() {
         frame = new JFrame(title);
-        
+
         if (!fullscreen) { // Fixes the game to be right resolution instead of window size.
             height += 28;
             width += 6;
         }
-        
         isFullscreen();
-        
+
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        
-        
         Assets.init(scale); // Load and crop images and set dimensions.
         Locations.init(); // Set locations.
 
@@ -64,6 +61,11 @@ public class Game implements Runnable {
         frame.setVisible(true);
     }
 
+    /**
+     * If the launcher sets fullscreen to true, this method makes the game
+     * full screen. If false, the game will be windowed.
+     *
+     */
     public void isFullscreen() {
         if (fullscreen) {
             frame.setUndecorated(true); // Disables decorations for frame.
@@ -72,7 +74,7 @@ public class Game implements Runnable {
             frame.setPreferredSize(new Dimension(width, height));
             //frame.setLocationRelativeTo(null); // Frame starts at middle.
             frame.setResizable(false); // The window isn't resizable by user.
-            
+
         }
     }
 

@@ -102,3 +102,8 @@ minioneille: toisten minioneiden summonaaminen viereisiin slotteihin pelatessa k
 varastaminen, deadly-ominaisuus(tappaa hyökättävän kohteen aina, mutta deadly minion ei tee influence damagea). 
 - Kaikkia on testattu pelaamalla ja kokeilemalla erilaisia skenaarioita (esim. summonerin laittamienn reunoille, muiden korttien 
 viereen jne, Puppet Masterin pelaaminen täyteen omaan pöytään tai vihollisen tyhjään pöytään jne...)
+
+**27.2.2015:** 8h
+- Pelin demoaminen
+- Testien tekemistä ja pientä korjailua
+- Dokumentaation päivittäminen palautuskuntoon

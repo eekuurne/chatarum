@@ -22,6 +22,7 @@ public class SpriteSheet {
      * @param y Y of upper left corner of the item to be cropped.
      * @param width Width of the item to be cropped.
      * @param height Height of the item to be cropped.
+     * @return Cropped BufferedImage.
      */
     public BufferedImage crop(int x, int y, int width, int height) {
         return sheet.getSubimage(x, y, width, height);

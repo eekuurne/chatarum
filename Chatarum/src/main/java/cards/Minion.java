@@ -95,6 +95,14 @@ public abstract class Minion extends Card {
         }
     }
 
+    /**
+     * What happens when a minion is clicked in a table. Changes the location of the
+     * minion and sets it chosen in the handler. This could be moved over to 
+     * LogicHandler too.
+     *
+     * @param handler LogicHandler.
+     * @param slot The minion's slot in table.
+     */
     public void clickInTable(LogicHandler handler, int slot) {
         handler.clearChosen();
         if (this.turnLeft) {
@@ -108,10 +116,23 @@ public abstract class Minion extends Card {
         }
     }
     
+    /**
+     * What happens when a minion enters the table. This method can be Overrided
+     * to add special table entering effects to minion.
+     * 
+     * @param ownPlayer Player whose turn it is.
+     * @param enemyPlayer The other player.
+     * @param slot Slot where the minion is put in table.
+     */
     public void enterTable(Player ownPlayer, Player enemyPlayer, int slot) {
         System.out.println(getName() + " played to table!");
     }
     
+    /**
+     * What happens when a minion dies. This method can be Overrided
+     * to add special dying effects to minion.
+     *
+     */
     public void die() {
         System.out.println(getName() + " has died!");
     }

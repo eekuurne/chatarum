@@ -76,6 +76,7 @@ public class Assets {
      * Method which loads all the images and crops all the single items from the
      * sprite sheets.
      *
+     * @param startingScale The scale difference to the original 1920x1080.
      */
     public static void init(double startingScale) {
         scale = startingScale;
