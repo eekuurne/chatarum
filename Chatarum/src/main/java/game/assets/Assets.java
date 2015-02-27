@@ -87,16 +87,16 @@ public class Assets {
     }
 
     private static void loadBackgroundObjects() {
-        background = ImageLoader.loadImage("resources/textures/background_1920x1080.png");
-        tableSlots = ImageLoader.loadImage("resources/textures/table_slots.png");
-        endTurn = ImageLoader.loadImage("resources/textures/end_turn.png");
-        startTurn = ImageLoader.loadImage("resources/textures/start_turn.png");
-        statBar = ImageLoader.loadImage("resources/textures/stat_bar.png");
+        background = ImageLoader.loadImage("/background_1920x1080.png");
+        tableSlots = ImageLoader.loadImage("/table_slots.png");
+        endTurn = ImageLoader.loadImage("/end_turn.png");
+        startTurn = ImageLoader.loadImage("/start_turn.png");
+        statBar = ImageLoader.loadImage("/stat_bar.png");
     }
 
     private static void neutralCrops() {
-        SpriteSheet neutralBig = new SpriteSheet(ImageLoader.loadImage("resources/textures/neutral_cards_big.png"));
-        SpriteSheet neutralSmall = new SpriteSheet(ImageLoader.loadImage("resources/textures/neutral_cards_small.png"));
+        SpriteSheet neutralBig = new SpriteSheet(ImageLoader.loadImage("/neutral_cards_big.png"));
+        SpriteSheet neutralSmall = new SpriteSheet(ImageLoader.loadImage("/neutral_cards_small.png"));
 
         neutralCardBack = neutralSmall.crop(smallWidth * 7, 0, smallWidth, smallHeight);
 
@@ -129,8 +129,8 @@ public class Assets {
     }
 
     private static void loadIcons() { // MAKE SPRITESHEET LATER AND CROP
-        guardianIcon = ImageLoader.loadImage("resources/textures/guardian_icon.png");
-        turnLeftIcon = ImageLoader.loadImage("resources/textures/turn_left_icon.png");
+        guardianIcon = ImageLoader.loadImage("/guardian_icon.png");
+        turnLeftIcon = ImageLoader.loadImage("/turn_left_icon.png");
     }
 
     public static void scaleDimensions(double scale) {
