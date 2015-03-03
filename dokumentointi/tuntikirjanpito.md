@@ -70,7 +70,7 @@
 mouse input, parempi keyboard input, moni luokka on selkeämpi ja ruudulle piirretään vain kun jotain tapahtuu
 jatkuvan loopin sijaan
 - Aihemäärittely meni uusiksi kurssin osalta: Factionit, championit ja skill-cardit jää pois kokonaan, ainoa pelimuoto
-tulee olemaan local multiplayer jne. (kirjoitan määrittelyn tarkemmin huomenna)
+tulee olemaan local multiplayer jne.
 
 **23.2.2015:** 14h
 - Tablen koodaus, korttien valitseminen kädestä, piirtelyä, 
@@ -100,10 +100,11 @@ launcherista (toistaiseksi) käsin koodista. Testattu Windowsilla ja Ubuntulla.
 - Uusien korttien lisäämistä (Puppet Master, Assassin, Axethrower, Voodoo Priest, Zombie, Moonblade). Mukana uusia ominaisuuksia
 minioneille: toisten minioneiden summonaaminen viereisiin slotteihin pelatessa kortti pöytään, satunnaisen vastustajan minionin 
 varastaminen, deadly-ominaisuus(tappaa hyökättävän kohteen aina, mutta deadly minion ei tee influence damagea). 
-- Kaikkia on testattu pelaamalla ja kokeilemalla erilaisia skenaarioita (esim. summonerin laittamienn reunoille, muiden korttien 
+- Kaikkia on testattu pelaamalla ja kokeilemalla erilaisia skenaarioita (esim. summonerin laittaminen reunoille, muiden korttien 
 viereen jne, Puppet Masterin pelaaminen täyteen omaan pöytään tai vihollisen tyhjään pöytään jne...)
 
-**27.2.2015:** 8h
+**27.2.2015:** 9h
 - Pelin demoaminen
 - Testien tekemistä ja pientä korjailua
 - Dokumentaation päivittäminen palautuskuntoon
+- Kuvien latauksen korjaaminen niin, että luotu .jar tiedosto toimii

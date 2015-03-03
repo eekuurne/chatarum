@@ -6,6 +6,7 @@ import cards.*;
 import cards.minions.Archer;
 import cards.minions.Militia;
 import cards.minions.Peasant;
+import cards.minions.PuppetMaster;
 import cards.minions.Raider;
 import cards.minions.Swordman;
 import cards.minions.Watchman;
@@ -121,5 +122,15 @@ public class DeckTest {
         
         assertEquals(0, deck.getRemaining());
         assertEquals("Militia", card.getName());
+    }
+    
+    @Test
+    public void takeCardReturnRight() {
+        Deck deck = new Deck();
+        
+        deck.addCard(new Swordman());
+        Card card = deck.takeCard();
+        
+        assertEquals("Swordman", card.getName());
     }
 }

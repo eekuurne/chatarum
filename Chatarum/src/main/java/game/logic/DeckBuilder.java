@@ -12,6 +12,7 @@ import cards.minions.Raider;
 import cards.minions.Swordman;
 import cards.minions.VoodooPriest;
 import cards.minions.Watchman;
+import cards.spells.RainOfFire;
 
 /**
  * Temporary class for making the decks for gameplay programming tests. In final
@@ -38,6 +39,9 @@ public class DeckBuilder {
      */
     public void init() {
         for (int i = 0; i < 5; i++) {
+            deck1.addCard(new RainOfFire());
+            deck1.addCard(new RainOfFire());
+            deck1.addCard(new RainOfFire());
             deck1.addCard(new Swordman());
             deck1.addCard(new Archer());
             deck1.addCard(new Militia());

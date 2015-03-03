@@ -36,8 +36,8 @@ public class Player {
         this.deck = deck;
         this.hand = new Hand();
         this.table = new Table();
-        this.maxInfluence = 30;
-        this.remainingInfluence = 30; // Starting influence defined here.
+        this.maxInfluence = 20;
+        this.remainingInfluence = 20; // Starting influence defined here.
         this.maxResources = 0;
         this.maxTurnResources = 0;
         this.remainingResources = 0;
@@ -139,7 +139,7 @@ public class Player {
         Font font = new Font("Serif", Font.BOLD, Assets.statTextFont); // Segoe Script?
         g.setFont(font);
         g.setColor(Color.black);
-        g.drawString("INFLUENCE: " + remainingInfluence + "/30", Locations.statX, textY);
+        g.drawString("INFLUENCE: " + remainingInfluence + "/20", Locations.statX, textY);
 
         g.drawImage(Assets.statBar, Locations.statX, barY, null);
         g.setColor(Color.RED);

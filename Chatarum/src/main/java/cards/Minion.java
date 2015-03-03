@@ -86,8 +86,8 @@ public abstract class Minion extends Card {
     @Override
     public void clickInHand(LogicHandler handler, int slot) {
         handler.clearChosen();
-        handler.setChosenHandCard(this);
-        handler.setChosenHandSlot(slot);
+        handler.setChosenHandMinion(this);
+        handler.setChosenHandMinionSlot(slot);
         if (handler.getTurn() % 2 != 0) {
             setLocation(getX(), Locations.player1HandY - Locations.chooseCardDelta);
         } else {

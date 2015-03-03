@@ -46,14 +46,14 @@ public class PlayerTest {
         
         player.changeRemainingInfluence(-5);
         
-        assertEquals(25, player.getInfluence());
+        assertEquals(player.getMaxInfluence() - 5, player.getInfluence());
     }
     
     @Test
     public void remainingInfluenceDoesntGoNegative() {
         Player player = new Player(new Deck(), 1);
         
-        player.changeRemainingInfluence(-35);
+        player.changeRemainingInfluence(-player.getMaxInfluence() - 5);
         
         assertEquals(0, player.getInfluence());
     }

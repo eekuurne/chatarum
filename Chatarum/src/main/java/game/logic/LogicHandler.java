@@ -2,6 +2,7 @@ package game.logic;
 
 import cards.Card;
 import cards.Minion;
+import cards.OffensiveAOE;
 import cards.containers.Deck;
 import cards.minions.Archer;
 import cards.minions.Swordman;
@@ -24,16 +25,19 @@ public class LogicHandler {
     private Player player1;
     private Player player2;
 
-    private Minion chosenHandCard;
-    private int chosenHandSlot;
+    private Minion chosenHandMinion;
+    private int chosenHandMinionSlot;
+    
+    private OffensiveAOE chosenHandOffensiveAOE;
+    private int chosenHandOffensiveAOESlot;
 
     private Minion chosenTableCard;
     private int chosenTableSlot;
 
     public LogicHandler(UserInterface ui) {
         this.turn = 1;
-        this.chosenHandCard = null;
-        this.chosenHandSlot = -1;
+        this.chosenHandMinion = null;
+        this.chosenHandMinionSlot = -1;
         this.ui = ui;
         this.betweenTurns = false;
 
@@ -52,7 +56,7 @@ public class LogicHandler {
         updateResources(player1);
         player2.changeMaxTurnResources(15); // Player 2 gets 5 more for turn 1 because he didn't start.
 
-        for (int i = 1; i < 6; i++) {
+        for (int i = 1; i < 7; i++) {
             player1.getHand().addCard(player1.getDeck().takeCard());
             player2.getHand().addCard(player2.getDeck().takeCard());
         }
@@ -106,16 +110,17 @@ public class LogicHandler {
         betweenTurns = false;
     }
 
+    // Split to smaller methods.
     public void clearChosen() {
-        if (chosenHandCard != null) {
-            Minion chosenH = chosenHandCard;
+        if (chosenHandMinion != null) {
+            Minion chosenH = chosenHandMinion;
             if (turn % 2 != 0) {
                 chosenH.setLocation(chosenH.getX(), Locations.player1HandY);
             } else {
                 chosenH.setLocation(chosenH.getX(), Locations.player2HandY);
             }
-            chosenHandCard = null;
-            chosenHandSlot = -1;
+            chosenHandMinion = null;
+            chosenHandMinionSlot = -1;
         }
         if (chosenTableCard != null) {
             Minion chosenT = chosenTableCard;
@@ -126,6 +131,16 @@ public class LogicHandler {
             }
             chosenTableCard = null;
             chosenTableSlot = -1;
+        }
+        if (chosenHandOffensiveAOE != null) {
+            OffensiveAOE offensiveAOE = chosenHandOffensiveAOE;
+            if (turn % 2 != 0) {
+                offensiveAOE.setLocation(offensiveAOE.getX(), Locations.player1HandY);
+            } else {
+                offensiveAOE.setLocation(offensiveAOE.getX(), Locations.player2HandY);
+            }
+            chosenHandOffensiveAOE = null;
+            chosenHandOffensiveAOESlot = -1;
         }
     }
 
@@ -169,16 +184,17 @@ public class LogicHandler {
 
     public void placeChosenMinionToTable(int slot, Player playerA, Player playerB) {
         if (playerA.getTable().getMinions()[slot] == null) {
-            playerA.getTable().insertMinion(chosenHandCard, slot);
-            playerA.getHand().takeCard(chosenHandSlot);
-            playerA.changeRemainingResources(-chosenHandCard.getCost());
-            chosenHandCard.enterTable(playerA, playerB, slot);
+            playerA.getTable().insertMinion(chosenHandMinion, slot);
+            playerA.getHand().takeCard(chosenHandMinionSlot);
+            playerA.changeRemainingResources(-chosenHandMinion.getCost());
+            chosenHandMinion.enterTable(playerA, playerB, slot);
             clearChosen();
             updateCardPositions();
         }
         clearChosen();
     }
 
+    // Split to smaller methods.
     public void minionAttack(int attackingSlot, int defendingSlot,
             Player attackingPlayer, Player defendingPlayer) {
 
@@ -282,7 +298,7 @@ public class LogicHandler {
         for (int i = 0; i < 8; i++) {
 
             if (x >= Locations.tableSlotX[i] && x <= Locations.tableX[i] + Assets.tableSlotWidth
-                    && chosenHandCard != null && playerA.getTable().getMinions()[i] == null) {
+                    && chosenHandMinion != null && playerA.getTable().getMinions()[i] == null) {
                 placeChosenMinionToTable(i, playerA, playerB);
                 return;
             } else if (playerA.getTable().getMinions()[i] != null && x >= playerA.getTable().getMinions()[i].getX()
@@ -333,16 +349,16 @@ public class LogicHandler {
         return player2;
     }
 
-    public Minion getChosenHandCard() {
-        return chosenHandCard;
+    public Minion getChosenHandMinion() {
+        return chosenHandMinion;
     }
 
-    public void setChosenHandCard(Minion chosenCard) {
-        this.chosenHandCard = chosenCard;
+    public void setChosenHandMinion(Minion chosenCard) {
+        this.chosenHandMinion = chosenCard;
     }
 
-    public int getChosenHandSlot() {
-        return chosenHandSlot;
+    public int getChosenHandMinionSlot() {
+        return chosenHandMinionSlot;
     }
 
     public Minion getChosenTableCard() {
@@ -353,8 +369,8 @@ public class LogicHandler {
         return chosenTableSlot;
     }
 
-    public void setChosenHandSlot(int chosenHandSlot) {
-        this.chosenHandSlot = chosenHandSlot;
+    public void setChosenHandMinionSlot(int chosenHandSlot) {
+        this.chosenHandMinionSlot = chosenHandSlot;
     }
 
     public void setChosenTableCard(Minion chosenTableCard) {
@@ -372,4 +388,26 @@ public class LogicHandler {
     public void setBetweenTurns(boolean betweenTurns) {
         this.betweenTurns = betweenTurns;
     }
+
+    public OffensiveAOE getChosenHandOffensiveAOE() {
+        return chosenHandOffensiveAOE;
+    }
+
+    public void setChosenHandOffensiveAOE(OffensiveAOE chosenHandAOE) {
+        this.chosenHandOffensiveAOE = chosenHandAOE;
+    }
+
+    public int getChosenHandOffensiveAOESlot() {
+        return chosenHandOffensiveAOESlot;
+    }
+
+    public void setChosenHandOffensiveAOESlot(int chosenHandAOESlot) {
+        this.chosenHandOffensiveAOESlot = chosenHandAOESlot;
+    }
+
+    public UserInterface getUi() {
+        return ui;
+    }
+    
+    
 }

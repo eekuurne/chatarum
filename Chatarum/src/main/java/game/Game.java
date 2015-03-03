@@ -80,7 +80,9 @@ public class Game implements Runnable {
 
     private void createComponents(Container container) {
         UserInterface ui = new UserInterface();
-        ui.addMouseListener(new MouseInput(ui));
+        MouseInput mouse = new MouseInput(ui);
+        ui.addMouseListener(mouse);
+        ui.addMouseMotionListener(mouse);
         container.add(ui);
 
         frame.addKeyListener(new KeyboardInput(ui));
