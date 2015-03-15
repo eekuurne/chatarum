@@ -41,5 +41,9 @@ public class Volley extends OffensiveAOE {
 
         g.drawString("   <Placeholder>", getX() + 5, getY() + Assets.smallHeight / 3);
     }
+    
+    public void paintHover(Graphics g) {
+        g.drawImage(Assets.archerBig, super.getX(), super.getY(), null);
+    }
 
 }

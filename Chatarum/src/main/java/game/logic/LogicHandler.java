@@ -27,7 +27,7 @@ public class LogicHandler {
 
     private Minion chosenHandMinion;
     private int chosenHandMinionSlot;
-    
+
     private OffensiveAOE chosenHandOffensiveAOE;
     private int chosenHandOffensiveAOESlot;
 
@@ -408,6 +408,27 @@ public class LogicHandler {
     public UserInterface getUi() {
         return ui;
     }
-    
-    
+
+    public void playerAHandHover(int x, int y, Player player) {
+        if (chosenHandMinion == null) {
+            for (int i = 0; i < player.getHand().getRemaining(); i++) {
+                if (x >= player.getHand().getCards().get(i).getX()
+                        && x <= player.getHand().getCards().get(i).getX() + Assets.smallWidth) {
+                    player.getHand().getCards().get(i).paintHover(ui.getGraphics());
+                    return;
+                }
+            }
+        }
+        ui.repaint();
+    }
+
+    public void playerBTableHover(int mx, int my, Player playerA, Player playerB) {
+    }
+
+    public void playerATableHover(int mx, int my, Player playerA, Player playerB) {
+    }
+
+    public void changeTurnHover() {
+    }
+
 }

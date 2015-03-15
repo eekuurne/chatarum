@@ -4,6 +4,7 @@ import game.logic.LogicHandler;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 
 /**
  * Absract class for all cards. Cards can be contained in decks and hands, and
@@ -47,6 +48,8 @@ public abstract class Card {
     }
 
     public abstract void paintComponent(Graphics g);
+    
+    public abstract void paintHover(Graphics g);
 
     /**
      * What happens when a card is clicked in hand. Minions go to their own

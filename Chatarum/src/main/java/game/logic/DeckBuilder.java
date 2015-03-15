@@ -40,8 +40,6 @@ public class DeckBuilder {
     public void init() {
         for (int i = 0; i < 5; i++) {
             deck1.addCard(new RainOfFire());
-            deck1.addCard(new RainOfFire());
-            deck1.addCard(new RainOfFire());
             deck1.addCard(new Swordman());
             deck1.addCard(new Archer());
             deck1.addCard(new Militia());
@@ -56,6 +54,7 @@ public class DeckBuilder {
         }
 
         for (int i = 0; i < 5; i++) {
+            deck2.addCard(new RainOfFire());
             deck2.addCard(new Swordman());
             deck2.addCard(new Archer());
             deck2.addCard(new Militia());

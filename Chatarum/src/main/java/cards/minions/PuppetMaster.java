@@ -9,6 +9,7 @@ import cards.Minion;
 import cards.containers.Table;
 import game.assets.Assets;
 import game.logic.Player;
+import game.ui.Locations;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
@@ -26,6 +27,16 @@ public class PuppetMaster extends Minion {
     @Override
     public void paintComponent(Graphics g) {
         g.drawImage(Assets.puppetMasterSmall, super.getX(), super.getY(), null);
+    }
+    
+    public void paintHover(Graphics g) {
+        if (super.getY() <= Locations.tableSlotsY) {
+            g.drawImage(Assets.puppetMasterBig, super.getX() - (Assets.bigWidth - Assets.smallWidth) 
+                    / 2, super.getY(), null);
+        } else {
+            g.drawImage(Assets.puppetMasterBig, super.getX() - (Assets.bigWidth - Assets.smallWidth) 
+                    / 2, super.getY() - (Assets.bigHeight - Assets.smallHeight), null);
+        }
     }
 
     /**

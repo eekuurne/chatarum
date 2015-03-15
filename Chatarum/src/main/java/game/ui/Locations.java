@@ -41,6 +41,10 @@ public class Locations {
     // Ending text.
     public static int endTextX;
     public static int endTextY;
+    
+    // Hover.
+    public static int hoverX;
+    public static int hoverY;
 
     public static void init() {
         backgroundObjectLocations();
@@ -70,6 +74,9 @@ public class Locations {
         
         endTextX = Assets.backgroundWidth / 3 - 95;
         endTextY = 2 * (Assets.backgroundHeight / 3 + 5);
+        
+        hoverX = 50;
+        hoverY = 540 - Assets.bigHeight / 2;
     }
 
     public static void deckLocations() {
@@ -183,5 +190,8 @@ public class Locations {
         
         endTextX *= scale;
         endTextY *= scale;
+        
+        hoverX *= scale;
+        hoverY *= scale;
     }
 }

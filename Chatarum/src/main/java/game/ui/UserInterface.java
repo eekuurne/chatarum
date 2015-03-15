@@ -126,4 +126,7 @@ public class UserInterface extends JPanel {
         g.setColor(Color.black);
         g.drawString("GG", Locations.endTextX, Locations.endTextY);
     }
+    
+    
+    
 }

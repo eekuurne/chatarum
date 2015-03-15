@@ -103,14 +103,51 @@ public class MouseInput extends MouseInputAdapter {
     public void mouseClicked(MouseEvent me) {
     }
 
+    
     @Override
     public void mouseMoved(MouseEvent me) {
+        
         int mx = me.getX(); // Mouse Y coordinate when moved.
         int my = me.getY(); // Mouse X coordinate when moved.
         
-        
-        
-        
-        
+        Player playerA = handler.checkPlayerTurn()[0]; // Player whose turn it is.
+        Player playerB = handler.checkPlayerTurn()[1]; // The other player.
+        int turnPlayer = playerA.getPlayerNumber(); // Player number of A.
+
+        // End turn button:
+        if (mx >= Locations.endTurnX && mx <= Locations.endTurnX + Assets.endTurnWidth
+                && my >= Locations.endTurnY && my <= Locations.endTurnY + Assets.endTurnHeight) {
+            
+            handler.changeTurnHover();
+
+        } // Player A table:
+        else if ((turnPlayer == 1 && mx >= Locations.tableSlotsX && mx <= Locations.tableSlotsX + Assets.tableSlotsWidth
+                && my >= Locations.player1TableSlotY && my <= Locations.tableSlotsY + Assets.tableSlotsHeight) 
+                || (turnPlayer == 2 && mx >= Locations.tableSlotsX && mx <= Locations.tableSlotsX + Assets.tableSlotsWidth
+                && my >= Locations.tableSlotsY && my <= Locations.tableSlotsY + Assets.tableSlotHeight)) {
+            
+            handler.playerATableHover(mx, my, playerA, playerB);
+            
+        } // Player B table:
+        else if ((turnPlayer == 2 && mx >= Locations.tableSlotsX && mx <= Locations.tableSlotsX + Assets.tableSlotsWidth
+                && my >= Locations.player1TableSlotY && my <= Locations.tableSlotsY + Assets.tableSlotsHeight) 
+                || (turnPlayer == 1 && mx >= Locations.tableSlotsX && mx <= Locations.tableSlotsX + Assets.tableSlotsWidth
+                && my >= Locations.tableSlotsY && my <= Locations.tableSlotsY + Assets.tableSlotHeight)) {
+
+            handler.playerBTableHover(mx, my, playerA, playerB);
+            
+        }// Player A hand:
+        else if ((turnPlayer == 1 && my >= Locations.player1HandY 
+                && my <= Locations.player1HandY + Assets.smallHeight
+                && !handler.getBetweenTurns()) 
+                || (turnPlayer == 2 && my >= Locations.player2HandY 
+                && my <= Locations.player2HandY + Assets.smallHeight
+                && !handler.getBetweenTurns())) {
+            
+            handler.playerAHandHover(mx, my, playerA);
+        } else {
+            ui.repaint();
+        }
+                
     }
 }
