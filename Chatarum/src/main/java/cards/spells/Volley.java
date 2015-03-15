@@ -1,9 +1,11 @@
 package cards.spells;
 
 import cards.OffensiveAOE;
+import cards.minions.Archer;
 import game.assets.Assets;
 import game.logic.LogicHandler;
 import game.logic.Player;
+import game.ui.Locations;
 import java.awt.Font;
 import java.awt.Graphics;
 
@@ -19,31 +21,44 @@ public class Volley extends OffensiveAOE {
 
     @Override
     public void clickEnemyTable(LogicHandler handler, Player playerA, Player playerB) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        for (int i = 0; i < 8; i++) {
+            if (playerB.getTable().getMinions()[i] != null) {
+                playerB.getTable().getMinions()[i].changeHealth(-1);
+                if (playerB.getTable().getMinions()[i].getHealth() <= 0) {
+                    playerB.getTable().removeMinion(i);
+                }
+            }
+        }
+        
+        int archers = 3;
+        for (int i = 0; i < 8; i++) {
+            if (archers > 0) {
+                if (playerA.getTable().getMinions()[i] == null) {
+                    playerA.getTable().getMinions()[i] = new Archer();
+                    archers--;
+                }
+            }
+        }
+        playerA.changeRemainingResources(-playerA.getHand().getCards().get(handler.getChosenHandOffensiveAOESlot()).getCost());
+        playerA.getHand().takeCard(handler.getChosenHandOffensiveAOESlot());
+
+        handler.clearChosen();
+        handler.updateCardPositions();
+        handler.getUi().repaint();
     }
 
     @Override
     public void paintComponent(Graphics g) {
-        // Draw placeholder.
-        g.drawRoundRect(getX(), getY(), Assets.smallWidth, Assets.smallHeight, 21, 21);
-
-        Font font = new Font("Serif", Font.BOLD, Assets.statTextFont);
-        g.setFont(font);
-        g.drawString("  " + getName(), getX() + 5, getY() + 2 * Assets.smallHeight / 3);
-
-        font = new Font("Serif", Font.BOLD, (int) (Assets.statTextFont / 1.5));
-        g.setFont(font);
-        g.drawString("Deals 2 AOE damage.", getX() + 5, getY() + 4 * Assets.smallHeight / 5);
-
-        font = new Font("Serif", Font.BOLD, (int) (Assets.statTextFont / 1.2));
-        g.setFont(font);
-        g.drawString("" + getCost(), getX() + Assets.smallWidth / 2, getY() + Assets.smallHeight - 5);
-
-        g.drawString("   <Placeholder>", getX() + 5, getY() + Assets.smallHeight / 3);
+        g.drawImage(Assets.volleySmall, super.getX(), super.getY(), null);
     }
     
     public void paintHover(Graphics g) {
-        g.drawImage(Assets.archerBig, super.getX(), super.getY(), null);
+        if (super.getY() <= Locations.tableSlotsY) {
+            g.drawImage(Assets.volleyBig, super.getX() - (Assets.bigWidth - Assets.smallWidth) 
+                    / 2, super.getY(), null);
+        } else {
+            g.drawImage(Assets.volleyBig, super.getX() - (Assets.bigWidth - Assets.smallWidth) 
+                    / 2, super.getY() - (Assets.bigHeight - Assets.smallHeight), null);
+        }
     }
-
 }

@@ -43,13 +43,13 @@ public class Assets {
     public static int bigWidth = 224, bigHeight = 355;
     public static BufferedImage swordmanBig, archerBig, watchmanBig, militiaBig,
             raiderBig, peasantBig, axethrowerBig, puppetMasterBig, assassinBig, 
-            voodooPriestBig, moonbladeBig, zombieBig;
+            voodooPriestBig, moonbladeBig, zombieBig, rainOfFireBig, volleyBig;
 
     // Small pictures of cards.
     public static int smallWidth = 125, smallHeight = 198;
     public static BufferedImage swordmanSmall, archerSmall, watchmanSmall,
             militiaSmall, raiderSmall, peasantSmall, axethrowerSmall, puppetMasterSmall, assassinSmall, 
-            voodooPriestSmall, moonbladeSmall, zombieSmall;
+            voodooPriestSmall, moonbladeSmall, zombieSmall, rainOfFireSmall, volleySmall;
 
     // Cardbacks.
     public static BufferedImage neutralCardBack;
@@ -112,6 +112,8 @@ public class Assets {
         voodooPriestBig = neutralBig.crop(bigWidth * 2, bigHeight, bigWidth, bigHeight);
         moonbladeBig = neutralBig.crop(bigWidth * 3, bigHeight, bigWidth, bigHeight);
         zombieBig = neutralBig.crop(bigWidth * 4, bigHeight, bigWidth, bigHeight);
+        rainOfFireBig = neutralBig.crop(bigWidth * 5, bigHeight, bigWidth, bigHeight);
+        volleyBig = neutralBig.crop(bigWidth * 6, bigHeight, bigWidth, bigHeight);
 
         swordmanSmall = neutralSmall.crop(0, 0, smallWidth, smallHeight);
         archerSmall = neutralSmall.crop(smallWidth, 0, smallWidth, smallHeight);
@@ -125,7 +127,8 @@ public class Assets {
         voodooPriestSmall = neutralSmall.crop(smallWidth * 2, smallHeight, smallWidth, smallHeight);
         moonbladeSmall = neutralSmall.crop(smallWidth * 3, smallHeight, smallWidth, smallHeight);
         zombieSmall = neutralSmall.crop(smallWidth * 4, smallHeight, smallWidth, smallHeight);
-        
+        rainOfFireSmall = neutralSmall.crop(smallWidth * 5, smallHeight, smallWidth, smallHeight);
+        volleySmall = neutralSmall.crop(smallWidth * 6, smallHeight, smallWidth, smallHeight);
     }
 
     private static void loadIcons() { // MAKE SPRITESHEET LATER AND CROP
@@ -188,6 +191,8 @@ public class Assets {
         voodooPriestBig = resize(voodooPriestBig, scale);
         moonbladeBig = resize(moonbladeBig, scale);
         zombieBig = resize(zombieBig, scale);
+        rainOfFireBig = resize(rainOfFireBig, scale);
+        volleyBig = resize(volleyBig, scale);
 
         swordmanSmall = resize(swordmanSmall, scale);
         archerSmall = resize(archerSmall, scale);
@@ -201,6 +206,8 @@ public class Assets {
         voodooPriestSmall = resize(voodooPriestSmall, scale);
         moonbladeSmall = resize(moonbladeSmall, scale);
         zombieSmall = resize(zombieSmall, scale);
+        rainOfFireSmall = resize(rainOfFireSmall, scale);
+        volleySmall = resize(volleySmall, scale);
         
         guardianIcon = resize(guardianIcon, scale);
         turnLeftIcon = resize(turnLeftIcon, scale);

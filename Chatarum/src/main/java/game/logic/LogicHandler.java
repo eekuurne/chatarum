@@ -179,6 +179,8 @@ public class LogicHandler {
             card.clickInHand(this, slot);
         } else {
             clearChosen();
+            /*player.getHand().getCards().get(slot).paintHover(ui.getGraphics());
+            ui.repaint();*/
         }
     }
 
@@ -410,7 +412,7 @@ public class LogicHandler {
     }
 
     public void playerAHandHover(int x, int y, Player player) {
-        if (chosenHandMinion == null) {
+        if (chosenHandMinion == null && chosenHandOffensiveAOE == null) {
             for (int i = 0; i < player.getHand().getRemaining(); i++) {
                 if (x >= player.getHand().getCards().get(i).getX()
                         && x <= player.getHand().getCards().get(i).getX() + Assets.smallWidth) {

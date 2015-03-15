@@ -1,7 +1,9 @@
 package cards;
 
+import game.assets.Assets;
 import game.logic.LogicHandler;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -47,8 +49,25 @@ public abstract class Card {
         this.y = y;
     }
 
-    public abstract void paintComponent(Graphics g);
-    
+    public void paintComponent(Graphics g) {
+        // Draw placeholder.
+        g.drawRoundRect(getX(), getY(), Assets.smallWidth, Assets.smallHeight, 21, 21);
+
+        Font font = new Font("Serif", Font.BOLD, Assets.statTextFont);
+        g.setFont(font);
+        g.drawString("  " + getName(), getX() + 5, getY() + 2 * Assets.smallHeight / 3);
+
+        font = new Font("Serif", Font.BOLD, (int) (Assets.statTextFont / 1.5));
+        g.setFont(font);
+        g.drawString("Deals 2 AOE damage.", getX() + 5, getY() + 4 * Assets.smallHeight / 5);
+
+        font = new Font("Serif", Font.BOLD, (int) (Assets.statTextFont / 1.2));
+        g.setFont(font);
+        g.drawString("" + getCost(), getX() + Assets.smallWidth / 2, getY() + Assets.smallHeight - 5);
+
+        g.drawString("   <Placeholder>", getX() + 5, getY() + Assets.smallHeight / 3);
+    }
+
     public abstract void paintHover(Graphics g);
 
     /**

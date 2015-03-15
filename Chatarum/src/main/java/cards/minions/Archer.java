@@ -22,6 +22,7 @@ public class Archer extends Minion {
         g.drawImage(Assets.archerSmall, super.getX(), super.getY(), null);
     }
     
+    @Override
     public void paintHover(Graphics g) {
         if (super.getY() <= Locations.tableSlotsY) {
             g.drawImage(Assets.archerBig, super.getX() - (Assets.bigWidth - Assets.smallWidth) 

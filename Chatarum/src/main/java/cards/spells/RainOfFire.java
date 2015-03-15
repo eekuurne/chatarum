@@ -39,25 +39,16 @@ public class RainOfFire extends OffensiveAOE {
 
     @Override
     public void paintComponent(Graphics g) {
-        // Draw placeholder.
-        g.drawRoundRect(getX(), getY(), Assets.smallWidth, Assets.smallHeight, 21, 21);
-
-        Font font = new Font("Serif", Font.BOLD, Assets.statTextFont);
-        g.setFont(font);
-        g.drawString("  " + getName(), getX() + 5, getY() + 2 * Assets.smallHeight / 3);
-
-        font = new Font("Serif", Font.BOLD, (int) (Assets.statTextFont / 1.5));
-        g.setFont(font);
-        g.drawString("Deals 2 AOE damage.", getX() + 5, getY() + 4 * Assets.smallHeight / 5);
-
-        font = new Font("Serif", Font.BOLD, (int) (Assets.statTextFont / 1.2));
-        g.setFont(font);
-        g.drawString("" + getCost(), getX() + Assets.smallWidth / 2, getY() + Assets.smallHeight - 5);
-
-        g.drawString("   <Placeholder>", getX() + 5, getY() + Assets.smallHeight / 3);
+        g.drawImage(Assets.rainOfFireSmall, super.getX(), super.getY(), null);
     }
     
     public void paintHover(Graphics g) {
-        g.drawImage(Assets.archerBig, super.getX(), super.getY(), null);
+        if (super.getY() <= Locations.tableSlotsY) {
+            g.drawImage(Assets.rainOfFireBig, super.getX() - (Assets.bigWidth - Assets.smallWidth) 
+                    / 2, super.getY(), null);
+        } else {
+            g.drawImage(Assets.rainOfFireBig, super.getX() - (Assets.bigWidth - Assets.smallWidth) 
+                    / 2, super.getY() - (Assets.bigHeight - Assets.smallHeight), null);
+        }
     }
 }

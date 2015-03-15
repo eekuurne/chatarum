@@ -13,6 +13,7 @@ import cards.minions.Swordman;
 import cards.minions.VoodooPriest;
 import cards.minions.Watchman;
 import cards.spells.RainOfFire;
+import cards.spells.Volley;
 
 /**
  * Temporary class for making the decks for gameplay programming tests. In final
@@ -38,33 +39,35 @@ public class DeckBuilder {
      *
      */
     public void init() {
+        deck1.addCard(new RainOfFire());
+        deck1.addCard(new PuppetMaster());
+        deck1.addCard(new VoodooPriest());
+        deck1.addCard(new Axethrower());
         for (int i = 0; i < 5; i++) {
-            deck1.addCard(new RainOfFire());
+            deck1.addCard(new Volley());
             deck1.addCard(new Swordman());
             deck1.addCard(new Archer());
             deck1.addCard(new Militia());
             deck1.addCard(new Peasant());
             deck1.addCard(new Raider());
             deck1.addCard(new Watchman());
-            deck1.addCard(new PuppetMaster());
-            deck1.addCard(new Axethrower());
             deck1.addCard(new Assassin());
-            deck1.addCard(new VoodooPriest());
             deck1.addCard(new Moonblade());
         }
-
+        
+        deck2.addCard(new RainOfFire());
+        deck2.addCard(new PuppetMaster());
+        deck2.addCard(new VoodooPriest());
+        deck2.addCard(new Axethrower());
         for (int i = 0; i < 5; i++) {
-            deck2.addCard(new RainOfFire());
+            deck2.addCard(new Volley());
             deck2.addCard(new Swordman());
             deck2.addCard(new Archer());
             deck2.addCard(new Militia());
             deck2.addCard(new Peasant());
             deck2.addCard(new Raider());
             deck2.addCard(new Watchman());
-            deck2.addCard(new PuppetMaster());
-            deck2.addCard(new Axethrower());
             deck2.addCard(new Assassin());
-            deck2.addCard(new VoodooPriest());
             deck2.addCard(new Moonblade());
         }
     }
