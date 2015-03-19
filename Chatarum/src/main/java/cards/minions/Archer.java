@@ -32,5 +32,4 @@ public class Archer extends Minion {
                     / 2, super.getY() - (Assets.bigHeight - Assets.smallHeight), null);
         }
     }
-    
 }

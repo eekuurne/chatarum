@@ -1,13 +1,11 @@
 package game.input;
 
-import cards.Card;
 import game.assets.Assets;
 import game.logic.LogicHandler;
 import game.logic.Player;
 import game.ui.Locations;
 import game.ui.UserInterface;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import javax.swing.event.MouseInputAdapter;
 
 /**

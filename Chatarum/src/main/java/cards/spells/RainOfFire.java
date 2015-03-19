@@ -5,8 +5,6 @@ import game.assets.Assets;
 import game.logic.LogicHandler;
 import game.logic.Player;
 import game.ui.Locations;
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 
 /**
