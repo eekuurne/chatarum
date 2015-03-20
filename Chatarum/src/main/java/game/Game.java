@@ -28,6 +28,8 @@ public class Game implements Runnable {
 
     private double scale;
     private boolean fullscreen;
+    
+    
 
     public Game(String title, int width, int height, boolean fullscreen) {
         this.title = title;
