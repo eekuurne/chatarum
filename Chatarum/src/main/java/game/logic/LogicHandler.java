@@ -6,6 +6,8 @@ import cards.OffensiveAOE;
 import cards.containers.Deck;
 import cards.minions.Archer;
 import cards.minions.Swordman;
+import game.AI.AI;
+import game.AI.SimpleAI;
 import game.assets.Assets;
 import game.ui.Locations;
 import game.ui.UserInterface;
@@ -52,6 +54,8 @@ public class LogicHandler {
 
         this.player1 = new Player(deck1, 1);
         this.player2 = new Player(deck2, 2);
+        
+        this.player2.setAI(new SimpleAI(player2, player1, this));
 
         updateResources(player1);
         player2.changeMaxTurnResources(15); // Player 2 gets 5 more for turn 1 because he didn't start.
@@ -94,6 +98,8 @@ public class LogicHandler {
         }
         influenceChange(startingPlayer, endingPlayer);
         betweenTurns = true;
+        
+        playAI(startingPlayer, endingPlayer);
     }
 
     public void startTurn() {
@@ -110,6 +116,17 @@ public class LogicHandler {
         betweenTurns = false;
     }
 
+    private void playAI(Player startingPlayer, Player endingPlayer) {
+        if (startingPlayer.getAI() != null) {
+            startTurn();
+            
+            startingPlayer.getAI().playTurn();
+            
+            endTurn();
+            startTurn();
+        }
+    }
+    
     // Split to smaller methods.
     public void clearChosen() {
         if (chosenHandMinion != null) {
@@ -432,5 +449,9 @@ public class LogicHandler {
 
     public void changeTurnHover() {
     }
+
+    
+
+    
 
 }

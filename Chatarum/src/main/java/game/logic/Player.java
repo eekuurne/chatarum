@@ -3,6 +3,7 @@ package game.logic;
 import cards.containers.Table;
 import cards.containers.Deck;
 import cards.containers.Hand;
+import game.AI.AI;
 import game.assets.Assets;
 import game.ui.Locations;
 import java.awt.Color;
@@ -30,6 +31,8 @@ public class Player {
     private int maxResources; // Current max. resources.
     private int maxTurnResources; // Max. resources of the turn without workers.
     private int remainingResources; // Remaining resources of the turn.
+    
+    private AI AI;
 
     public Player(Deck deck, int number) {
         this.playerNumber = number;
@@ -41,6 +44,7 @@ public class Player {
         this.maxResources = 0;
         this.maxTurnResources = 0;
         this.remainingResources = 0;
+        this.AI = null;
     }
 
     /**
@@ -227,4 +231,13 @@ public class Player {
         this.maxResources = maxResources;
     }
 
+    public void setAI(AI AI) {
+        this.AI = AI;
+    }
+
+    public AI getAI() {
+        return AI;
+    }
+    
+    
 }

@@ -55,12 +55,12 @@ public class DeckBuilder {
             deck1.addCard(new Moonblade());
         }
         
-        deck2.addCard(new RainOfFire());
+        //deck2.addCard(new RainOfFire());
         deck2.addCard(new PuppetMaster());
         deck2.addCard(new VoodooPriest());
         deck2.addCard(new Axethrower());
         for (int i = 0; i < 5; i++) {
-            deck2.addCard(new Volley());
+            //deck2.addCard(new Volley());
             deck2.addCard(new Swordman());
             deck2.addCard(new Archer());
             deck2.addCard(new Militia());

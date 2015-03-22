@@ -23,47 +23,33 @@ public class SimpleAI extends AI {
         playTable();
     }
 
-    /**
-     *
-     *
-     */
     private void playTable() {
         for (int i = 0; i < 8; i++) {
             if (playerA.getTable().getMinions()[i] != null
                     && playerA.getTable().getMinions()[i].getTurnleft()) {
-                ArrayList<Minion> enemyTable = checkEnemyTable();
-                int attackSlot = rand.nextInt(enemyTable.size());
-                handler.minionAttack(attackSlot, i, playerA, playerB);
+                ArrayList<Integer> enemyTableSlots = checkFilledTableSlots(playerB);
+
+                if (enemyTableSlots.size() > 0) {
+                    int attackSlot = enemyTableSlots.get(rand.nextInt(enemyTableSlots.size()));
+                    handler.minionAttack(i, attackSlot, playerA, playerB);
+                }
             }
         }
     }
 
     private void playHand() {
-        Card[] hand = new Card[playerA.getHand().getRemaining()];
-        
-        for (int i = 0; i < playerA.getHand().getRemaining(); i++) {
-            hand[i] = playerA.getHand().getCards().get(i);
-        }
-        
-        for (int i = 0; i < hand.length; i++) {
-            if (playerA.getRemainingResources() >= hand[i].getCost()) {
+        int handSize = playerA.getHand().getRemaining();
+        for (int i = handSize - 1; i >= 0; i--) {
+            if (playerA.getRemainingResources() >= playerA.getHand().getCards().get(i).getCost()) {
                 handler.clickHandSlot(i, playerA);
-                
-                // Randomize the slot where to put the minion.
-                
-                //handler.placeChosenMinionToTable(i, playerA, playerB);
+
+                ArrayList<Integer> tableSlots = checkEmptyTableSlots(playerA);
+
+                if (tableSlots.size() > 0) {
+                    int slot = tableSlots.get(rand.nextInt(tableSlots.size()));
+                    handler.placeChosenMinionToTable(slot, playerA, playerB);
+                }
             }
         }
     }
-
-    private ArrayList<Minion> checkEnemyTable() {
-        ArrayList<Minion> enemyTable = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
-            if (playerB.getTable().getMinions()[i] != null) {
-                enemyTable.add(playerB.getTable().getMinions()[i]);
-            }
-        }
-        return enemyTable;
-    }
-
 }
