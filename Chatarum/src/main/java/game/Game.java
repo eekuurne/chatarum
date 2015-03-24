@@ -1,5 +1,6 @@
 package game;
 
+import game.AI.AI;
 import game.assets.Assets;
 import game.assets.ImageLoader;
 import game.input.KeyboardInput;
@@ -29,14 +30,19 @@ public class Game implements Runnable {
     private double scale;
     private boolean fullscreen;
     
+    private AI player1AI;
+    private AI player2AI;
+    
     
 
-    public Game(String title, int width, int height, boolean fullscreen) {
+    public Game(String title, int width, int height, boolean fullscreen, AI player1AI, AI player2AI) {
         this.title = title;
         this.width = width;
         this.height = height;
         this.scale = (double) width / 1920;
         this.fullscreen = fullscreen;
+        this.player1AI = player1AI;
+        this.player2AI = player2AI;
     }
 
     @Override
@@ -81,7 +87,7 @@ public class Game implements Runnable {
     }
 
     private void createComponents(Container container) {
-        UserInterface ui = new UserInterface();
+        UserInterface ui = new UserInterface(player1AI, player2AI);
         MouseInput mouse = new MouseInput(ui);
         ui.addMouseListener(mouse);
         ui.addMouseMotionListener(mouse);

@@ -47,13 +47,13 @@ public class VoodooPriest extends Minion {
      */
     @Override
     public void enterTable(Player ownPlayer, Player enemyPlayer, int slot) {
-        System.out.println("Voodoo priest has arrived!");
+        //System.out.println("Voodoo priest has arrived!");
         if (slot != 0 && ownPlayer.getTable().getMinions()[slot - 1] == null) {
-            System.out.println("Left zombie summoned!");
+            //System.out.println("Left zombie summoned!");
             ownPlayer.getTable().insertMinion(new Zombie(), slot - 1);
         }
         if (slot != 7 && ownPlayer.getTable().getMinions()[slot + 1] == null) {
-            System.out.println("Right zombie summoned!");
+            //System.out.println("Right zombie summoned!");
             ownPlayer.getTable().insertMinion(new Zombie(), slot + 1);
         }
         

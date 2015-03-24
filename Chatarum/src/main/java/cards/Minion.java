@@ -125,7 +125,7 @@ public abstract class Minion extends Card {
      * @param slot Slot where the minion is put in table.
      */
     public void enterTable(Player ownPlayer, Player enemyPlayer, int slot) {
-        System.out.println(getName() + " played to table!");
+        //System.out.println(getName() + " played to table!");
     }
     
     /**
@@ -134,6 +134,6 @@ public abstract class Minion extends Card {
      *
      */
     public void die() {
-        System.out.println(getName() + " has died!");
+        //System.out.println(getName() + " has died!");
     }
 }

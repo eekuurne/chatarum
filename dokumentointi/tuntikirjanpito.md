@@ -108,3 +108,30 @@ viereen jne, Puppet Masterin pelaaminen täyteen omaan pöytään tai vihollisen
 - Testien tekemistä ja pientä korjailua
 - Dokumentaation päivittäminen palautuskuntoon
 - Kuvien latauksen korjaaminen niin, että luotu .jar tiedosto toimii
+
+
+**10.3.2015:** 2h
+- Tietorakenteet ja algoritmit hajoitustyön aiheen suunnittelu
+
+**14.3.2015:** 3h
+- Pelaajan oman käden Hoverin koodaaminen
+
+**15.3.2015:** 4h
+- Hoverin optimointia, Volleyn ja Rain of Firen viimeistely
+
+**19.3.2015:** 2h
+- Aihemäärittelyn kirjoittaminen, suunnittelua
+
+**20.3.2015:** 3h
+- Ensimmäisen tekoälyn koodauksen aloittaminen
+
+**21.3.2015:** 4h
+- SimpleAI-tekoälyn viimeisteleminen ja tekoälyn mahdollisuuden lisääminen peliin
+
+**22.3.2015:** 2h
+- Tekoälyn testauksen koodausta ja ensimmäiset tehdyt testit: pelaaja 1 voitti 909 ja pelaaja 2 1000 SimpleAI:lla
+
+**23.3.2015:** 3h
+- AITester luokan koodaus ja testien tekeminen: nyt testejä voi tehdä n. 1 000 000 / 30 sec vauhtia, SimpleAI:lla
+player 1 win-loss ratio näyttäisi vakiintuvan n. 0,898 paikkeille.
+

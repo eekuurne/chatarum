@@ -39,12 +39,12 @@ public class DeckBuilder {
      *
      */
     public void init() {
-        deck1.addCard(new RainOfFire());
+        //deck1.addCard(new RainOfFire());
         deck1.addCard(new PuppetMaster());
         deck1.addCard(new VoodooPriest());
         deck1.addCard(new Axethrower());
         for (int i = 0; i < 5; i++) {
-            deck1.addCard(new Volley());
+            //deck1.addCard(new Volley());
             deck1.addCard(new Swordman());
             deck1.addCard(new Archer());
             deck1.addCard(new Militia());

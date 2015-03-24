@@ -45,4 +45,29 @@ public abstract class AI {
         }
         return tableSlots;
     }
+
+    public LogicHandler getHandler() {
+        return handler;
+    }
+
+    public Player getPlayerA() {
+        return playerA;
+    }
+
+    public Player getPlayerB() {
+        return playerB;
+    }
+    
+    public void setHandler(LogicHandler handler) {
+        this.handler = handler;
+    }
+    
+    public void setPlayerA(Player playerA) {
+        this.playerA = playerA;
+    }
+    
+    public void setPlayerB(Player playerB) {
+        this.playerB = playerB;
+    }
+
 }

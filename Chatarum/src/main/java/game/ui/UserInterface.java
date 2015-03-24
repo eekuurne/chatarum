@@ -1,6 +1,7 @@
 package game.ui;
 
 import cards.Minion;
+import game.AI.AI;
 import game.assets.Assets;
 import game.logic.LogicHandler;
 import game.logic.Player;
@@ -18,10 +19,10 @@ public class UserInterface extends JPanel {
 
     private LogicHandler handler;
 
-    public UserInterface() {
+    public UserInterface(AI player1AI, AI player2AI) {
         super.setBackground(Color.black);
 
-        this.handler = new LogicHandler(this);
+        this.handler = new LogicHandler(this, player1AI, player2AI);
     }
 
     @Override
@@ -126,7 +127,4 @@ public class UserInterface extends JPanel {
         g.setColor(Color.black);
         g.drawString("GG", Locations.endTextX, Locations.endTextY);
     }
-    
-    
-    
 }
