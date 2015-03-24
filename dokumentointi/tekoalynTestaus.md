@@ -10,6 +10,7 @@ suorittaa enemmän testejä kerralla.
 Testin tulokset:
 
 Pelaaja 1: 909 voittoa
+
 Pelaaja 2: 1000 voittoa
 
 Pelaajien asetelma tuntuisi olevan siis yllättävän tasainen tällä hetkellä.
@@ -27,9 +28,11 @@ käyttää tulevaisuuden testauksessa.
 Testin tulokset 10 000 000:lla
 
 Pelaaja 1: 4733002 voittoa
+
 Pelaaja 2: 5266998 voittoa
 
 Pelaajan 1 voitto-häviö ratio: ~0.8986
+
 Pelaajan 2 voitto-häviö ratio: ~1.1128
 
 Peli siis todellakin tuntuu olevan melko tasainen aloitusvuorosta riippumatta. Uusien tekoälyjen kehittämistä voidaan siis
