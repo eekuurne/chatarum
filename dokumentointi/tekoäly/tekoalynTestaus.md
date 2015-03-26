@@ -1,0 +1,143 @@
+**Tekoälyille tehtyjä testejä:**
+
+**22.3.2015:**
+
+Testasin ensimmäistä, täysin satunnaisuuteen perustuvaa tekoälyä itseään vastaan. Tavoitteena oli tehdä havaintoja
+tasapainosta pelaajien 1 ja 2 välillä. Massatestauksessa oli jonkin verran ongelmia, ja StackOverFlowErroria tuli
+aina jos yritin tehdä liian monta testiä kerralla. Pitänee optimoida pelin restarttausta jotenkin, jotta voidaan
+suorittaa enemmän testejä kerralla.
+
+Testin tulokset:
+
+Pelaaja 1: 909 voittoa
+Pelaaja 2: 1000 voittoa
+
+Pelaajien asetelma tuntuisi olevan siis yllättävän tasainen tällä hetkellä.
+
+**23.3.2015:**
+
+Koodasin uuden tavan testata tekoälyjä vastakkain ja pääsin eroon StackOverFlowErroreista. Nyt tekoälyn testaus
+voidaan suorittaa launcherista suoraan kutsumalla AITester-luokkaa ja antaa parametrina tehtävien testien määrä sekä
+käytettävät tekoälyt.
+
+Käyttämälläni tietokoneella testipelejä voidaan pelata nyt noin 1 000 000 / 30 sec. Tehtyäni useita testejä tällä määrällä
+sekä suuremmilla, totesin että miljoonan testin lopputulos on vakiintunut jo niin lähelle keskiarvoa, että sitä voidaan
+käyttää tulevaisuuden testauksessa.
+
+Testin tulokset 10 000 000:lla
+
+Pelaaja 1: 4733002 voittoa
+Pelaaja 2: 5266998 voittoa
+Pelaajan 1 voitto-häviö-ratio: ~0.8986
+Pelaajan 2 voitto-häviö-ratio: ~1.1128
+
+Peli siis todellakin tuntuu olevan melko tasainen aloitusvuorosta riippumatta. Uusien tekoälyjen kehittämistä voidaan siis
+jatkaa tällä asetelmalla, ja kun ollaan päästy tarpeeksi tyydyttävään tekoälyyn, voidaan sen kanssa tehtyjen testien avulla
+lähteä tasapainottamaan peliä tarkemmin.
+
+**24.3.2015:**
+
+Tein lisää testejä SimpleAI:lla ja kokeilin saisiko peliä vielä tasapainotettua pienillä muutoksilla. Totesin mm. että 
+pelaajan 2 5 enemmän resursseja joka vuoro on erittäin hyvä tasoittava tekijä, sillä poistamalla sen saatiin tulokset:
+
+Pelaaja 1: 722055
+Pelaaja 2: 277945
+Pelaajan 1 voitto-häviö-ratio: 2.597834
+Pelaajan 2 voitto-häviö-ratio: 0.38493606
+
+Vähentämällä molempien pelaajien aloituskortteja yhdellä:
+
+Pelaaja 1: 447335 voittoa
+Pelaaja 2: 552665 voittoa
+Pelaajan 1 voitto-häviö-ratio: 0.8094144
+Pelaajan 2 voitto-häviö-ratio: 1.2354611
+
+Ottamalla pois pelaajan 2 ylimääräisen aloituskortin saatiin seuraavat tulokset:
+
+Pelaaja 1: 604888 voittoa
+Pelaaja 2: 395112 voittoa
+Pelaajan 1 voitto-häviö-ratio: 1.5309279
+Pelaajan 2 voitto-häviö-ratio: 0.6531986
+
+Muuttamalla maxInfluenceksi 15, 25, 30 tai 35 ei ollut mitään vaikutusta pelaajien tasapainoon. 20:llä pelien pituus tuntuisi
+sopivalta, joten se pidettäköön toistaiseksi.
+
+Lisäämällä molempien pelaajien aloituskortteja yhdellä (pelaaja 1: 8, pelaaja 2: 9):
+
+Pelaaja 1: 500190 voittoa
+Pelaaja 2: 499810 voittoa
+Pelaajan 1 voitto-häviö-ratio: 1.0007603
+Pelaajan 2 voitto-häviö-ratio: 0.9992403
+
+Kauheasti tämän tasaisemmaksi ei peli enää voi mennä, ja suuri aloituskorttien määrä vähentää myös tuurin osuutta pelin 
+lopputuloksesta. Näillä arvoilla jatketaan siis pelin kehittämistä eteenpäin:
+
+Max influence: 20
+Max resources: 100
+Max turn resources: 80
+Pelaajan 1 aloituskortit: 8
+Pelaajan 2 aloituskortit: 9
+Resurssien kasvu per vuoro: 10
+Pelaajan 1 aloitusresurssit: 10
+Pelaajan 2 aloitusresurssit: 15
+
+**25.3.2015:**
+
+**Voittovuoron tarkistus: checkLethal**
+
+Tein ominaisuuden, jolla tekoäly tarkistaa aina vuoron alussa voiko se voittaa sillä vuorolla ja se viimeistelee 
+pelin jos mahdollista. Testasin antaa ominaisuuden pelaajalle 1 seuraavilla tuloksilla:
+
+Pelaaja 1: 5081432 voittoa
+Pelaaja 2: 4918568 voittoa
+Pelaajan 1 voitto-häviö-ratio: 1.033112
+Pelaajan 2 voitto-häviö-ratio: 0.9679492
+
+Ja pelaajalle 2 seuraavilla tuloksilla:
+
+Pelaaja 1: 4956593 voittoa
+Pelaaja 2: 5043407 voittoa
+Pelaajan 1 voitto-häviö-ratio: 0.98278666
+Pelaajan 2 voitto-häviö-ratio: 1.0175148
+
+Molemmille pelaajille:
+
+Pelaaja 1: 5028758 voittoa
+Pelaaja 2: 4971242 voittoa
+Pelaajan 1 voitto-häviö-ratio: 1.0115697
+Pelaajan 2 voitto-häviö-ratio: 0.9885626
+
+Näiden testien perusteella voidaan todeta, että checkLethal selvästi parantaa AI:n voittomahdollisuuksia, ja se antaa 
+hieman enemmän etua aloittavalle pelaajalle. Testien perusteella voidaan todeta ominaisuus kannattavaksi, ja se annetaan
+jatkossa kaikille uusille AI:lle (SimpleAI pysyy ennallaan, koska sen tarkoitus on perustua täysin satunnaisuuteen). 
+Loogisesti ajateltuna "jos pelaaja voi voittaa tällä vuorolla, niin voita" on myöskin perus käytäntö pelissä kuin pelissä,
+ja tekoäly vaikuttaisi hölmöltä ilman sitä. Se myös lyhentää pelejä.
+
+Tässä vaiheessa checkLethal metodi on melko optimaalinen, mutta siihen voitaisiin vielä lisätä ominaisuus, jossa omia
+pienen damagen kortteja tuhotaan pöydästä ja tehdään tilaa paremmille mounted-korteille, mutta tapaukset joissa tästä
+on hyötyä ovat erittäin harvinaisia. Tällä tuskin olisi suurta vaikutusta, se hidastaisi testejä ja se on myös toimintaa
+jota moni pelaajakaan ei itse tajuaisi tehdä. Sen lisäystä voidaan harkita lopulliselle parhaalle tekoälylle.
+
+Toinen mahdollinen lisäys olisi optimoida mounted-minionien tekemä damage etsimällä paras mahdollinen yhdistelmä kädestä.
+Se tullaan varmasti lisäämään paremmille tekoälyille.
+
+**26.3.2015:**
+
+Testasin vielä miten tekoäly käyttäytyy jos siltä poistaa toisen playTablen alusta, jolloin välillä voi käydä niin että
+pöytä on täynnä -> ei pelata kortteja kädestä -> pöytä tyhjenee kun minionit hyökkää, mutta enää ei pelata kortteja.
+Poistettiin pelaajalta 1:
+
+Pelaaja 1: 491689 voittoa
+Pelaaja 2: 508311 voittoa
+Pelaajan 1 voitto-häviö-ratio: 0.9672995
+Pelaajan 2 voitto-häviö-ratio: 1.033806
+
+Silläkin on siis selvästi vaikutusta. Toisaalta jos playTablen poistaa lopusta, eli mounted minionit ei koskaan hyökkää
+sillä vuorolla minioneita kun ne pelataan:
+
+Pelaaja 1: 391971 voittoa
+Pelaaja 2: 608029 voittoa
+Pelaajan 1 voitto-häviö-ratio: 0.6446584
+Pelaajan 2 voitto-häviö-ratio: 1.5512091
+
+Sillä on jo suurempi vaikutus.

@@ -135,3 +135,15 @@ viereen jne, Puppet Masterin pelaaminen täyteen omaan pöytään tai vihollisen
 - AITester luokan koodaus ja testien tekeminen: nyt testejä voi tehdä n. 1 000 000 / 30 sec vauhtia, SimpleAI:lla
 player 1 win-loss ratio näyttäisi vakiintuvan n. 0,898 paikkeille.
 
+**24.3.2015:** 3h
+- Tekoälyjen koodausta lisää
+- Testejä muuttamalla pelin eri ominaisuuksia, kuten maxInfluence, aloituskortteja jne.'
+- Nyt simpleAI:t voittaa yhtä paljon molemmilla puolilla
+
+**25.3.2015:** 5h
+- Background-kuvan hiomista
+- checkLethal ominaisuuden koodaus, testaus ja dokumentointi
+- Javadocin täydentäminen
+
+**25.3.2015:** 1h
+- Lisää testausta

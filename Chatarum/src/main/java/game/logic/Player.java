@@ -143,7 +143,7 @@ public class Player {
         Font font = new Font("Serif", Font.BOLD, Assets.statTextFont); // Segoe Script?
         g.setFont(font);
         g.setColor(Color.black);
-        g.drawString("INFLUENCE: " + remainingInfluence + "/20", Locations.statX, textY);
+        g.drawString("INFLUENCE: " + remainingInfluence + "/" + maxInfluence, Locations.statX, textY);
 
         g.drawImage(Assets.statBar, Locations.statX, barY, null);
         g.setColor(Color.RED);
@@ -199,7 +199,7 @@ public class Player {
         return table;
     }
 
-    public int getInfluence() {
+    public int getRemainingInfluence() {
         return remainingInfluence;
     }
 
@@ -217,10 +217,6 @@ public class Player {
 
     public int getMaxInfluence() {
         return maxInfluence;
-    }
-
-    public int getRemainingInfluence() {
-        return remainingInfluence;
     }
 
     public void setRemainingResources(int remainingResources) {

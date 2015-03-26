@@ -42,7 +42,7 @@ public class UserInterface extends JPanel {
         paintHealthLosses(g, handler.getPlayer1());
         paintHealthLosses(g, handler.getPlayer2());
         
-        if (handler.getPlayer1().getInfluence() <= 0 || handler.getPlayer2().getInfluence() <= 0) {
+        if (handler.getPlayer1().getRemainingInfluence() <= 0 || handler.getPlayer2().getRemainingInfluence() <= 0) {
             paintEndText(g);
         }
     }

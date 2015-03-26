@@ -35,7 +35,7 @@ public class LogicHandler {
 
     private Minion chosenTableCard;
     private int chosenTableSlot;
-    
+
     private int player1Wins;
     private int player2Wins;
     private boolean AITesting;
@@ -46,10 +46,10 @@ public class LogicHandler {
         this.chosenHandMinionSlot = -1;
         this.ui = ui;
         this.betweenTurns = false;
-        
+
         this.player1Wins = 0;
         this.player2Wins = 0;
-        this.AITesting = true;
+        this.AITesting = false;
 
         init(player1AI, player2AI);
     }
@@ -62,33 +62,35 @@ public class LogicHandler {
 
         this.player1 = new Player(deck1, 1);
         this.player2 = new Player(deck2, 2);
-        
+
         setupAI(player1AI, player2AI);
 
         updateResources(player1);
         player2.changeMaxTurnResources(15); // Player 2 gets 5 more for turn 1 because he didn't start.
 
-        for (int i = 1; i < 7; i++) {
+        for (int i = 1; i < 8; i++) {
             player1.getHand().addCard(player1.getDeck().takeCard());
             player2.getHand().addCard(player2.getDeck().takeCard());
         }
 
-        //player1.getHand().cardPositions(1);
-        //player2.getHand().cardPositions(2);
+        updateCardPositions();
 
-        //repaint();
+        repaint();
     }
-    
+
     public void setupAI(AI player1AI, AI player2AI) {
-        this.player1.setAI(player1AI);
-        this.player1.getAI().setHandler(this);
-        this.player1.getAI().setPlayerA(player1);
-        this.player1.getAI().setPlayerB(player2);
-        
-        this.player2.setAI(player2AI);
-        this.player2.getAI().setHandler(this);
-        this.player2.getAI().setPlayerA(player2);
-        this.player2.getAI().setPlayerB(player1);
+        if (player1AI != null) {
+            this.player1.setAI(player1AI);
+            this.player1.getAI().setHandler(this);
+            this.player1.getAI().setPlayerA(player1);
+            this.player1.getAI().setPlayerB(player2);
+        }
+        if (player2AI != null) {
+            this.player2.setAI(player2AI);
+            this.player2.getAI().setHandler(this);
+            this.player2.getAI().setPlayerA(player2);
+            this.player2.getAI().setPlayerB(player1);
+        }
     }
 
     /**
@@ -103,7 +105,7 @@ public class LogicHandler {
         }
         clearChosen();
         updateCardPositions();
-        
+
         repaint();
     }
 
@@ -123,14 +125,17 @@ public class LogicHandler {
         if (endGame() != 0) {
             return endGame();
         }
-        
-        //playAI(startingPlayer, endingPlayer);
+
+        if (!AITesting) {
+            playAI(startingPlayer, endingPlayer);
+        }
+
         return 0;
     }
 
     public void startTurn() {
         turn++;
-        
+
         Player startingPlayer;
         if (turn % 2 != 0) {
             startingPlayer = player1;
@@ -142,17 +147,17 @@ public class LogicHandler {
         setMinionTurnLeftsTrue(startingPlayer);
         betweenTurns = false;
     }
-    
+
     /**
      * Ends the game if some player's health goes to 0.
      *
      */
     private int endGame() {
-        if (player1.getRemainingInfluence() <= 0 || (turn >= 100 
+        if (player1.getRemainingInfluence() <= 0 || (turn >= 100
                 && player1.getRemainingInfluence() <= player2.getRemainingInfluence())) {
             //System.out.println("Player 2 wins!");
             return 2;
-        } else if (player2.getRemainingInfluence() <= 0 || (turn >= 100 
+        } else if (player2.getRemainingInfluence() <= 0 || (turn >= 100
                 && player2.getRemainingInfluence() < player1.getRemainingInfluence())) {
             //System.out.println("Player 1 wins!");
             return 1;
@@ -163,14 +168,14 @@ public class LogicHandler {
     private void playAI(Player startingPlayer, Player endingPlayer) {
         if (startingPlayer.getAI() != null) {
             startTurn();
-            
+
             startingPlayer.getAI().playTurn();
-            
+
             endTurn();
             startTurn();
         }
     }
-    
+
     // Split to smaller methods.
     public void clearChosen() {
         if (chosenHandMinion != null) {
@@ -241,7 +246,7 @@ public class LogicHandler {
         } else {
             clearChosen();
             /*player.getHand().getCards().get(slot).paintHover(ui.getGraphics());
-            ui.repaint();*/
+             ui.repaint();*/
         }
     }
 
@@ -304,9 +309,9 @@ public class LogicHandler {
         }
 
         updateCardPositions();
-        
+
         repaint();
-        
+
     }
 
     private void influenceChange(Player startingPlayer, Player endingPlayer) {
@@ -501,4 +506,9 @@ public class LogicHandler {
             ui.repaint();
         }
     }
+
+    public void setAITesting(boolean AITesting) {
+        this.AITesting = AITesting;
+    }
+
 }

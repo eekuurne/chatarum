@@ -83,7 +83,7 @@ public class Assets {
     }
 
     private static void loadBackgroundObjects() {
-        background = ImageLoader.loadImage("/background_1920x1080.png");
+        background = ImageLoader.loadImage("/background_enhanced.png");
         tableSlots = ImageLoader.loadImage("/table_slots.png");
         endTurn = ImageLoader.loadImage("/end_turn.png");
         startTurn = ImageLoader.loadImage("/start_turn.png");

@@ -46,7 +46,7 @@ public class PlayerTest {
         
         player.changeRemainingInfluence(-5);
         
-        assertEquals(player.getMaxInfluence() - 5, player.getInfluence());
+        assertEquals(player.getMaxInfluence() - 5, player.getRemainingInfluence());
     }
     
     @Test
@@ -55,7 +55,7 @@ public class PlayerTest {
         
         player.changeRemainingInfluence(-player.getMaxInfluence() - 5);
         
-        assertEquals(0, player.getInfluence());
+        assertEquals(0, player.getRemainingInfluence());
     }
     
     @Test
@@ -65,7 +65,7 @@ public class PlayerTest {
         player.changeRemainingInfluence(-10);
         player.changeRemainingInfluence(20);
         
-        assertEquals(player.getMaxInfluence(), player.getInfluence());
+        assertEquals(player.getMaxInfluence(), player.getRemainingInfluence());
     }
     
     @Test

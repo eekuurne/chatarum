@@ -20,10 +20,11 @@ public class AITester {
         this.player1AI = player1AI;
         this.player2AI = player2AI;
 
-        this.handler = new LogicHandler(new UserInterface(player1AI, player2AI), player1AI, player2AI);
-
         Assets.init(1); // Load and crop images and set dimensions.
         Locations.init(); // Set locations.
+        
+        this.handler = new LogicHandler(new UserInterface(player1AI, player2AI), player1AI, player2AI);
+        handler.setAITesting(true);
     }
 
     public void runTests(int amount) {
@@ -32,7 +33,8 @@ public class AITester {
 
         for (int i = 0; i < amount; i++) {
             this.handler = new LogicHandler(new UserInterface(player1AI, player2AI), player1AI, player2AI);
-
+            handler.setAITesting(true);
+            
             while (true) {
                 handler.getPlayer1().getAI().playTurn();
                 int win = handler.endTurn();
@@ -60,10 +62,10 @@ public class AITester {
             }
 
         }
-        System.out.println("Player 1 wins: " + player1Wins);
-        System.out.println("Player 2 wins: " + player2Wins);
-        System.out.println("Player 1 win-loss ratio: " + (float) player1Wins / player2Wins);
-        System.out.println("Player 2 win-loss ratio: " + (float) player2Wins / player1Wins);
+        System.out.println("Pelaaja 1: " + player1Wins + " voittoa");
+        System.out.println("Pelaaja 2: " + player2Wins + " voittoa");
+        System.out.println("Pelaajan 1 voitto-häviö-ratio: " + (float) player1Wins / player2Wins);
+        System.out.println("Pelaajan 2 voitto-häviö-ratio: " + (float) player2Wins / player1Wins);
         
     }
 
