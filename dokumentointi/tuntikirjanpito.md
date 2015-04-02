@@ -147,3 +147,5 @@ player 1 win-loss ratio näyttäisi vakiintuvan n. 0,898 paikkeille.
 
 **25.3.2015:** 1h
 - Lisää testausta
+
+**TÄSTÄ ETEENPÄIN TUNTIKIRJANPITO VIIKKORAPORTEISSA**

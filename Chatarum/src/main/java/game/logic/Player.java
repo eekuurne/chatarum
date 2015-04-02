@@ -235,5 +235,14 @@ public class Player {
         return AI;
     }
     
+    public int getTableSize() {
+        int tableSize = 0;
+        for (int i = 0; i < 8; i++) {
+            if (table.getMinions()[i] != null) {
+                tableSize++;
+            }
+        }
+        return tableSize;
+    }
     
 }

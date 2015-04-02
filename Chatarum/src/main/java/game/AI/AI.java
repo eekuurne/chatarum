@@ -31,11 +31,12 @@ public abstract class AI {
      * Defines what happens when the game asks for the AI to play his turn.
      * Every different AI implementation has a different approach, so the method
      * is abstract.
-     *
      */
     public abstract void playTurn();
 
     /**
+     * (Muutetaan taulukoksi)
+     *
      * Returns the player's table slots which are filled with minion.
      *
      * @param player The player who's table is checked
@@ -52,6 +53,8 @@ public abstract class AI {
     }
 
     /**
+     * (Muutetaan taulukoksi)
+     *
      * Returns the player's table slots which are empty.
      *
      * @param player The player who's table is checked
@@ -70,9 +73,6 @@ public abstract class AI {
     /**
      * Checks if the player has possibility to end the game on this turn and
      * ends the game if so.
-     *
-     * @param playerA The player who's turn it is.
-     * @param playerB The other player.
      */
     protected void checkLethal() {
         int enemyInfluence = playerB.getRemainingInfluence();
@@ -86,7 +86,7 @@ public abstract class AI {
     }
 
     /**
-     * Returns total damage of the minions in player's table.
+     * @return Total damage of the minions in player's table.
      */
     private int checkTableDamage() {
         int damage = 0;
@@ -101,7 +101,7 @@ public abstract class AI {
     }
 
     /**
-     * Returns the damage potential of mounted minions in hand.
+     * @return The damage potential of mounted minions in hand.
      */
     private int checkHandMountedDamage() {
         int ownResources = playerA.getRemainingResources();
@@ -126,7 +126,6 @@ public abstract class AI {
     /**
      * Plays mounted minions from hand to table in the order they are in hand
      * slots.
-     *
      */
     protected void playMountedMinions() {
         for (int i = 0; i < playerA.getHand().getRemaining(); i++) {
@@ -138,6 +137,43 @@ public abstract class AI {
                         handler.placeChosenMinionToTable(j, playerA, playerB);
                         break;
                     }
+                }
+            }
+        }
+    }
+
+    /**
+     * Attacks random targets with every minion on the player's table.
+     */
+    protected void playTableRandomly() {
+        for (int i = 0; i < 8; i++) {
+            if (playerA.getTable().getMinions()[i] != null
+                    && playerA.getTable().getMinions()[i].getTurnleft()) {
+                ArrayList<Integer> enemyTableSlots = checkFilledTableSlots(playerB);
+
+                if (enemyTableSlots.size() > 0) {
+                    int attackSlot = enemyTableSlots.get(rand.nextInt(enemyTableSlots.size()));
+                    handler.minionAttack(i, attackSlot, playerA, playerB);
+                }
+            }
+        }
+    }
+
+    /**
+     * Goes through hand slots in order and places minions on table to a random
+     * slot if there is enough resources.
+     */
+    protected void playHandRandomly() {
+        int handSize = playerA.getHand().getRemaining();
+        for (int i = handSize - 1; i >= 0; i--) {
+            if (playerA.getRemainingResources() >= playerA.getHand().getCards().get(i).getCost()) {
+                handler.clickHandSlot(i, playerA);
+
+                ArrayList<Integer> tableSlots = checkEmptyTableSlots(playerA);
+
+                if (tableSlots.size() > 0) {
+                    int slot = tableSlots.get(rand.nextInt(tableSlots.size()));
+                    handler.placeChosenMinionToTable(slot, playerA, playerB);
                 }
             }
         }

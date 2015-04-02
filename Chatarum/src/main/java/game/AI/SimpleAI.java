@@ -17,50 +17,22 @@ public class SimpleAI extends AI {
         super(playerA, playerB, handler);
     }
 
+    /**
+     * First the AI plays the turns of the minions in table. Then it plays the
+     * hand. Then it plays the new mounted minions.
+     */
     @Override
     public void playTurn() {
         playTable();
         playHand();
         playTable();
-
     }
 
-    /**
-     * Attacks random targets with every minion on the player's table.
-     *
-     */
     private void playTable() {
-        for (int i = 0; i < 8; i++) {
-            if (playerA.getTable().getMinions()[i] != null
-                    && playerA.getTable().getMinions()[i].getTurnleft()) {
-                ArrayList<Integer> enemyTableSlots = checkFilledTableSlots(playerB);
-
-                if (enemyTableSlots.size() > 0) {
-                    int attackSlot = enemyTableSlots.get(rand.nextInt(enemyTableSlots.size()));
-                    handler.minionAttack(i, attackSlot, playerA, playerB);
-                }
-            }
-        }
+        playTableRandomly();
     }
 
-    /**
-     * Goes through hand slots in order and places minions on table to a random
-     * slot if there is enough resources.
-     *
-     */
     private void playHand() {
-        int handSize = playerA.getHand().getRemaining();
-        for (int i = handSize - 1; i >= 0; i--) {
-            if (playerA.getRemainingResources() >= playerA.getHand().getCards().get(i).getCost()) {
-                handler.clickHandSlot(i, playerA);
-
-                ArrayList<Integer> tableSlots = checkEmptyTableSlots(playerA);
-
-                if (tableSlots.size() > 0) {
-                    int slot = tableSlots.get(rand.nextInt(tableSlots.size()));
-                    handler.placeChosenMinionToTable(slot, playerA, playerB);
-                }
-            }
-        }
+        playHandRandomly();
     }
 }

@@ -4,6 +4,7 @@ import game.AI.AI;
 import game.AI.AITester;
 import game.AI.MediumAI;
 import game.AI.SimpleAI;
+import game.AI.TestAI;
 import javax.swing.SwingUtilities;
 
 /**
@@ -14,10 +15,10 @@ public class Launcher {
 
     public static void main(String[] args) {
 
-        AI player1AI = new MediumAI(null, null, null);
-        AI player2AI = new SimpleAI(null, null, null);
+        AI player1AI = null;
+        AI player2AI = new MediumAI(null, null, null);
 
-        if (true) { // for testing
+        if (false) { // for testing
             AITester tester = new AITester(player1AI, player2AI);
             tester.runTests(1000000);
         } else {

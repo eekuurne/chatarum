@@ -83,16 +83,16 @@ public class Hand {
             y = Locations.player2HandY;
         }
 
-        /*if (((player == 1 && turn % 2 == 1) || (player == 2 && turn % 2 == 0))
-                && !betweenTurns) {*/
+        if (((player == 1 && turn % 2 == 1) || (player == 2 && turn % 2 == 0))
+                && !betweenTurns) {
             for (int i = 0; i < cards.size(); i++) {
                 cards.get(i).paintComponent(g);
             }
-        /*} else {
+        } else {
             for (int i = 0; i < cards.size(); i++) {
                 g.drawImage(Assets.neutralCardBack, Locations.handX[i], y, null);
             }
-        }*/
+        }
     }
 
     /**

@@ -8,6 +8,7 @@ package game.logic;
 
 import cards.Card;
 import cards.containers.Deck;
+import cards.minions.Archer;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -151,5 +152,32 @@ public class PlayerTest {
         player.changeRemainingResources(30);
         
         assertEquals(20, player.getRemainingResources());
+    }
+    
+    @Test
+    public void getTableSizeWorksWithZero() {
+        Player player = new Player(new Deck(), 1);
+        assertEquals(0, player.getTableSize());
+    }
+    
+    @Test
+    public void getTableSizeWorks() {
+        Player player = new Player(new Deck(), 1);
+        
+        player.getTable().insertMinion(new Archer(), 1);
+        player.getTable().insertMinion(new Archer(), 3);
+        
+        assertEquals(2, player.getTableSize());
+    }
+    
+    @Test
+    public void getTableSizeWorksWithFull() {
+        Player player = new Player(new Deck(), 1);
+        
+        for (int i = 0; i < 8; i++) {
+            player.getTable().insertMinion(new Archer(), i);
+        }
+        
+        assertEquals(8, player.getTableSize());
     }
 }
