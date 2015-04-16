@@ -50,6 +50,15 @@ public class Table {
             }
         }
     }
+    
+    public boolean isEmpty() {
+        for (int i = 0; i < 8; i++) {
+            if (minions[i] != null) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     public Minion[] getMinions() {
         return minions;

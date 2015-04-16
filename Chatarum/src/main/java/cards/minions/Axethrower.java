@@ -12,7 +12,7 @@ import java.awt.Graphics;
 public class Axethrower extends Minion {
 
     public Axethrower() {
-        super("Axethrower", 55, 4, 2, false, true, false, 0);
+        super("Axethrower", 35, 2, 1, false, true, false, 0);
     }
 
     @Override

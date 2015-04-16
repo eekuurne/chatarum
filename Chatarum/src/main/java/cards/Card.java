@@ -51,7 +51,7 @@ public abstract class Card {
 
     public void paintComponent(Graphics g) {
         // Draw placeholder.
-        g.drawRoundRect(getX(), getY(), Assets.smallWidth, Assets.smallHeight, 21, 21);
+        g.drawImage(Assets.cardBackGroundSmall, x, y, null);
 
         Font font = new Font("Serif", Font.BOLD, Assets.statTextFont);
         g.setFont(font);

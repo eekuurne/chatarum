@@ -103,7 +103,7 @@ public abstract class AI {
     /**
      * @return The damage potential of mounted minions in hand.
      */
-    private int checkHandMountedDamage() {
+    protected int checkHandMountedDamage() {
         int ownResources = playerA.getRemainingResources();
         int damage = 0;
         int emptySlots = checkEmptyTableSlots(playerA).size();

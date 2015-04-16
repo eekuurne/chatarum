@@ -47,6 +47,10 @@ public class Assets {
             militiaSmall, raiderSmall, peasantSmall, axethrowerSmall, puppetMasterSmall, assassinSmall, 
             voodooPriestSmall, moonbladeSmall, zombieSmall, rainOfFireSmall, volleySmall;
 
+    // Card components.
+    public static BufferedImage cardBackGroundSmall;
+    public static BufferedImage cardBackGroundBig;
+    
     // Cardbacks.
     public static BufferedImage neutralCardBack;
 
@@ -95,6 +99,9 @@ public class Assets {
         SpriteSheet neutralSmall = new SpriteSheet(ImageLoader.loadImage("/neutral_cards_small.png"));
 
         neutralCardBack = neutralSmall.crop(smallWidth * 7, 0, smallWidth, smallHeight);
+        
+        cardBackGroundSmall = neutralSmall.crop(smallWidth * 7, smallHeight * 2, smallWidth, smallHeight);
+        cardBackGroundBig = neutralBig.crop(bigWidth * 7, bigHeight * 2, bigWidth, bigHeight);
 
         swordmanBig = neutralBig.crop(0, 0, bigWidth, bigHeight);
         archerBig = neutralBig.crop(bigWidth, 0, bigWidth, bigHeight);
@@ -174,6 +181,9 @@ public class Assets {
         statBar = resize(statBar, scale);
         
         neutralCardBack = resize(neutralCardBack, scale);
+        
+        cardBackGroundSmall = resize(cardBackGroundSmall, scale);
+        cardBackGroundBig = resize(cardBackGroundBig, scale);
 
         swordmanBig = resize(swordmanBig, scale);
         archerBig = resize(archerBig, scale);

@@ -35,11 +35,19 @@
             <param>cards.containers.Deck</param>
             <param>cards.containers.Hand</param>
             <param>game.logic.Player</param>
+            <param>game.AI.AI</param>
+            <param>game.AI.SimpleAI</param>
+            <param>game.AI.MediumAI</param>
+            <param>game.AI.AITester</param>
           </targetClasses>
           <targetTests>
             <param>cards.containers.DeckTest</param>
             <param>cards.containers.HandTest</param>
             <param>game.logic.PlayerTest</param>
+            <param>game.AI.AI</param>
+            <param>game.AI.SimpleAI</param>
+            <param>game.AI.MediumAI</param>
+            <param>game.AI.AITester</param>
           </targetTests>
         </configuration>
       </plugin>

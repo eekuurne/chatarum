@@ -23,16 +23,8 @@ public class SimpleAI extends AI {
      */
     @Override
     public void playTurn() {
-        playTable();
-        playHand();
-        playTable();
-    }
-
-    private void playTable() {
         playTableRandomly();
-    }
-
-    private void playHand() {
         playHandRandomly();
+        playTableRandomly();
     }
 }

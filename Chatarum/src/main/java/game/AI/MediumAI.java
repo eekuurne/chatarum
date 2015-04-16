@@ -35,15 +35,11 @@ public class MediumAI extends AI {
     @Override
     public void playTurn() {
         checkLethal();
-        playTable();
+        playTableRandomly();
         playHand();
-        playTable();
-    }
-
-    private void playTable() {
         playTableRandomly();
     }
-
+    
     /**
      * The AI tries the minions in hand in order, and if there's enough
      * resources it plays it to the table. If it's a guardian, it tries to place

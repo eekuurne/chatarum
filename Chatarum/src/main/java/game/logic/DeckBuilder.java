@@ -1,17 +1,7 @@
 package game.logic;
 
 import cards.containers.Deck;
-import cards.minions.Archer;
-import cards.minions.Assassin;
-import cards.minions.Axethrower;
-import cards.minions.Militia;
-import cards.minions.Moonblade;
-import cards.minions.Peasant;
-import cards.minions.PuppetMaster;
-import cards.minions.Raider;
-import cards.minions.Swordman;
-import cards.minions.VoodooPriest;
-import cards.minions.Watchman;
+import cards.minions.*;
 import cards.spells.RainOfFire;
 import cards.spells.Volley;
 
@@ -39,12 +29,8 @@ public class DeckBuilder {
      *
      */
     public void init() {
-        //deck1.addCard(new RainOfFire());
-        deck1.addCard(new PuppetMaster());
-        deck1.addCard(new VoodooPriest());
-        deck1.addCard(new Axethrower());
+        
         for (int i = 0; i < 5; i++) {
-            //deck1.addCard(new Volley());
             deck1.addCard(new Swordman());
             deck1.addCard(new Archer());
             deck1.addCard(new Militia());
@@ -53,14 +39,16 @@ public class DeckBuilder {
             deck1.addCard(new Watchman());
             deck1.addCard(new Assassin());
             deck1.addCard(new Moonblade());
+            deck1.addCard(new Axethrower());
+            deck1.addCard(new Trader());
+            deck1.addCard(new Shieldmaiden());
+            deck1.addCard(new Berserker());
+            deck1.addCard(new Sharpshooter());
+            deck1.addCard(new Bouncer());
+            deck1.addCard(new Headhunter());
         }
         
-        //deck2.addCard(new RainOfFire());
-        deck2.addCard(new PuppetMaster());
-        deck2.addCard(new VoodooPriest());
-        deck2.addCard(new Axethrower());
         for (int i = 0; i < 5; i++) {
-            //deck2.addCard(new Volley());
             deck2.addCard(new Swordman());
             deck2.addCard(new Archer());
             deck2.addCard(new Militia());
@@ -69,6 +57,13 @@ public class DeckBuilder {
             deck2.addCard(new Watchman());
             deck2.addCard(new Assassin());
             deck2.addCard(new Moonblade());
+            deck2.addCard(new Axethrower());
+            deck2.addCard(new Trader());
+            deck2.addCard(new Shieldmaiden());
+            deck2.addCard(new Berserker());
+            deck2.addCard(new Sharpshooter());
+            deck2.addCard(new Bouncer());
+            deck2.addCard(new Headhunter());
         }
     }
 

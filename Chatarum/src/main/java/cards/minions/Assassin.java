@@ -12,7 +12,7 @@ import java.awt.Graphics;
 public class Assassin extends Minion {
 
     public Assassin() {
-        super("Assassin", 35, 0, 2, false, false, false, 0);
+        super("Assassin", 30, 0, 2, false, false, false, 0);
         setDeadly(true);
     }
 

@@ -15,12 +15,12 @@ public class Launcher {
 
     public static void main(String[] args) {
 
-        AI player1AI = null;
-        AI player2AI = new MediumAI(null, null, null);
+        AI player1AI = new MediumAI(null, null, null);
+        AI player2AI = new TestAI(null, null, null);
 
-        if (false) { // for testing
+        if (true) { // for testing
             AITester tester = new AITester(player1AI, player2AI);
-            tester.runTests(1000000);
+            tester.runTests(10000000);
         } else {
             Game ui = new Game("Chatarum", 1280, 720, false, player1AI, player2AI);
             SwingUtilities.invokeLater(ui);

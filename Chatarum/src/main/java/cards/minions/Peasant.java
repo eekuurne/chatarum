@@ -14,7 +14,7 @@ import java.awt.event.MouseEvent;
 public class Peasant extends Minion {
 
     public Peasant() {
-        super("Peasant", 5, 0, 1, false, false, false, 5);
+        super("Peasant", 5, 0, 2, false, false, false, 5);
     }
 
     @Override

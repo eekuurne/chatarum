@@ -1,9 +1,12 @@
 package cards;
 
 import cards.containers.Table;
+import game.assets.Assets;
 import game.logic.LogicHandler;
 import game.logic.Player;
 import game.ui.Locations;
+import java.awt.Font;
+import java.awt.Graphics;
 
 /**
  *
@@ -96,8 +99,8 @@ public abstract class Minion extends Card {
     }
 
     /**
-     * What happens when a minion is clicked in a table. Changes the location of the
-     * minion and sets it chosen in the handler. This could be moved over to 
+     * What happens when a minion is clicked in a table. Changes the location of
+     * the minion and sets it chosen in the handler. This could be moved over to
      * LogicHandler too.
      *
      * @param handler LogicHandler.
@@ -115,11 +118,11 @@ public abstract class Minion extends Card {
             }
         }
     }
-    
+
     /**
      * What happens when a minion enters the table. This method can be Overrided
      * to add special table entering effects to minion.
-     * 
+     *
      * @param ownPlayer Player whose turn it is.
      * @param enemyPlayer The other player.
      * @param slot Slot where the minion is put in table.
@@ -127,13 +130,50 @@ public abstract class Minion extends Card {
     public void enterTable(Player ownPlayer, Player enemyPlayer, int slot) {
         //System.out.println(getName() + " played to table!");
     }
-    
+
     /**
-     * What happens when a minion dies. This method can be Overrided
-     * to add special dying effects to minion.
+     * What happens when a minion dies. This method can be Overrided to add
+     * special dying effects to minion.
      *
      */
     public void die() {
         //System.out.println(getName() + " has died!");
+    }
+
+    @Override
+    public void paintComponent(Graphics g) {
+        g.drawImage(Assets.cardBackGroundSmall, super.getX(), super.getY(), null);
+
+        // Draw name:
+        Font font = new Font("Serif", Font.BOLD, (int) (Assets.statTextFont / 1.1));
+        g.setFont(font);
+        g.drawString("  " + getName(), getX(), getY() + 2 * Assets.smallHeight / 3);
+        
+        // Draw damage:
+        font = new Font("Serif", Font.BOLD, (int) (Assets.statTextFont * 1.5));
+        g.setFont(font);
+        g.drawString(" " + getDamage(), getX(), getY() + Assets.smallHeight - 5);
+        
+        // Draw health:
+        g.drawString("" + getHealth(), getX() + 4 * Assets.smallWidth / 5, getY() + Assets.smallHeight - 5);
+        
+        // Draw cost:
+        font = new Font("Serif", Font.BOLD, (int) (Assets.statTextFont * 1.2));
+        g.setFont(font);
+        g.drawString("" + getCost(), getX() + Assets.smallWidth / 2 - 5, getY() + Assets.smallHeight - 5);
+        
+        // Draw special:
+        
+        
+    }
+
+    public void paintHover(Graphics g) {
+        if (super.getY() <= Locations.tableSlotsY) {
+            g.drawImage(Assets.cardBackGroundBig, super.getX() - (Assets.bigWidth - Assets.smallWidth)
+                    / 2, super.getY(), null);
+        } else {
+            g.drawImage(Assets.cardBackGroundBig, super.getX() - (Assets.bigWidth - Assets.smallWidth)
+                    / 2, super.getY() - (Assets.bigHeight - Assets.smallHeight), null);
+        }
     }
 }

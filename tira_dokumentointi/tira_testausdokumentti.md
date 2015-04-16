@@ -17,6 +17,11 @@ Luokka MediumAI:
 
 - Luokka ei aiheuta erroreita pelattaessa
 
+Luokka TestAI:
+
+- playWarriors ja playRangeds toimii kuten pitää
+
+
 Luokka AITester:
 
 - Luokka ei aiheuta erroreita pelattaessa
