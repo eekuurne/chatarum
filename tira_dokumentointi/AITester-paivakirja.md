@@ -215,3 +215,59 @@ kuitenkin huononsivat voittoprosenttia, joten jätin muutokset tekemättä.
 Testasin vielä tehdyn MediumAI-toteutuksen vanhaa SimpleAI:ta vastaan seuraavilla tuloksilla:
 
 MediumAI:n voitto-häviö-ratio: 1.1899377
+
+**17.4.2015:**
+
+Kehitin seuraavaa AI:ta ja testasin playTurnia, jossa minionit pyrkivät aluksi hyökkäämään kohteita joiden health on sama kuin
+hyökkääjän attack ja sitten vasta jäljellejääneet hyökkäävät randomilla. Korttien pelaaminen pöytään tapahtui järjestyksessä ABEmpty:
+
+TestAI:n voitto-häviö-ratio MediumAI:ta vastaan: 1.7367374
+
+Kehityksessä ollaan siis selvästi menty oikeaan suuntaan.
+
+Lisäsin ominaisuuden, jolla hyökkääjä yrittää hyökätä kohdetta, joka ei tapa hyökkääjää jos em. ei onnistu:
+
+TestAI:n voitto-häviö-ratio MediumAI:ta vastaan: 1.6594691
+
+Tämä ei siis selvästi ole hyvä juttu, joten se jätetään toteuttamatta. Seuraavaksi kokeilin ominaisuutta, jossa em. jälkeen yritetään
+hyökätä vielä minioneita, joiden health on vähemmän kuin hyökkääjän attack:
+
+TestAI:n voitto-häviö-ratio MediumAI:ta vastaan: 1.8439664
+
+Poistin random hyökkäyksen tableAttackin ja playABEmptyn välistä:
+
+TestAI:n voitto-häviö-ratio MediumAI:ta vastaan: 1.8464086
+
+Poistin sen myös vuoron lopusta:
+
+TestAI:n voitto-häviö-ratio MediumAI:ta vastaan: 1.844671
+
+Kun lisättiin ominaisuus, että AI pelaa ensisijaisesti mounted minionit, jos ne voivat sillä vuorolla tappaa toisen minionin. Voittprosentti laski
+1.820409:een, mutta ominaisuus kuitenkin vaikuttaa hyvältä. Kokeillaan vielä pelata AI:lla jolla se on AI:ta vastaan jolla sitä ei ole. Aloitetaan
+kokeilemalla miten pelaajien 1 ja 2 voittoprosentit käyttäytyvät tällä toteutuksella (ilman mounted ominaisuutta):
+
+Pelaajan 1 voitto-häviö-ratio: 1.0209941
+
+Pelaajan 2 voitto-häviö-ratio: 0.9794376
+
+Vaihdetaan pelaajalle 2 playMountedToKill-ominaisuus:
+
+Pelaajan 1 voitto-häviö-ratio: 0.8753391
+
+Pelaajan 2 voitto-häviö-ratio: 1.1424145
+
+Tässä testissä nähdäänkin, että ominaisuus paransi huomattavasti tekoälyä, kun ne muuten ovat identtiset. Pidetään siis ominaisuus. 
+
+Päivän päätteeksi kokeilin vielä kehityksen tässä vaiheessa olevaa AdvancedAI:ta vanhaa SimpleAI:ta vastaan:
+
+Pelaajan 1 voitto-häviö-ratio: 2.266045 (AdvancedAI)
+
+Pelaajan 2 voitto-häviö-ratio: 0.44129747 (SimpleAI)
+
+
+
+
+
+
+
+

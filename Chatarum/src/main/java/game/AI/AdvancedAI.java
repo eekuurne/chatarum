@@ -3,26 +3,25 @@ package game.AI;
 import cards.Minion;
 import game.logic.LogicHandler;
 import game.logic.Player;
-import java.util.ArrayList;
 
 /**
- * THIS CLASS IS FOR TESTING ONLY. IT WILL MOST LIKELY CONTAIN METHODS THAT
- * AREN'T PROPERLY COMMENTED, TESTED OR ARE UNDER CONSTRUCTION IN ANY OTHER WAY.
- *
- * I copy another AI here, change something and play this AI against the copied
- * one to test the effects of the change. This class is where I build all the
- * new methods.
+ * 
+ * 
+ * 
+ * 
+ * 
  *
  * @author Eero Kuurne
  */
-public class TestAI extends AI {
+public class AdvancedAI extends AI {
 
     private final int[] normalOrder = {2, 4, 6, 0, 7, 1, 3, 5};
     private final int[] guardianOrder = {3, 5, 1, 7, 6, 4, 2, 0};
 
-    public TestAI(Player playerA, Player playerB, LogicHandler handler) {
+    public AdvancedAI(Player playerA, Player playerB, LogicHandler handler) {
         super(playerA, playerB, handler);
     }
+
 
     /**
      * The AI starts with checking if it can finish the game in this turn and
@@ -36,8 +35,6 @@ public class TestAI extends AI {
     public void playTurn() {
         checkLethal();
 
-        //playMountedsToKill();
-        
         tableAttackToKill();
 
         if (playerA.getTable().isEmpty() && playerB.getTable().isEmpty()) {

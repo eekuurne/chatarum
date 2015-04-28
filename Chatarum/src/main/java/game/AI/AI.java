@@ -179,6 +179,33 @@ public abstract class AI {
         }
     }
 
+    protected void tableAttackToKill() {
+        for (int i = 0; i < 8; i++) {
+            if (playerA.getTable().getMinions()[i] != null && playerA.getTable().getMinions()[i].getTurnleft()) {
+                playerA.getTable().getMinions()[i].clickInTable(handler, i);
+                Minion attacker = playerA.getTable().getMinions()[i];
+                boolean continueTrying = true;
+                // Tries to attack target whose health is equal to attacker's damage.
+                for (int j = 0; j < 8; j++) {
+                    Minion defender = playerB.getTable().getMinions()[j];
+                    if (defender != null && (attacker.getDamage() == defender.getHealth() || attacker.getDeadly())) {
+                        handler.minionAttack(i, j, playerA, playerB);
+                        continueTrying = false;
+                        break;
+                    }
+                }
+                
+                for (int j = 0; j < 8; j++) {
+                    Minion defender = playerB.getTable().getMinions()[j];
+                    if (defender != null && attacker.getDamage() > defender.getHealth() && continueTrying) {
+                        handler.minionAttack(i, j, playerA, playerB);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    
     public LogicHandler getHandler() {
         return handler;
     }

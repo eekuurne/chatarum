@@ -19,7 +19,7 @@ Luokka MediumAI:
 
 Luokka TestAI:
 
-- playWarriors ja playRangeds toimii kuten pitää
+- playWarriors, playWorkers, playDeadlys ja playRangeds toimii kuten pitää
 
 
 Luokka AITester:
