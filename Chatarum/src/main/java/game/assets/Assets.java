@@ -39,13 +39,16 @@ public class Assets {
     public static int bigWidth = 224, bigHeight = 355;
     public static BufferedImage swordmanBig, archerBig, watchmanBig, militiaBig,
             raiderBig, peasantBig, axethrowerBig, puppetMasterBig, assassinBig, 
-            voodooPriestBig, moonbladeBig, zombieBig, rainOfFireBig, volleyBig;
+            voodooPriestBig, moonbladeBig, zombieBig, rainOfFireBig, volleyBig, 
+            shieldmaidenBig, sharpshooterBig, headhunterBig, berserkerBig, traderBig,
+            bouncerBig;
 
     // Small pictures of cards.
     public static int smallWidth = 125, smallHeight = 198;
     public static BufferedImage swordmanSmall, archerSmall, watchmanSmall,
             militiaSmall, raiderSmall, peasantSmall, axethrowerSmall, puppetMasterSmall, assassinSmall, 
-            voodooPriestSmall, moonbladeSmall, zombieSmall, rainOfFireSmall, volleySmall;
+            voodooPriestSmall, moonbladeSmall, zombieSmall, rainOfFireSmall, volleySmall, shieldmaidenSmall,
+            sharpshooterSmall, headhunterSmall, berserkerSmall, traderSmall, bouncerSmall;
 
     // Card components.
     public static BufferedImage cardBackGroundSmall;
@@ -117,6 +120,12 @@ public class Assets {
         zombieBig = neutralBig.crop(bigWidth * 4, bigHeight, bigWidth, bigHeight);
         rainOfFireBig = neutralBig.crop(bigWidth * 5, bigHeight, bigWidth, bigHeight);
         volleyBig = neutralBig.crop(bigWidth * 6, bigHeight, bigWidth, bigHeight);
+        shieldmaidenBig = neutralBig.crop(bigWidth * 7, bigHeight, bigWidth, bigHeight);
+        sharpshooterBig = neutralBig.crop(0, bigHeight * 2, bigWidth, bigHeight);
+        headhunterBig = neutralBig.crop(bigWidth, bigHeight * 2, bigWidth, bigHeight);
+        berserkerBig = neutralBig.crop(bigWidth * 2, bigHeight * 2, bigWidth, bigHeight);
+        traderBig = neutralBig.crop(bigWidth * 3, bigHeight * 2, bigWidth, bigHeight);
+        bouncerBig = neutralBig.crop(bigWidth * 4, bigHeight * 2, bigWidth, bigHeight);
 
         swordmanSmall = neutralSmall.crop(0, 0, smallWidth, smallHeight);
         archerSmall = neutralSmall.crop(smallWidth, 0, smallWidth, smallHeight);
@@ -132,6 +141,12 @@ public class Assets {
         zombieSmall = neutralSmall.crop(smallWidth * 4, smallHeight, smallWidth, smallHeight);
         rainOfFireSmall = neutralSmall.crop(smallWidth * 5, smallHeight, smallWidth, smallHeight);
         volleySmall = neutralSmall.crop(smallWidth * 6, smallHeight, smallWidth, smallHeight);
+        shieldmaidenSmall = neutralSmall.crop(smallWidth * 7, smallHeight, smallWidth, smallHeight);
+        sharpshooterSmall = neutralSmall.crop(0, smallHeight * 2, smallWidth, smallHeight);
+        headhunterSmall = neutralSmall.crop(smallWidth, smallHeight * 2, smallWidth, smallHeight);
+        berserkerSmall = neutralSmall.crop(smallWidth * 2, smallHeight * 2, smallWidth, smallHeight);
+        traderSmall = neutralSmall.crop(smallWidth * 3, smallHeight * 2, smallWidth, smallHeight);
+        bouncerSmall = neutralSmall.crop(smallWidth * 4, smallHeight * 2, smallWidth, smallHeight);
     }
 
     private static void loadIcons() { // MAKE SPRITESHEET LATER AND CROP
@@ -199,6 +214,12 @@ public class Assets {
         zombieBig = resize(zombieBig, scale);
         rainOfFireBig = resize(rainOfFireBig, scale);
         volleyBig = resize(volleyBig, scale);
+        shieldmaidenBig = resize(shieldmaidenBig, scale);
+        sharpshooterBig = resize(sharpshooterBig, scale);
+        headhunterBig = resize(headhunterBig, scale);
+        berserkerBig = resize(berserkerBig, scale);
+        traderBig = resize(traderBig, scale);
+        bouncerBig = resize(bouncerBig, scale);
 
         swordmanSmall = resize(swordmanSmall, scale);
         archerSmall = resize(archerSmall, scale);
@@ -214,6 +235,12 @@ public class Assets {
         zombieSmall = resize(zombieSmall, scale);
         rainOfFireSmall = resize(rainOfFireSmall, scale);
         volleySmall = resize(volleySmall, scale);
+        shieldmaidenSmall = resize(shieldmaidenSmall, scale);
+        sharpshooterSmall = resize(sharpshooterSmall, scale);
+        headhunterSmall = resize(headhunterSmall, scale);
+        berserkerSmall = resize(berserkerSmall, scale);
+        traderSmall = resize(traderSmall, scale);
+        bouncerSmall = resize(bouncerSmall, scale);
         
         guardianIcon = resize(guardianIcon, scale);
         turnLeftIcon = resize(turnLeftIcon, scale);

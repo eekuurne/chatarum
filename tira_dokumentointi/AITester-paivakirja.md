@@ -265,9 +265,88 @@ Pelaajan 1 voitto-häviö-ratio: 2.266045 (AdvancedAI)
 Pelaajan 2 voitto-häviö-ratio: 0.44129747 (SimpleAI)
 
 
+**2.5.2015:**
 
+Testasin, että jos playMountedsToKill kutsuttaisiin ennen neljän vaihtoehdon valitsemista, mutta se vähensi voittoprosenttia yhdellä.
 
+Kokeilin, jos em. käden pelaamisen sijasta kutsutaankin tableAttackToKill sijasta playHandRandomlyä. Voittoprosentti huononi
+samaa luokkaa kuin ennen tableAttackToKill ja playMountedsToKill lisäämistä. Suunta mihin on menty tuntuisi siis oikealta, jatkokehitetään
+siis tältä pohjalta.
 
+(Muutokset tehdään aina pelaaja 2:lle)
 
+Muutin playAEmptyn niin, että ellei mounted unitit saa tyhjennettyä vastustajan pöytää, ei kutsuta enää playWorkersiä alussa jos 
+kädessä on tarpeeksi kortteja. Muuten pelaamisjärjestys pysyy samana:
 
+Pelaajan 1 voitto-häviö-ratio: 0.93310153
+
+Pelaajan 2 voitto-häviö-ratio: 1.0716947
+
+Tämä selvästi paransi voittoprosenttia. Oma osuutensa vaikutukseen on varmasti se, että worker minionit eivät välttämättä ole yhtä hyviä
+kuin muut, mutta tällä niiden huonoa pelaamista voidaan ainakin välttää.
+
+Poistetaan playMounteds kokonaan playAEmptystä (kokeillaan kannattaako ne säästää tappoihin jos pöydässä on vastustajan minioneita):
+
+Pelaajan 2 voitto-häviö-ratio: 1.0626829
+
+Ei näköjään. Muutetaan sama kuin aiemmin nyt koskemaan myös playABNotEmptyä:
+
+Pelaajan 2 voitto-häviö-ratio: 1.2276016
+
+Workereitä ei siis selvästi kannata pelata koskaan, jos pöydässä on vastustajan minioneita. Kokeillaan playMounteds poistoa vielä tälle:
+
+Pelaajan 2 voitto-häviö-ratio: 1.216769
+
+Selvästi mounted kortteja kannattaa pelata muutenkin kuin poistaakseen vastustajan kortin. Mietittyäni AdvancedAI:n tämänhetkistä toteutusta,
+tajusin että playABEmpty ja playBEmpty ovat samat ja playAEmpty ja playABNotEmpty ovat samat, enkä keksi mitään millä niiden käytöstä
+voitaisiin erotella toisistaan. Refaktoroidaan siis toimintaa yhdistelemällä metodeja.
+
+Kokeillaan vielä tätä AIta vanhaa SimpleAI:ta vastaan:
+
+Pelaajan 1 voitto-häviö-ratio: 2.5315747 (AdvancedAI)
+
+Pelaajan 2 voitto-häviö-ratio: 0.39501104 (SimpleAI)
+
+Ja MediumAI:ta vastaan:
+
+Pelaajan 1 voitto-häviö-ratio: 2.1066108 (AdvancedAI)
+
+Pelaajan 2 voitto-häviö-ratio: 0.47469613 (MediumAI)
+
+Itseään vastaan (aloitusvuorojen tasapaino):
+
+Pelaajan 1 voitto-häviö-ratio: 0.96263725
+
+Pelaajan 2 voitto-häviö-ratio: 1.0388129
+
+Testasin peliä AI:ta vastaan käsin ja löysin "bugeja": AI yrittää tappaa minioneita Guardianin ohi jolloin se hyökkää vahingossa Guardiania
+epäoptimaalisesti, ja playMountedsToKill ei hyödynnä minioneille määriteltyä järjestystä mistä olisi hyötyä jos hyökkääjä selviää itse
+hyökkäyksestä. HUOM. näiden vaikutus on kuitenkin erittäin pieni tässä toteutuksessa, koska Minion hyökkäisi kuitenkin lopuksi randomilla
+ja Guardian vie parhaimmillaan 3 slottia jotka johtavat hyökkäyksen siihen kuitenkin. Ja Mounted minionit yleensä kuolevat hyökätessään.
+Korjataan kuitenkin jos ehditään.
+
+**3.5.2015:**
+
+Siirretään playGuardians playBNotEmptyssä ensimmäiseksi (TestAI pelaaja 2):
+
+Pelaajan 2 voitto-häviö-ratio: 1.1148285
+
+Voittoprosentti parani kuten odotinkin. Varsinkin näiden tekoälyjen pelatessa keskenään kestävien Minioneiden pelaaminen pöytään kun
+vastustajalla on siellä kortteja näyttäisi toimivan, koska suurin osa korteista on heikkoja ja tappavat itsensä hyökätessään Guardianeita.
+Ne myös toisaalta suojaavat muita omia kortteja.
+
+Vaihdoin BNotEmptyssä playWarriors ja playRangeds paikkoja keskenään, huononi. 
+
+guardian->deadly->warrior->ranged->mounted->worker: 1.1137332
+
+guardian->warrior->deadly->ranged->mounted->worker: 1.128926
+
+guardian->warrior->deadly->mounted->ranged->worker: 1.1292783
+
+Ranged minionit menevät selvästi hukkaan, jos ne pelataan tykinruuaksi. Lienee parasta kirjoittaa koodinpätkä, jossa ne pelataan
+vain guardianin suojaan kun vastustajalla on minioneita pöydässä.
+
+guardian->warrior->deadly->mounted->worker->ranged: 1.0278468
+
+Workerit näyttävät menevän vielä enemmän hukkaan. Jätetään playBNotEmpty tätä edeltäneeseen muotoon.
 

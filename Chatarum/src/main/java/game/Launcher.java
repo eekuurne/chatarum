@@ -16,10 +16,10 @@ public class Launcher {
 
     public static void main(String[] args) {
 
-        AI player1AI = new AdvancedAI(null, null, null);
-        AI player2AI = new SimpleAI(null, null, null);
+        AI player1AI = null;
+        AI player2AI = new AdvancedAI(null, null, null);
 
-        if (true) { // for testing
+        if (false) { // for testing
             AITester tester = new AITester(player1AI, player2AI);
             tester.runTests(10000000);
         } else {

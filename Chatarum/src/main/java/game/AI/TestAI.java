@@ -36,25 +36,19 @@ public class TestAI extends AI {
     public void playTurn() {
         checkLethal();
 
-        //playMountedsToKill();
-        
         tableAttackToKill();
 
-        if (playerA.getTable().isEmpty() && playerB.getTable().isEmpty()) {
-            playABEmpty();
-        } else if (playerA.getTable().isEmpty() && !playerB.getTable().isEmpty()) {
-            playAEmpty();
-        } else if (!playerA.getTable().isEmpty() && playerB.getTable().isEmpty()) {
+        if (playerB.getTable().isEmpty()) {
             playBEmpty();
         } else {
-            playABNotEmpty();
+            playBNotEmpty();
         }
 
         tableAttackToKill();
         playTableRandomly();
     }
 
-    private void playABEmpty() {
+    private void playBEmpty() {
         if (playerA.getHand().getRemaining() > 3) { // change to count resource costs of remaining cards in hand
             playWorkers();
         }
@@ -66,20 +60,19 @@ public class TestAI extends AI {
         playWorkers();
     }
 
-    private void playAEmpty() {
+    private void playBNotEmpty() {
         playMountedsToKill();
 
-        playABEmpty();
-    }
-
-    private void playBEmpty() {
-        playABEmpty();
-    }
-
-    private void playABNotEmpty() {
-        playMountedsToKill();
-        
-        playABEmpty();
+        if (playerB.getTable().isEmpty()) {
+            playBEmpty();
+        } else {
+            playGuardians();
+            playWarriors();
+            playDeadlys();
+            playMounteds();
+            playRangeds();
+            playWorkers();
+        }
     }
 
     /**
