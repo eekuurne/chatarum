@@ -20,12 +20,23 @@ public class Launcher {
         AI player2AI = new AdvancedAI(null, null, null);
 
         if (false) { // for testing
+            System.out.println("AdvancedAI vs. AdvancedAI: ");
             AITester tester = new AITester(player1AI, player2AI);
-            tester.runTests(10000000);
+            tester.runTests(5000000);
+            
+            System.out.println("AdvancedAI vs. SimpleAI: ");
+            player2AI = new SimpleAI(null, null, null);
+            tester = new AITester(player1AI, player2AI);
+            tester.runTests(5000000);
+            
+            System.out.println("MediumAI vs. MediumAI: ");
+            player2AI = new MediumAI(null, null, null);
+            tester = new AITester(player1AI, player2AI);
+            tester.runTests(5000000);
+            
         } else {
             Game ui = new Game("Chatarum", 1280, 720, false, player1AI, player2AI);
             SwingUtilities.invokeLater(ui);
         }
-
     }
 }

@@ -6,7 +6,11 @@ Luokka AI:
 - playHandRandomly pelaa minioneita kaikkiin mahdollisiin slotteihin eikä aiheuta erroreita
 - checkTableDamage toimii
 - checkHandMountedDamage toimii
-- playMountedMinions toimii
+- playMountedMinions toimii (mutta voisi olla parempi - ei vielä optimoi suurinta mahdollista damagea joka voidaan pelata)
+- checkLethal-metodi osaa viimeistellä pelin, kun mahdollista (huom. playMountedMinions kommentti) eikä aiheuta erroreita
+- checkEmptyTableSlots palauttaa oikeat tyhjät slotit ja sitä hyödyntävät metodit käyttävät sitä oikein
+- checkFilledTableSlots palauttaa oikeat tyhjät slotit ja sitä hyödyntävät metodit käyttävät sitä oikein
+
 
 Luokka SimpleAI:
 
@@ -17,9 +21,11 @@ Luokka MediumAI:
 
 - Luokka ei aiheuta erroreita pelattaessa
 
-Luokka TestAI:
+Luokka AdvancedAI:
 
 - playWarriors, playWorkers, playDeadlys ja playRangeds toimii kuten pitää
+- checkHandCost laskee käden hinnan oikein
+
 
 
 Luokka AITester:

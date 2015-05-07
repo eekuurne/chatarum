@@ -159,20 +159,12 @@ Testasin vielä miten tekoäly käyttäytyy jos siltä poistaa toisen playTablen
 pöytä on täynnä -> ei pelata kortteja kädestä -> pöytä tyhjenee kun minionit hyökkää, mutta enää ei pelata kortteja.
 Poistettiin pelaajalta 1:
 
-Pelaaja 1: 491689 voittoa
-
-Pelaaja 2: 508311 voittoa
-
 Pelaajan 1 voitto-häviö-ratio: 0.9672995
 
 Pelaajan 2 voitto-häviö-ratio: 1.033806
 
 Silläkin on siis selvästi vaikutusta. Toisaalta jos playTablen poistaa lopusta, eli mounted minionit ei koskaan hyökkää
 sillä vuorolla minioneita kun ne pelataan:
-
-Pelaaja 1: 391971 voittoa
-
-Pelaaja 2: 608029 voittoa
 
 Pelaajan 1 voitto-häviö-ratio: 0.6446584
 
@@ -217,6 +209,9 @@ Testasin vielä tehdyn MediumAI-toteutuksen vanhaa SimpleAI:ta vastaan seuraavil
 MediumAI:n voitto-häviö-ratio: 1.1899377
 
 **17.4.2015:**
+
+(Tässä vaiheessa tein havainnon, että 1 000 000:lla pelillä tuloksissa alkaa olla jo hieman heittoa toistettuna, joten jatkossa
+testit tehdään aina 10 000 000:lla pelillä, jolla tuntuisi tulevan jo erittäin tarkka tulos.)
 
 Kehitin seuraavaa AI:ta ja testasin playTurnia, jossa minionit pyrkivät aluksi hyökkäämään kohteita joiden health on sama kuin
 hyökkääjän attack ja sitten vasta jäljellejääneet hyökkäävät randomilla. Korttien pelaaminen pöytään tapahtui järjestyksessä ABEmpty:
@@ -349,4 +344,192 @@ vain guardianin suojaan kun vastustajalla on minioneita pöydässä.
 guardian->warrior->deadly->mounted->worker->ranged: 1.0278468
 
 Workerit näyttävät menevän vielä enemmän hukkaan. Jätetään playBNotEmpty tätä edeltäneeseen muotoon.
+
+**5.5.2015:**
+
+Tein mielenkiintoisen havainnon: edellä muutettu ratkaisu suosii aloittavaa pelaajaa huomattavasti enemmän. Pelatessa samoilla AI:lla
+keskenään, saatiin seuraavat tulokset:
+
+Pelaajan 1 voitto-häviö-ratio: 1.1959344
+
+Pelaajan 2 voitto-häviö-ratio: 0.8361662
+
+Testatasin vielä millaiset tulokset toteutus saa, kun vanha ja uusi järjestys pelaavat eri puolilla:
+
+Pelaajan 1 voitto-häviö-ratio: 1.3056073 (uusi)
+
+Pelaajan 2 voitto-häviö-ratio: 0.7659271 (vanha)
+
+Pelaajan 1 voitto-häviö-ratio: 0.8855818 (vanha)
+
+Pelaajan 2 voitto-häviö-ratio: 1.1292012 (uuusi)
+
+Uusi toteutus on siis selvästi parempi puolesta riippumatta, mutta se hyödyttää enemmän aloittavaa pelaajaa.
+
+Muutin metodia tableAttackToKill niin, että ensin käydään kaikkien hyökkääjien optimaaliset kohteet läpi ja vasta sitten hyökätään
+overkill-kohteita. Vaikutus oli seuraavanlainen (uusi toteutus pelaajalla 2):
+
+Pelaajan 1 voitto-häviö-ratio: 1.1830033
+
+Pelaajan 2 voitto-häviö-ratio: 0.84530616
+
+Eli muutos paransi marginaalisesti voittoprosenttia pitkällä aikavälillä. Se vaikuttaa muutenkin loogisemmalta pelitavalta AI:lle.
+Nyt AdvancedAI vs. AdvancedAI antaa seuraavat tulokset:
+
+Pelaajan 1 voitto-häviö-ratio: 1.2093471
+
+Pelaajan 2 voitto-häviö-ratio: 0.82689244
+
+**6.5.2015:**
+
+Testailin muuttaa vielä playBEmpty-metodin järjestyksiä:
+
+alkuperäinen: worker(if cards > 3) -> warrior->ranged->deadly->guardian->mounted->worker
+
+Pelaajan 2 voitto-häviö-ratio: 0.82689244 (alkuperäinen vs. alkuperäinen), muutetaan pelaajaa 2:
+
+worker(if cards > 3)->ranged->warrior->deadly->guardian->mounted->worker: 0.83637595
+
+worker(if cards > 3)->ranged->deadly->warrior->guardian->mounted->worker: 0.8396404
+
+worker(if cards > 3)->ranged->deadly->guardian->warrior->mounted->worker: 0.83817244
+
+worker(if cards > 3)->ranged->deadly->warrior->mounted->guardian->worker: 0.8395883
+
+worker(if cards > 3)->ranged->deadly->warrior->guardian->worker->mounted: 0.8396265
+
+worker(if cards > 3)->deadly->ranged->warrior->guardian->mounted->worker: 0.83395654
+
+worker(if cards > 2)->ranged->deadly->warrior->guardian->mounted->worker: 0.83906454
+
+worker(if cards > 4)->ranged->deadly->warrior->guardian->mounted->worker: 0.8405492
+
+worker(if cards > 5)->ranged->deadly->warrior->guardian->mounted->worker: 0.8414378
+
+worker(if cards > 6)->ranged->deadly->warrior->guardian->mounted->worker: 0.8441763
+
+worker(if cards > 7)->ranged->deadly->warrior->guardian->mounted->worker: 0.8496497
+
+ranged->deadly->warrior->guardian->mounted->worker: 0.8650509
+
+ranged->worker(if cards > 4)->deadly->warrior->guardian->mounted->worker: 0.85591114
+
+ranged->deadly->worker(if cards > 4)->warrior->guardian->mounted->worker: 0.86021626
+
+ranged->deadly->warrior->worker(if cards > 4)->guardian->mounted->worker: 0.85875577
+
+ranged->deadly->worker(if cards > 5)->warrior->guardian->mounted->worker: 0.860418
+
+ranged->deadly->worker(if cards > 6)->warrior->guardian->mounted->worker: 0.86285406
+
+ranged->deadly->worker(if cards > 7)->warrior->guardian->mounted->worker: 0.8654938
+
+Enempää tätä ratkaisua on turha hioa. Muutetaan nyt workers-osuutta niin, että se ei ole riippuvainen kädessä 
+olevien korttien määrästä, vaan niiden hinnasta.
+
+ranged->deadly->worker(if cost>150)->warrior->guardian->mounted->worker: 0.8610409
+
+ranged->deadly->worker(if cost>200)->warrior->guardian->mounted->worker: 0.861379
+
+ranged->deadly->worker(if cost>210)->warrior->guardian->mounted->worker: 0.8617876
+
+ranged->deadly->worker(if cost>220)->warrior->guardian->mounted->worker: 0.86134887
+
+ranged->deadly->worker(if cost>190)->warrior->guardian->mounted->worker: 0.86217314
+
+ranged->deadly->worker(if cost>180)->warrior->guardian->mounted->worker: 0.8618753
+
+ranged->deadly->worker(if cost>185)->warrior->guardian->mounted->worker: 0.86334836
+
+worker(if cost>185)->ranged->deadly->warrior->guardian->mounted->worker: 0.8447713
+
+ranged->worker(if cost>185)->deadly->warrior->guardian->mounted->worker: 0.85756904
+
+ranged->worker(if cost>195)->deadly->warrior->guardian->mounted->worker: 0.8577954
+
+Costin mukaan workerien pelaaminen ei näköjään olekaan kannattavampaa kuin kädessä olevien korttien mukaan. Johtuneeko siitä,
+että korttien määrä kertoo pelin olevan alkuvaiheessa, kun niitä kannattaa pelata, kun taas hinta ei välttämättä yhtä suurella
+varmuudella. Kokeillaan vielä niiden yhdistämistä:
+
+ranged->deadly->worker(if cards>7||cost>185)->warrior->guardian->mounted->worker: 0.86368626
+
+ranged->deadly->worker(if cards>7&&cost>185)->warrior->guardian->mounted->worker: 0.8653849
+
+Eipä tuolle cost-metodille näyttäisi olevan oikeastaan hyötyä. Muutetaan AdvancedAI nyt parhaat tulokset saaneeseen muotoon:
+
+ranged->deadly->worker(if cards>7)->warrior->guardian->mounted->worker
+
+Uusi pelaajan 2 voitto-ratio AdvancedAI vs. AdvancedAI: 0.8544852
+
+Kokeilen millainen vaikutus on eri minionien pelaamiseen, jos ne pelataan vain kun pöydässä on guardianeita playBNotEmpty-llä:
+
+ranged(if guarded)->guardian->warrior->deadly->mounted->ranged->worker: 0.86093354
+
+ranged(if guarded)->guardian->ranged(if guarded)->warrior->deadly->mounted->ranged->worker: 0.879103
+
+guardian->ranged(if guarded)->warrior->deadly->mounted->ranged->worker: 0.881441
+
+warrior(if guarded)->guardian->ranged(if guarded)->warrior->deadly->mounted->ranged->worker: 0.87309515
+
+guardian->warrior(if guarded)->ranged(if guarded)->warrior->deadly->mounted->ranged->worker: 0.86777705
+
+guardian->deadly(if guarded)->ranged(if guarded)->warrior->deadly->mounted->ranged->worker: 0.86049
+
+guardian->ranged(if guarded)->deadly(if guarded)->warrior->deadly->mounted->ranged->worker: 0.8831523
+
+Muutetaan AdvancedAI tähän. Kokeillaan metodin hyödyntämistä playBEmptyssä:
+
+Uusi pelaajan 2 voitto-ratio AdvancedAI vs. AdvancedAI: 0.8514579
+
+worker(if guarded)->ranged->deadly->worker(if cards > 7)->warrior->guardian->mounted->worker: 0.8508925
+
+ranged(if guarded)->worker(if guarded)->ranged->deadly->worker(if cards>7)->warrior->guardian->mounted->worker: 
+
+deadly(if guarded)->worker(if guarded)->ranged->deadly->worker(if cards>7)->warrior->guardian->mounted->worker: 
+
+worker(if guarded&&cards>3)->ranged->deadly->worker(if cards>7)->warrior->guardian->mounted->worker: 
+
+worker(if guarded&&cost>185)->ranged->deadly->worker(if cards>7)->warrior->guardian->mounted->worker: 0.85238975
+
+worker(if guarded&&cost>190)->ranged->deadly->worker(if cards>7)->warrior->guardian->mounted->worker: 0.8526602
+
+worker(if guarded&&cost>195)->ranged->deadly->worker(if cards>7)->warrior->guardian->mounted->worker: 0.8514853
+
+worker(if guarded&&cost>200)->ranged->deadly->worker(if cards>7)->warrior->guardian->mounted->worker: 0.85177606
+
+worker(if guarded&&cards>7)->ranged->deadly->worker(if cards>7)->warrior->guardian->mounted->worker: 0.8518539
+
+worker(if guarded&&cards>6)->ranged->deadly->worker(if cards>7)->warrior->guardian->mounted->worker: 0.8508284
+
+worker(if guarded&&cost>190)->deadly(if guarded)->ranged->deadly->worker(if cards>7)->warrior->guardian->mounted->worker: 0.8519098
+
+Nyt on mennyt testailu kyllä niin pilkun viilaukseksi, että en näillä enää testaile. Valitaan parhaan tuloksen saanut ja
+aletaan kehittää uusia metodeita. Kokeillaan vielä itseään, SimpleAI:ta ja MediumAI:ta vastaan:
+
+Pelaajan 1 voitto-häviö-ratio: 1.1731563 (AdvancedAI)
+
+Pelaajan 2 voitto-häviö-ratio: 0.8524014 (AdvancedAI)
+
+Pelaajan 1 voitto-häviö-ratio: 3.123871 (AdvancedAI)
+
+Pelaajan 2 voitto-häviö-ratio: 0.32011563 (SimpleAI)
+
+Pelaajan 1 voitto-häviö-ratio: 2.3930442 (AdvancedAI)
+
+Pelaajan 2 voitto-häviö-ratio: 0.4178778 (MediumAI)
+
+Voittoprosentit ovat nousseet huomattavasti viime kokeilusta (2.5316 SimpleAI vastaan, 2.1066 MediumAI vastaan) optimoimalla
+järjestystä, missä minioneita pelataan ja parantamalla hyökkäysmetodia hieman. Tämä AI antaa jo pelaajaakin vastaan melko
+vaikean vastuksen, jos ei tahallaan hyödynnä sijoittamisessa järjestystä, missä AI hyökkää. Sen voisikin korjata vielä
+satunnaiseksi, niin ennalta määrätyt järjestykset eivät enää ilmene muussa kuin kädessä, mitä pelaaja ei itse näe. 
+
+
+
+
+
+
+
+
+
+
 

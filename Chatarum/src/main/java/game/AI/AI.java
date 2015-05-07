@@ -5,6 +5,7 @@ import cards.Minion;
 import game.logic.LogicHandler;
 import game.logic.Player;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -35,39 +36,89 @@ public abstract class AI {
     public abstract void playTurn();
 
     /**
-     * (Muutetaan taulukoksi)
-     *
-     * Returns the player's table slots which are filled with minion.
-     *
-     * @param player The player who's table is checked
-     * @return Player's table slots which are filled with minion
+     * Attacks random targets with every minion on the player's table.
      */
-    protected ArrayList<Integer> checkFilledTableSlots(Player player) {
-        ArrayList<Integer> tableSlots = new ArrayList<>();
+    protected void playTableRandomly() {
         for (int i = 0; i < 8; i++) {
-            if (player.getTable().getMinions()[i] != null) {
-                tableSlots.add(i);
+            if (playerA.getTable().getMinions()[i] != null
+                    && playerA.getTable().getMinions()[i].getTurnleft()) {
+                int[] enemyTableSlots = checkFilledTableSlots(playerB);
+
+                if (enemyTableSlots.length > 0) {
+                    int attackSlot = enemyTableSlots[rand.nextInt(enemyTableSlots.length)];
+                    handler.minionAttack(i, attackSlot, playerA, playerB);
+                }
             }
         }
-        return tableSlots;
     }
 
     /**
-     * (Muutetaan taulukoksi)
-     *
-     * Returns the player's table slots which are empty.
-     *
-     * @param player The player who's table is checked
-     * @return Player's table slots which are empty
+     * Goes through hand slots in order and places minions on table to a random
+     * slot if there is enough resources.
      */
-    protected ArrayList<Integer> checkEmptyTableSlots(Player player) {
-        ArrayList<Integer> tableSlots = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
-            if (player.getTable().getMinions()[i] == null) {
-                tableSlots.add(i);
+    protected void playHandRandomly() {
+        int handSize = playerA.getHand().getRemaining();
+        for (int i = handSize - 1; i >= 0; i--) {
+            if (playerA.getRemainingResources() >= playerA.getHand().getCards().get(i).getCost()) {
+                handler.clickHandSlot(i, playerA);
+
+                int[] tableSlots = checkEmptyTableSlots(playerA);
+
+                if (tableSlots.length > 0) {
+                    int slot = tableSlots[rand.nextInt(tableSlots.length)];
+                    handler.placeChosenMinionToTable(slot, playerA, playerB);
+                }
             }
         }
-        return tableSlots;
+    }
+
+    /**
+     * Attacks enemy minions with own minions if they die to the attack. First
+     * tries the optimal targets, then all the others.
+     */
+    protected void tableAttackToKill() {
+        tableAttackOptimalTargets();
+        tableAttackOverkillTargets();
+    }
+
+    /**
+     * Goes through minions in table and tries to attack target who has health
+     * equal to attackers damage.
+     */
+    private void tableAttackOptimalTargets() {
+        for (int i = 0; i < 8; i++) {
+            if (playerA.getTable().getMinions()[i] != null && playerA.getTable().getMinions()[i].getTurnleft()) {
+                playerA.getTable().getMinions()[i].clickInTable(handler, i);
+                Minion attacker = playerA.getTable().getMinions()[i];
+                for (int j = 0; j < 8; j++) {
+                    Minion defender = playerB.getTable().getMinions()[j];
+                    if (defender != null && (attacker.getDamage() == defender.getHealth() || attacker.getDeadly())) {
+                        handler.minionAttack(i, j, playerA, playerB);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Goes through minions in table and tries to attack target who has health
+     * smaller than attackers damage.
+     */
+    private void tableAttackOverkillTargets() {
+        for (int i = 0; i < 8; i++) {
+            if (playerA.getTable().getMinions()[i] != null && playerA.getTable().getMinions()[i].getTurnleft()) {
+                playerA.getTable().getMinions()[i].clickInTable(handler, i);
+                Minion attacker = playerA.getTable().getMinions()[i];
+                for (int j = 0; j < 8; j++) {
+                    Minion defender = playerB.getTable().getMinions()[j];
+                    if (defender != null && attacker.getDamage() >= defender.getHealth()) {
+                        handler.minionAttack(i, j, playerA, playerB);
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -83,6 +134,54 @@ public abstract class AI {
             playMountedMinions();
             handler.endTurn();
         }
+    }
+
+    /**
+     * Returns the player's table slots which are filled with minion.
+     *
+     * @param player The player who's table is checked
+     * @return Player's table slots which are filled with minion
+     */
+    private int[] checkFilledTableSlots(Player player) {
+        int size = 0;
+        for (int i = 0; i < 8; i++) {
+            if (player.getTable().getMinions()[i] != null) {
+                size++;
+            }
+        }
+        int[] tableSlots = new int[size];
+        int j = 0;
+        for (int i = 0; i < 8; i++) {
+            if (player.getTable().getMinions()[i] != null) {
+                tableSlots[j] = i;
+                j++;
+            }
+        }
+        return tableSlots;
+    }
+
+    /**
+     * Returns the player's table slots which are empty.
+     *
+     * @param player The player who's table is checked
+     * @return Player's table slots which are empty
+     */
+    private int[] checkEmptyTableSlots(Player player) {
+        int size = 0;
+        for (int i = 0; i < 8; i++) {
+            if (player.getTable().getMinions()[i] == null) {
+                size++;
+            }
+        }
+        int[] tableSlots = new int[size];
+        int j = 0;
+        for (int i = 0; i < 8; i++) {
+            if (player.getTable().getMinions()[i] == null) {
+                tableSlots[j] = i;
+                j++;
+            }
+        }
+        return tableSlots;
     }
 
     /**
@@ -103,10 +202,10 @@ public abstract class AI {
     /**
      * @return The damage potential of mounted minions in hand.
      */
-    protected int checkHandMountedDamage() {
+    private int checkHandMountedDamage() {
         int ownResources = playerA.getRemainingResources();
         int damage = 0;
-        int emptySlots = checkEmptyTableSlots(playerA).size();
+        int emptySlots = checkEmptyTableSlots(playerA).length;
 
         for (int i = 0; i < playerA.getHand().getRemaining(); i++) {
             if (emptySlots <= 0) {
@@ -127,7 +226,7 @@ public abstract class AI {
      * Plays mounted minions from hand to table in the order they are in hand
      * slots.
      */
-    protected void playMountedMinions() {
+    private void playMountedMinions() {
         for (int i = 0; i < playerA.getHand().getRemaining(); i++) {
             handler.clickHandSlot(i, playerA);
             if (handler.getChosenHandMinion() != null && handler.getChosenHandMinion().getTurnleft()
@@ -142,70 +241,6 @@ public abstract class AI {
         }
     }
 
-    /**
-     * Attacks random targets with every minion on the player's table.
-     */
-    protected void playTableRandomly() {
-        for (int i = 0; i < 8; i++) {
-            if (playerA.getTable().getMinions()[i] != null
-                    && playerA.getTable().getMinions()[i].getTurnleft()) {
-                ArrayList<Integer> enemyTableSlots = checkFilledTableSlots(playerB);
-
-                if (enemyTableSlots.size() > 0) {
-                    int attackSlot = enemyTableSlots.get(rand.nextInt(enemyTableSlots.size()));
-                    handler.minionAttack(i, attackSlot, playerA, playerB);
-                }
-            }
-        }
-    }
-
-    /**
-     * Goes through hand slots in order and places minions on table to a random
-     * slot if there is enough resources.
-     */
-    protected void playHandRandomly() {
-        int handSize = playerA.getHand().getRemaining();
-        for (int i = handSize - 1; i >= 0; i--) {
-            if (playerA.getRemainingResources() >= playerA.getHand().getCards().get(i).getCost()) {
-                handler.clickHandSlot(i, playerA);
-
-                ArrayList<Integer> tableSlots = checkEmptyTableSlots(playerA);
-
-                if (tableSlots.size() > 0) {
-                    int slot = tableSlots.get(rand.nextInt(tableSlots.size()));
-                    handler.placeChosenMinionToTable(slot, playerA, playerB);
-                }
-            }
-        }
-    }
-
-    protected void tableAttackToKill() {
-        for (int i = 0; i < 8; i++) {
-            if (playerA.getTable().getMinions()[i] != null && playerA.getTable().getMinions()[i].getTurnleft()) {
-                playerA.getTable().getMinions()[i].clickInTable(handler, i);
-                Minion attacker = playerA.getTable().getMinions()[i];
-                boolean continueTrying = true;
-                // Tries to attack target whose health is equal to attacker's damage.
-                for (int j = 0; j < 8; j++) {
-                    Minion defender = playerB.getTable().getMinions()[j];
-                    if (defender != null && (attacker.getDamage() == defender.getHealth() || attacker.getDeadly())) {
-                        handler.minionAttack(i, j, playerA, playerB);
-                        continueTrying = false;
-                        break;
-                    }
-                }
-                
-                for (int j = 0; j < 8; j++) {
-                    Minion defender = playerB.getTable().getMinions()[j];
-                    if (defender != null && attacker.getDamage() > defender.getHealth() && continueTrying) {
-                        handler.minionAttack(i, j, playerA, playerB);
-                        break;
-                    }
-                }
-            }
-        }
-    }
-    
     public LogicHandler getHandler() {
         return handler;
     }

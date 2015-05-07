@@ -49,12 +49,15 @@ public class TestAI extends AI {
     }
 
     private void playBEmpty() {
-        if (playerA.getHand().getRemaining() > 3) { // change to count resource costs of remaining cards in hand
+        if (guardedSlotsInTable() && checkHandCost() > 190) {
+            playWorkers();
+        }
+        playRangeds();
+        playDeadlys();
+        if (playerA.getHand().getRemaining() > 7) {
             playWorkers();
         }
         playWarriors();
-        playRangeds();
-        playDeadlys();
         playGuardians();
         playMounteds();
         playWorkers();
@@ -67,12 +70,39 @@ public class TestAI extends AI {
             playBEmpty();
         } else {
             playGuardians();
+            if (guardedSlotsInTable()) {
+                playRangeds();
+                playDeadlys();
+            }
             playWarriors();
             playDeadlys();
             playMounteds();
             playRangeds();
             playWorkers();
         }
+    }
+
+    private int checkHandCost() {
+        int cost = 0;
+        for (int i = 0; i < playerA.getHand().getRemaining(); i++) {
+            cost += playerA.getHand().getCards().get(i).getCost();
+        }
+        return cost;
+    }
+
+    private boolean guardedSlotsInTable() {
+        for (int i = 0; i < 8; i++) {
+            int nextSlot = normalOrder[i] + 1;
+            int previousSlot = normalOrder[i] - 1;
+            if (playerA.getTable().getMinions()[normalOrder[i]] == null
+                    && ((previousSlot >= 0 && playerA.getTable().getMinions()[previousSlot] != null
+                    && playerA.getTable().getMinions()[previousSlot].getGuardian())
+                    || (nextSlot <= 7 && playerA.getTable().getMinions()[nextSlot] != null)
+                    && playerA.getTable().getMinions()[nextSlot].getGuardian())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -267,5 +297,4 @@ public class TestAI extends AI {
             }
         }
     }
-
 }
