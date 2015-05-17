@@ -90,11 +90,10 @@ public abstract class Minion extends Card {
     }
 
     /**
-     * Changes the minion's health when attacked or healed. Negative amount when
-     * taking damage, positive for heal.
+     * Chooses a minion from hand.
      *
-     * @param handler
-     * @param slot
+     * @param handler The logic handler.
+     * @param slot The slot that is chosen.
      */
     @Override
     public void clickInHand(LogicHandler handler, int slot) {

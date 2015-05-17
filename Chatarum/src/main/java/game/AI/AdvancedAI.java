@@ -5,8 +5,9 @@ import game.logic.LogicHandler;
 import game.logic.Player;
 
 /**
- * AdvancedAI is the result of vast testing and improvements made piece by piece.
- * It's currently the best AI and it wins the other AIs with high win-loss-ratio.
+ * AdvancedAI is the result of vast testing and improvements made piece by
+ * piece. It's currently the best AI and it wins the other AIs with high
+ * win-loss-ratio.
  *
  * @author Eero Kuurne
  */

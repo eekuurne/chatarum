@@ -46,8 +46,8 @@ public abstract class AI {
                 if (enemyTableSlots.length > 0) {
                     for (int j = 0; j < enemyTableSlots.length; j++) {
                         handler.minionAttack(i, enemyTableSlots[j], playerA, playerB);
-                        if (playerA.getTable().getMinions()[i] == null || 
-                                !playerA.getTable().getMinions()[i].getTurnleft()) {
+                        if (playerA.getTable().getMinions()[i] == null
+                                || !playerA.getTable().getMinions()[i].getTurnleft()) {
                             break;
                         }
                     }
@@ -133,7 +133,7 @@ public abstract class AI {
      */
     private int[] randomSlotOrders() {
         int[] slots = {0, 1, 2, 3, 4, 5, 6, 7};
-        
+
         // Fisher-Yates shuffle:
         for (int i = slots.length - 1; i > 0; i--) {
             int index = rand.nextInt(i + 1);
@@ -141,13 +141,13 @@ public abstract class AI {
             slots[index] = slots[i];
             slots[i] = a;
         }
-        
+
         return slots;
     }
-    
+
     /**
      * Shuffles the parameter's array and returns it.
-     * 
+     *
      * @param slots Array of integers
      * @return Array with numbers of parameter's array in random order
      */
