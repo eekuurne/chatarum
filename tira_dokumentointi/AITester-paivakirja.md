@@ -768,7 +768,7 @@ Pelaajan 1 voitto-häviö-ratio: 0.6654836
 Pelaajan 2 voitto-häviö-ratio: 1.5026666
 
 Voittoprosentit vaikuttavat mielestäni nyt sopivilta. AdvancedAI:n ja MediumAI:n välinen ero on nyt lähinnä järjestyksessä,
-missä minioneita yritytetään pelata pöytään, ja AdvancedAI osaa pelata mounted minioneita tuhotakseen vastustajan kortteja. 
+missä minioneita yritetään pelata pöytään, ja AdvancedAI osaa pelata mounted minioneita tuhotakseen vastustajan kortteja. 
 
 **Yhteenveto (kurssin osalta):**
 
@@ -784,7 +784,3 @@ Haastavammaksi tekoälyksi tulen kehittämään vielä ratkaisun, joka luomalla 
 valita optimaalisia ratkaisuja ja mahdollisesti laskelmoida tulevia vuoroja. Harmi etten kurssin aikana ehtinyt sitä 
 toteuttaa, innostuin liikaa viilaamaan pilkkua AdvancedAI:n toteutuksessa ja en ollut varma miten sen toteuttaisin niin,
 että tulevaisuudessa lisättävät kortit eivät riko sitä. Siinä onkin sitten kesäksi tekemistä :)
-
-
-
-

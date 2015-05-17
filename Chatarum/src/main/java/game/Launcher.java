@@ -29,12 +29,12 @@ public class Launcher {
             AI player1AI = new AdvancedAI(null, null, null);
             AI player2AI = new MediumAI(null, null, null);
             AITester tester = new AITester(player1AI, player2AI);
-            tester.runTests(10000000);
+            tester.runTests(1000);
         } else {
             AI player1AI = null;
             AI player2AI = new AdvancedAI(null, null, null);
 
-            Game ui = new Game("Chatarum", 1920, 1080, true, player1AI, player2AI);
+            Game ui = new Game("Chatarum", 1280, 720, false, player1AI, player2AI);
             SwingUtilities.invokeLater(ui);
         }
     }

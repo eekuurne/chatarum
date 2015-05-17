@@ -7,6 +7,6 @@ AITester toimii niin, että jos Launcherin if-lausekkeeseen vaihdetaan true ja m
 eivät ole null, niin tester.runTests voidaan antaa parametriksi testien määrä. Silloin ohjelma
 pyörittää pelejä tekoälyjen välillä ja tulostaa lopputuloksen.
 
-Jos peliä haluaa pelata itse, kannattaa vaihtaa player1AI = null ja laittaa false if-lausekkeeseen.
-Gamen parametreihin voi asettaa resoluution ja true/false fullscreenille. Pelin voi sulkea Escillä
+Peliä voi pelata itse vaihtamalla Launcherissa if-lausekkeen falseksi. Tekoälyä voi vaihtaa else-lausekeen
+sisällä Gamen parametreihin voi asettaa resoluution ja true/false fullscreenille. Pelin voi sulkea Escillä
 tai raksista jos windowed.

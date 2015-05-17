@@ -2,7 +2,8 @@
 
 AITesterillä on pelattu jokaisen muutoksen jälkeen niin monta peliä, että voidaan olla varmoja ettei peli aiheuta
 erroreita missään tilanteessa, ainakaan tällä kurssilla toteutettujen luokkien osalta (AITester ei käytä UserInterfacea
-eikä Gamea).
+eikä Gamea). En ole myöskään muistanut kirjoittaa kaikkia tehtyjä testejä tänne, mutta dokumentti antaa jonkinlaisen
+kuvan kuitenkin.
 
 Luokka AI:
 
@@ -14,8 +15,7 @@ Luokka AI:
 - checkLethal-metodi osaa viimeistellä pelin, kun mahdollista (huom. playMountedMinions kommentti) eikä aiheuta erroreita
 - checkEmptyTableSlots palauttaa oikeat tyhjät slotit ja sitä hyödyntävät metodit käyttävät sitä oikein
 - checkFilledTableSlots palauttaa oikeat tyhjät slotit ja sitä hyödyntävät metodit käyttävät sitä oikein
-- randomSlotOrders palauttaa oikeat slotit satunnaisessa järjestyksessä
-
+- randomSlotOrders palauttaa oikeat slotit satunnaisessa järjestyksessä, myös kun sille annetaan muu lista parametrina
 
 Luokka SimpleAI:
 
@@ -30,7 +30,6 @@ Luokka AdvancedAI:
 
 - playWarriors, playWorkers, playDeadlys, playMounteds ja playRangeds toimii kuten pitää
 - checkHandCost laskee käden hinnan oikein
-
 
 Luokka AITester:
 
