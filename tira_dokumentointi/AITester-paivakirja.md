@@ -1,5 +1,19 @@
 **Tekoälyille tehtyjä testejä:**
 
+**Johdanto**
+
+Tähän päiväkirjaan on kirjoitettu testituloksia tekoälyille tekemistäni testeistä. Niiden pääasiallisena tarkoituksena on
+ollut olla apuna minulle kehittäessäni tekoälyistä parempia - vertailemalla uusia tuloksia vanhoihin olen aina nähnyt oliko
+uusi ratkaisu parempi. Niitä ei ole siistitty ollenkaan, ja paikka paikoin se voi olla melko raskastakin luettavaa. 
+
+Päiväkirjasta kuitenkin löytyy selitykset kaikille tehdyille ratkaisuille tekoälyjen hyödyntämistä metodeista, ja tulokset siitä 
+kuinka paljon ne ovat vaikuttaneet. Lopussa on yhteenveto, jossa kerrotaan lyhyesti miten tekoälyn kehitys on kurssin aikana 
+tehty. 
+
+Testejä on tehty myös jonkin verran tämän päiväkirjan ulkopuolella, ja joissain kohdissa viitataankin myös testeihin
+joiden tuloksia ei näytetä. Suurin osa niistä on kuitenkin ollut testejä, joissa uusi ominaisuus on todettu huonoksi tai
+ne ovat liittyneet pelikorttien tasapainottamiseen. Käsin itse pelaamalla tehdyistä testeistä löytyy tietoa testausdokumentista.
+
 **22.3.2015:**
 
 Testasin ensimmäistä, täysin satunnaisuuteen perustuvaa tekoälyä itseään vastaan. Tavoitteena oli tehdä havaintoja
@@ -504,31 +518,272 @@ worker(if guarded&&cards>6)->ranged->deadly->worker(if cards>7)->warrior->guardi
 worker(if guarded&&cost>190)->deadly(if guarded)->ranged->deadly->worker(if cards>7)->warrior->guardian->mounted->worker: 0.8519098
 
 Nyt on mennyt testailu kyllä niin pilkun viilaukseksi, että en näillä enää testaile. Valitaan parhaan tuloksen saanut ja
-aletaan kehittää uusia metodeita. Kokeillaan vielä itseään, SimpleAI:ta ja MediumAI:ta vastaan:
+aletaan kehittää uusia metodeita. Kokeillaan vielä itseään, SimpleAI:ta ja MediumAI:ta vastaan (testit 100 000 000:lla):
 
-Pelaajan 1 voitto-häviö-ratio: 1.1731563 (AdvancedAI)
+**AdvancedAI vs. AdvancedAI:**
 
-Pelaajan 2 voitto-häviö-ratio: 0.8524014 (AdvancedAI)
+Pelaajan 1 voitto-häviö-ratio: 1.173931 (AdvancedAI)
 
-Pelaajan 1 voitto-häviö-ratio: 3.123871 (AdvancedAI)
+Pelaajan 2 voitto-häviö-ratio: 0.8518388 (AdvancedAI)
 
-Pelaajan 2 voitto-häviö-ratio: 0.32011563 (SimpleAI)
+**AdvancedAI vs. SimpleAI:**
 
-Pelaajan 1 voitto-häviö-ratio: 2.3930442 (AdvancedAI)
+Pelaajan 1 voitto-häviö-ratio: 3.1260295 (AdvancedAI)
 
-Pelaajan 2 voitto-häviö-ratio: 0.4178778 (MediumAI)
+Pelaajan 2 voitto-häviö-ratio: 0.3198946 (SimpleAI)
 
-Voittoprosentit ovat nousseet huomattavasti viime kokeilusta (2.5316 SimpleAI vastaan, 2.1066 MediumAI vastaan) optimoimalla
-järjestystä, missä minioneita pelataan ja parantamalla hyökkäysmetodia hieman. Tämä AI antaa jo pelaajaakin vastaan melko
-vaikean vastuksen, jos ei tahallaan hyödynnä sijoittamisessa järjestystä, missä AI hyökkää. Sen voisikin korjata vielä
-satunnaiseksi, niin ennalta määrätyt järjestykset eivät enää ilmene muussa kuin kädessä, mitä pelaaja ei itse näe. 
+**SimpleAI vs. AdvancedAI:**
 
+Pelaajan 1 voitto-häviö-ratio: 0.37094435 (SimpleAI)
 
+Pelaajan 2 voitto-häviö-ratio: 2.6958222 (AdvancedAI)
 
+**AdvancedAI vs. MediumAI:**
 
+Pelaajan 1 voitto-häviö-ratio: 2.3935428 (AdvancedAI)
 
+Pelaajan 2 voitto-häviö-ratio: 0.41779074 (MediumAI)
 
+**MediumAI vs. AdvancedAI:**
 
+Pelaajan 1 voitto-häviö-ratio: 0.46836856 (MediumAI)
+
+Pelaajan 2 voitto-häviö-ratio: 2.1350708 (AdvancedAI)
+
+Voittoprosentit ovat nousseet huomattavasti viime kokeilusta (pelaajalla 1: 2.5316 SimpleAI vastaan, 2.1066 MediumAI vastaan) 
+optimoimalla järjestystä, missä minioneita pelataan ja parantamalla hyökkäysmetodia hieman. Tämä AI antaa jo pelaajaakin 
+vastaan melko vaikean vastuksen, jos ei tahallaan hyödynnä sijoittamisessa järjestystä, missä AI hyökkää. Sen voisikin korjata 
+vielä satunnaiseksi, niin ennalta määrätyt järjestykset eivät enää ilmene muussa kuin kädessä, mitä pelaaja ei itse näe. Eli
+randomilla slotit taulukkoon, joka sitte käydään läpi.
+
+Tuli myös todettua, että AI:t eivät osaa hyödyntää ranged-minioneita kovin hyvin tai hankkiutua ensisijaisesti eroon vastustajan
+rangedeista, mikä johtaa useissa peleissä siihen, että tarpeeksi kun niitä saa pöytään niin toisella ei ole enää mahdollisuuksia.
+Tämä on yksi asioista, joita AITesterillä ei ole tullut huomattua.
+
+Tämänkaltaiset tekijät johtavat siihen, että kun lähdetään kehittämään optimaalisen skenaarion valitsevaa AI:ta, niin
+minioneille pitänee todennäköisesti keksiä tietyt painoarvot sen sijaan, että katsottaisiin esim. pöytään jäävää damagea tai
+omien ja vastustajan minionien määrää.
+
+**13.5.2015:**
+
+Vanha pelaajan 2 voitto-häviö-ratio: 0.8518388 (AdvancedAI vs. AdvancedAI)
+
+Kokeilin vaihtaa playMountedsToKill:in samanlaiseksi kuin tableAttackToKill, eli ensin optimaaliset kohteet ja sitten vasta
+overkillit. Se huononsi voittoprosenttia marginaalisesti, minkä jälkeen kokeilin muuttaa metodia niin, että overkillejä ei
+pelata ollenkaan:
+
+Pelaajan 2 voitto-häviö-ratio: 0.98142886
+
+Muutos paransi voittoprosenttia huomattavasti. Tein testit vielä kaikkia AI:ta vastaan ja kaikilla aloituspaikoilla, ja
+muutos voittoprosentissa oli huomattava kaikilla:
+
+**AdvancedAI vs. AdvancedAI:**
+
+Pelaajan 1 voitto-häviö-ratio: 1.12992 (AdvancedAI)
+
+Pelaajan 2 voitto-häviö-ratio: 0.8850184 (AdvancedAI)
+
+**AdvancedAI vs. SimpleAI:**
+
+Pelaajan 1 voitto-häviö-ratio: 3.5070057 (AdvancedAI)
+
+Pelaajan 2 voitto-häviö-ratio: 0.28514352 (SimpleAI)
+
+**SimpleAI vs. AdvancedAI:**
+
+Pelaajan 1 voitto-häviö-ratio: 0.32453963 (SimpleAI)
+
+Pelaajan 2 voitto-häviö-ratio: 3.0812879 (AdvancedAI)
+
+**AdvancedAI vs. MediumAI:**
+
+Pelaajan 1 voitto-häviö-ratio: 2.7674987 (AdvancedAI)
+
+Pelaajan 2 voitto-häviö-ratio: 0.36133713 (MediumAI)
+
+**MediumAI vs. AdvancedAI:**
+
+Pelaajan 1 voitto-häviö-ratio: 0.39863446 (MediumAI)
+
+Pelaajan 2 voitto-häviö-ratio: 2.508564 (AdvancedAI)
+
+**14.5.2015:**
+
+Koska playMountedsToKillOverkill-metodi poistettiin kokonaan AdvancedAI:n toiminnasta, kokeilin vielä sijoittaa sen
+playBNotEmptyyn juuri ennen playMountedsia. Voittoprosentti parani marginaalisesti joitain vastaan ja huononi marginaalisesti
+joitain vastaan. Jätetään pois. Kokeilin vielä poistaa playMountedin kokonaan playBNotEmptystä. Se huononsi vain
+voittoprosenttia.
+
+**15.5.2015:**
+
+Kokeilin poistaa AdvancedAI:n playTurnista playTableRandomlyn lopusta. Se huononsi taas voittoprosenttia.
+
+Muutin hyökkäysmetodeita niin, että hyökkäyskohteita ei enää yritetä järjestyksessä 0-7, vaan satunnaisesti. Nyt pelaaja ei
+voi enää huijata tekoälyä sijoittamalla minioneita pöytään sellasiiin slotteihin, joita haluaa AI:n hyökkäävän. 
+
+**AdvancedAI vs. AdvancedAI:**
+
+Pelaajan 1 voitto-häviö-ratio: 1.11975
+
+Pelaajan 2 voitto-häviö-ratio: 0.89305645
+
+**AdvancedAI vs. SimpleAI:**
+
+Pelaajan 1 voitto-häviö-ratio: 3.5086706
+
+Pelaajan 2 voitto-häviö-ratio: 0.28500822
+
+**SimpleAI vs. AdvancedAI:** 
+
+Pelaajan 1 voitto-häviö-ratio: 0.32371667
+
+Pelaajan 2 voitto-häviö-ratio: 3.089121
+
+**AdvancedAI vs. MediumAI:** 
+
+Pelaajan 1 voitto-häviö-ratio: 2.7889771
+
+Pelaajan 2 voitto-häviö-ratio: 0.3585544
+
+**MediumAI vs. AdvancedAI:** 
+
+Pelaajan 1 voitto-häviö-ratio: 0.38766596
+
+Pelaajan 2 voitto-häviö-ratio: 2.5795405
+
+Testeissä voittoprosentit muuttuivat paremmiksi ja muutos tasoitti hieman myös aloituspaikkojen välistä eroa. Suurin ero on 
+kuitenkin pelaajaa vastaan ja muutos on tärkeä.
+
+Seuraavaksi kokeilin muuttaa hyökkäysmetodia niin, ettei guardianin takana olevia optimaalisia kohteita yritetä ollenkaan
+hyökätä hyökäten vahingossa guardiania. Tein sen muuttamalla logicHandlerin minionAttackia niin, että hyökkäystä ei 
+yksinkertaisesti tehdä, jos minion on suojattu. Näin se poistaa myös pelaajalta mahdollisuuden vahingossa hyökätä väärää
+kohdetta. Jos kaksi guardiania on vierekkäin, ne eivät suojaa toisiaan. Lisäsin guarded tarkistuksen myös
+playMountedsToKilliin ja muutin playTableRandomlyä niin, että se jatkaa kohteen etsimistä jos se on randomannut suojatun
+kohteen.
+
+**AdvancedAI vs. AdvancedAI:**
+
+Pelaajan 1 voitto-häviö-ratio: 1.144208
+
+Pelaajan 2 voitto-häviö-ratio: 0.873967
+
+**AdvancedAI vs. SimpleAI:**
+
+Pelaajan 1 voitto-häviö-ratio: 3.6691473
+
+Pelaajan 2 voitto-häviö-ratio: 0.2725429
+
+**SimpleAI vs. AdvancedAI:** 
+
+Pelaajan 1 voitto-häviö-ratio: 0.30797958
+
+Pelaajan 2 voitto-häviö-ratio: 3.2469685
+
+**AdvancedAI vs. MediumAI:** 
+
+Pelaajan 1 voitto-häviö-ratio: 2.9951663
+
+Pelaajan 2 voitto-häviö-ratio: 0.33387128
+
+**MediumAI vs. AdvancedAI:** 
+
+Pelaajan 1 voitto-häviö-ratio: 0.3622512
+
+Pelaajan 2 voitto-häviö-ratio: 2.7605155
+
+Tämä koko rupeama korjasi sekä AI:ssa esiintyneen ongelman, lyhensi ja selkeytti koodia UserInterfacessa ja LogicHandlerissa 
+ja paransi myös pelaajan käytettävyyttä. AdvancedAI:n voittoprosentti kasvoi huomattavasti tämän seurauksena. AI käyttäytyy
+nyt myös pelaajan silmään paljon järkevämmin. 5/5.
+
+Seuraavaksi kokeilin vielä laittaa tableAttackToKillit ja playMountedsToKillit tuplana kaikkiin kohtiin: tämän seurauksena
+jos joku kortti jättää hyökkäämättä koska guardian suojaa optimaalista kohdetta mutta seuraavaksi hyökkäävä kortti 
+tuhoaa sen, niin hyökkäämättä jättäneillä korteilla on vielä mahdollisuus kokeilla uudestaan. Yli kahta kertaa ei kannata
+kuitenkaan, koska guardianit eivät voi suojata guardianeita:
+
+**AdvancedAI vs. AdvancedAI:**
+
+Pelaajan 1 voitto-häviö-ratio: 1.1505973
+
+Pelaajan 2 voitto-häviö-ratio: 0.8691138
+
+**AdvancedAI vs. SimpleAI:**
+
+Pelaajan 1 voitto-häviö-ratio: 3.7016652
+
+Pelaajan 2 voitto-häviö-ratio: 0.2701487
+
+**SimpleAI vs. AdvancedAI:** 
+
+Pelaajan 1 voitto-häviö-ratio: 0.30511603
+
+Pelaajan 2 voitto-häviö-ratio: 3.2774417
+
+**AdvancedAI vs. MediumAI:** 
+
+Pelaajan 1 voitto-häviö-ratio: 3.0584464
+
+Pelaajan 2 voitto-häviö-ratio: 0.32696337
+
+**MediumAI vs. AdvancedAI:** 
+
+Pelaajan 1 voitto-häviö-ratio: 0.35652667
+
+Pelaajan 2 voitto-häviö-ratio: 2.8048391
+
+Nyt kaikki pienet mokat on korjattu, ja AI toimii juuri niin kuin sen oli tarkoitus. Se ei todellakaan ole optimaalinen, mutta
+antaa jo haastavan vastuksen pelaajaa vastaan ja voittaa aiemmat, paljon satunnaisuutta käyttäneet AI-toteutukset suurella
+voittoprosentilla. AdvancedAI on nyt mielestäni valmis.
+
+Koska MediumAI eroaa mielestäni liian vähän SimpleAI:sta ja liikaa AdvancedAI:sta tällä hetkellä, lisäsin sille vielä 
+tableAttackToKillit samaan tapaan kuin AdvancedAI:lla on:
+
+**MediumAI vs. MediumAI:** 
+
+Pelaajan 1 voitto-häviö-ratio: 1.0069331
+
+Pelaajan 2 voitto-häviö-ratio: 0.9931146
+
+**MediumAI vs. SimpleAI:** 
+
+Pelaajan 1 voitto-häviö-ratio: 2.2516434
+
+Pelaajan 2 voitto-häviö-ratio: 0.44412005
+
+**SimpleAI vs. MediumAI:** 
+
+Pelaajan 1 voitto-häviö-ratio: 0.4531099
+
+Pelaajan 2 voitto-häviö-ratio: 2.2069702
+
+**AdvancedAI vs. MediumAI:** 
+
+Pelaajan 1 voitto-häviö-ratio: 1.6895906
+
+Pelaajan 2 voitto-häviö-ratio: 0.59185934
+
+**MediumAI vs. AdvancedAI:** 
+
+Pelaajan 1 voitto-häviö-ratio: 0.6654836
+
+Pelaajan 2 voitto-häviö-ratio: 1.5026666
+
+Voittoprosentit vaikuttavat mielestäni nyt sopivilta. AdvancedAI:n ja MediumAI:n välinen ero on nyt lähinnä järjestyksessä,
+missä minioneita yritytetään pelata pöytään, ja AdvancedAI osaa pelata mounted minioneita tuhotakseen vastustajan kortteja. 
+
+**Yhteenveto (kurssin osalta):**
+
+Kaikki kurssin aikana kehittämäni AI:t perustuvat pitkälti peräkkäin kutsuttaviin ehtolauseisiin, joiden järjestystä on
+parhaan mukaan pyritty optimoimaan peluuttamalla tekoälyjä keskenään. Algoritmit toiminnan takana eivät ole erityisen
+hienovaraisia tai nerokkaita eivätkä ne perustu mihinkään aiempaan teoriaan, mutta ne on kehitetty ja optimoitu pala
+palalta tavoitteena luoda niistä tehokkaampia. Jokainen tehty ratkaisu on perusteltavissa, ja tästä päiväkirjasta löytyy
+niitä tukevia testituloksia ja spekulointia.
+
+Lopputuloksena on erittäin tehokas tekoäly, joka näyttää pelaajan näkökulmasta tekevän järkeviä ratkaisuja. Lopullisessa
+pelin julkaisussa AdvancedAI:n kaltainen tekoäly menisi todennäköisesti vaikeusasteena Medium ja MediumAI olisi Easy.
+Haastavammaksi tekoälyksi tulen kehittämään vielä ratkaisun, joka luomalla joka vuoro kaikki mahdolliset skenaariot osaa
+valita optimaalisia ratkaisuja ja mahdollisesti laskelmoida tulevia vuoroja. Harmi etten kurssin aikana ehtinyt sitä 
+toteuttaa, innostuin liikaa viilaamaan pilkkua AdvancedAI:n toteutuksessa ja en ollut varma miten sen toteuttaisin niin,
+että tulevaisuudessa lisättävät kortit eivät riko sitä. Siinä onkin sitten kesäksi tekemistä :)
 
 
 

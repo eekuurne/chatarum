@@ -9,6 +9,9 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 /**
+ * Minion cards can be played from hand to table. They have all have damage
+ * and health values and they fight against each other in the table. They
+ * can also have special abilities, which are explained below.
  *
  * @author Eero Kuurne
  */
@@ -86,6 +89,13 @@ public abstract class Minion extends Card {
         this.health += amount;
     }
 
+    /**
+     * Changes the minion's health when attacked or healed. Negative amount when
+     * taking damage, positive for heal.
+     *
+     * @param handler
+     * @param slot
+     */
     @Override
     public void clickInHand(LogicHandler handler, int slot) {
         handler.clearChosen();
@@ -140,6 +150,11 @@ public abstract class Minion extends Card {
         //System.out.println(getName() + " has died!");
     }
 
+    /**
+     * Draws a placeholder card if no picture has been assigned to a card.
+     *
+     * @param g Graphics
+     */
     @Override
     public void paintComponent(Graphics g) {
         g.drawImage(Assets.cardBackGroundSmall, super.getX(), super.getY(), null);
@@ -167,6 +182,12 @@ public abstract class Minion extends Card {
         
     }
 
+    /**
+     * Draws a placeholder if no card picture has been assigned.
+     *
+     * @param g Graphics
+     */
+    @Override
     public void paintHover(Graphics g) {
         if (super.getY() <= Locations.tableSlotsY) {
             g.drawImage(Assets.cardBackGroundBig, super.getX() - (Assets.bigWidth - Assets.smallWidth)

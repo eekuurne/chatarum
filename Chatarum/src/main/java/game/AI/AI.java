@@ -42,11 +42,15 @@ public abstract class AI {
         for (int i = 0; i < 8; i++) {
             if (playerA.getTable().getMinions()[i] != null
                     && playerA.getTable().getMinions()[i].getTurnleft()) {
-                int[] enemyTableSlots = checkFilledTableSlots(playerB);
-
+                int[] enemyTableSlots = randomSlotOrders(checkFilledTableSlots(playerB));
                 if (enemyTableSlots.length > 0) {
-                    int attackSlot = enemyTableSlots[rand.nextInt(enemyTableSlots.length)];
-                    handler.minionAttack(i, attackSlot, playerA, playerB);
+                    for (int j = 0; j < enemyTableSlots.length; j++) {
+                        handler.minionAttack(i, enemyTableSlots[j], playerA, playerB);
+                        if (playerA.getTable().getMinions()[i] == null || 
+                                !playerA.getTable().getMinions()[i].getTurnleft()) {
+                            break;
+                        }
+                    }
                 }
             }
         }
@@ -74,7 +78,8 @@ public abstract class AI {
 
     /**
      * Attacks enemy minions with own minions if they die to the attack. First
-     * tries the optimal targets, then all the others.
+     * tries the optimal targets, then targets with less health than attackers
+     * attack value.
      */
     protected void tableAttackToKill() {
         tableAttackOptimalTargets();
@@ -86,14 +91,15 @@ public abstract class AI {
      * equal to attackers damage.
      */
     private void tableAttackOptimalTargets() {
+        int[] attackOrder = randomSlotOrders();
         for (int i = 0; i < 8; i++) {
             if (playerA.getTable().getMinions()[i] != null && playerA.getTable().getMinions()[i].getTurnleft()) {
                 playerA.getTable().getMinions()[i].clickInTable(handler, i);
                 Minion attacker = playerA.getTable().getMinions()[i];
                 for (int j = 0; j < 8; j++) {
-                    Minion defender = playerB.getTable().getMinions()[j];
+                    Minion defender = playerB.getTable().getMinions()[attackOrder[j]];
                     if (defender != null && (attacker.getDamage() == defender.getHealth() || attacker.getDeadly())) {
-                        handler.minionAttack(i, j, playerA, playerB);
+                        handler.minionAttack(i, attackOrder[j], playerA, playerB);
                         break;
                     }
                 }
@@ -106,19 +112,54 @@ public abstract class AI {
      * smaller than attackers damage.
      */
     private void tableAttackOverkillTargets() {
+        int[] attackOrder = randomSlotOrders();
         for (int i = 0; i < 8; i++) {
             if (playerA.getTable().getMinions()[i] != null && playerA.getTable().getMinions()[i].getTurnleft()) {
                 playerA.getTable().getMinions()[i].clickInTable(handler, i);
                 Minion attacker = playerA.getTable().getMinions()[i];
                 for (int j = 0; j < 8; j++) {
-                    Minion defender = playerB.getTable().getMinions()[j];
+                    Minion defender = playerB.getTable().getMinions()[attackOrder[j]];
                     if (defender != null && attacker.getDamage() >= defender.getHealth()) {
-                        handler.minionAttack(i, j, playerA, playerB);
+                        handler.minionAttack(i, attackOrder[j], playerA, playerB);
                         break;
                     }
                 }
             }
         }
+    }
+
+    /**
+     * @return Array with numbers from 0 to 7 in random order.
+     */
+    private int[] randomSlotOrders() {
+        int[] slots = {0, 1, 2, 3, 4, 5, 6, 7};
+        
+        // Fisher-Yates shuffle:
+        for (int i = slots.length - 1; i > 0; i--) {
+            int index = rand.nextInt(i + 1);
+            int a = slots[index];
+            slots[index] = slots[i];
+            slots[i] = a;
+        }
+        
+        return slots;
+    }
+    
+    /**
+     * Shuffles the parameter's array and returns it.
+     * 
+     * @param slots Array of integers
+     * @return Array with numbers of parameter's array in random order
+     */
+    private int[] randomSlotOrders(int[] slots) {
+        // Fisher-Yates shuffle:
+        for (int i = slots.length - 1; i > 0; i--) {
+            int index = rand.nextInt(i + 1);
+            int a = slots[index];
+            slots[index] = slots[i];
+            slots[i] = a;
+        }
+        return slots;
     }
 
     /**

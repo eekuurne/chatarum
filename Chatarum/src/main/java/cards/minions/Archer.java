@@ -7,7 +7,7 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
 /**
- * Basic warrior class.
+ * Basic ranged minion.
  *
  * @author Eero Kuurne
  */

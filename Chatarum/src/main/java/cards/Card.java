@@ -49,8 +49,12 @@ public abstract class Card {
         this.y = y;
     }
 
+    /**
+     * Draws a placeholder card if no picture has been assigned to a card.
+     *
+     * @param g Graphics
+     */
     public void paintComponent(Graphics g) {
-        // Draw placeholder.
         g.drawImage(Assets.cardBackGroundSmall, x, y, null);
 
         Font font = new Font("Serif", Font.BOLD, Assets.statTextFont);
@@ -59,7 +63,7 @@ public abstract class Card {
 
         font = new Font("Serif", Font.BOLD, (int) (Assets.statTextFont / 1.5));
         g.setFont(font);
-        g.drawString("Deals 2 AOE damage.", getX() + 5, getY() + 4 * Assets.smallHeight / 5);
+        g.drawString("<Placeholder>", getX() + 5, getY() + 4 * Assets.smallHeight / 5);
 
         font = new Font("Serif", Font.BOLD, (int) (Assets.statTextFont / 1.2));
         g.setFont(font);
@@ -68,6 +72,11 @@ public abstract class Card {
         g.drawString("   <Placeholder>", getX() + 5, getY() + Assets.smallHeight / 3);
     }
 
+    /**
+     * Draws the card bigger when mouse is hovering over it.
+     *
+     * @param g Graphics
+     */
     public abstract void paintHover(Graphics g);
 
     /**

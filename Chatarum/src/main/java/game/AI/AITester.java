@@ -64,6 +64,7 @@ public class AITester {
                 handler.startTurn();
             }
         }
+        // Results are in Finnish so they can be copypasted to the documentation.
         System.out.println("Pelaaja 1: " + player1Wins + " voittoa");
         System.out.println("Pelaaja 2: " + player2Wins + " voittoa");
         System.out.println("Pelaajan 1 voitto-häviö-ratio: " + (float) player1Wins / player2Wins);

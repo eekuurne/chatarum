@@ -14,6 +14,7 @@ import game.ui.UserInterface;
 import java.util.ArrayList;
 
 /**
+ * Handles the logic of the game.
  *
  * @author Eero Kuurne
  */
@@ -54,9 +55,15 @@ public class LogicHandler {
         init(player1AI, player2AI);
     }
 
+    /**
+     * Builds decks, setups players and AIs, sets starting resources,picks
+     * starting cards and repaints the UI at the start of the game.
+     *
+     * @param player1AI Player 1's AI
+     * @param player2AI Player 2's AI
+     */
     public void init(AI player1AI, AI player2AI) {
         DeckBuilder deckBuilder = new DeckBuilder();
-
         Deck deck1 = deckBuilder.getDeck1();
         Deck deck2 = deckBuilder.getDeck2();
 
@@ -74,10 +81,15 @@ public class LogicHandler {
         }
 
         updateCardPositions();
-
         repaint();
     }
 
+    /**
+     * Setups the handlers and players for the AIs.
+     *
+     * @param player1AI Player 1's AI
+     * @param player2AI Player 2's AI
+     */
     public void setupAI(AI player1AI, AI player2AI) {
         if (player1AI != null) {
             this.player1.setAI(player1AI);
@@ -95,7 +107,6 @@ public class LogicHandler {
 
     /**
      * What happens when the player clicks "End turn" button.
-     *
      */
     public void changeTurn() {
         if (!betweenTurns) {
@@ -109,6 +120,11 @@ public class LogicHandler {
         repaint();
     }
 
+    /**
+     * Ends the turn.
+     *
+     * @return 0 if game didn't end, 1 if player 1 wins, 2 if player 2 wins.
+     */
     public int endTurn() {
         Player endingPlayer;
         Player startingPlayer;
@@ -133,6 +149,9 @@ public class LogicHandler {
         return 0;
     }
 
+    /**
+     * Starts the turn.
+     */
     public void startTurn() {
         turn++;
 
@@ -151,6 +170,7 @@ public class LogicHandler {
     /**
      * Ends the game if some player's health goes to 0.
      *
+     * @return 0 if game didn't end, 1 if player 1 wins, 2 if player 2 wins.
      */
     private int endGame() {
         if (player1.getRemainingInfluence() <= 0 || (turn >= 100
@@ -165,6 +185,12 @@ public class LogicHandler {
         return 0;
     }
 
+    /**
+     * Plays a turn for AI.
+     *
+     * @param startingPlayer Player who is about to start turn.
+     * @param endingPlayer Player who ended the last turn.
+     */
     private void playAI(Player startingPlayer, Player endingPlayer) {
         if (startingPlayer.getAI() != null) {
             startTurn();
@@ -176,7 +202,11 @@ public class LogicHandler {
         }
     }
 
-    // Split to smaller methods.
+    /**
+     * Clears the chosen card.
+     *
+     * (Refactor later)
+     */
     public void clearChosen() {
         if (chosenHandMinion != null) {
             Minion chosenH = chosenHandMinion;
@@ -210,6 +240,9 @@ public class LogicHandler {
         }
     }
 
+    /**
+     * Updates the card positions on screen after something changes.
+     */
     public void updateCardPositions() {
         // Update hands.
         player1.getHand().cardPositions(1);
@@ -220,10 +253,20 @@ public class LogicHandler {
         player2.getTable().cardPositions(2);
     }
 
+    /**
+     * Draws a card from the players deck and puts it in his hand.
+     *
+     * @param player The player who draws the card.
+     */
     public void drawCard(Player player) {
         player.getHand().addCard(player.getDeck().takeCard());
     }
 
+    /**
+     * Updates resources of a player.
+     *
+     * @param player The player whose resources will be updated.
+     */
     public void updateResources(Player player) {
         if (turn != 2) { // Fixes the player 2 starting resources.
             player.changeMaxTurnResources(10);
@@ -239,17 +282,28 @@ public class LogicHandler {
         player.setRemainingResources(player.getMaxResources());
     }
 
+    /**
+     * What happens when player clicks a card in hand.
+     *
+     * @param slot The slot which is clicked.
+     * @param player The player whose hand is clicked.
+     */
     public void clickHandSlot(int slot, Player player) {
         Card card = player.getHand().getCards().get(slot);
         if (card.getCost() <= player.getRemainingResources()) {
             card.clickInHand(this, slot);
         } else {
             clearChosen();
-            /*player.getHand().getCards().get(slot).paintHover(ui.getGraphics());
-             ui.repaint();*/
         }
     }
 
+    /**
+     * Method for placing minion to table.
+     *
+     * @param slot The table slot where minion is placed.
+     * @param playerA The player whose turn it is.
+     * @param playerB The enemy player.
+     */
     public void placeChosenMinionToTable(int slot, Player playerA, Player playerB) {
         if (playerA.getTable().getMinions()[slot] == null) {
             playerA.getTable().insertMinion(chosenHandMinion, slot);
@@ -262,23 +316,25 @@ public class LogicHandler {
         clearChosen();
     }
 
-    // Split to smaller methods.
+    /**
+     * Method for minion attacking.
+     *
+     * @param attackingSlot The table slot of the attacking minion.
+     * @param defendingSlot The table slot of the defending minion.
+     * @param attackingPlayer The attacking player.
+     * @param defendingPlayer The defending player.
+     */
     public void minionAttack(int attackingSlot, int defendingSlot,
             Player attackingPlayer, Player defendingPlayer) {
 
         Minion attacker = attackingPlayer.getTable().getMinions()[attackingSlot];
         Minion defender = defendingPlayer.getTable().getMinions()[defendingSlot];
 
-        // If there are adjacent guardians, guide the attack to them. If both
-        // sides are guardians, attack left one.
-        ArrayList<Integer> guardianSlots = checkGuardians(defendingPlayer);
-        if (guardianSlots.contains(defendingSlot - 1)) {
-            defendingSlot--;
-            defender = defendingPlayer.getTable().getMinions()[defendingSlot];
-        } else if (guardianSlots.contains(defendingSlot + 1)) {
-            defendingSlot++;
-            defender = defendingPlayer.getTable().getMinions()[defendingSlot];
+        // Checks if the defending minion is guarded by guardian.
+        if (guarded(defendingPlayer.getTable().getMinions(), defendingSlot)) {
+            return;
         }
+
         // Attacker uses his turn.
         attacker.setTurnLeft(false);
 
@@ -314,6 +370,13 @@ public class LogicHandler {
 
     }
 
+    /**
+     * Changes influence of a player if at the end of turn there are minions in
+     * table who didn't use their turns.
+     *
+     * @param startingPlayer The player who is starting turn.
+     * @param endingPlayer The The player who is ending turn.
+     */
     private void influenceChange(Player startingPlayer, Player endingPlayer) {
         int influenceLost = 0;
         for (int i = 0; i < 8; i++) {
@@ -326,6 +389,12 @@ public class LogicHandler {
         startingPlayer.changeRemainingInfluence(-influenceLost);
     }
 
+    /**
+     * At the start of a player's turn, gives turns to all of his minions in
+     * table.
+     *
+     * @param startingPlayer The player who is starting turn.
+     */
     public void setMinionTurnLeftsTrue(Player startingPlayer) {
         for (int i = 0; i < 8; i++) {
             if (startingPlayer.getTable().getMinions()[i] != null
@@ -336,8 +405,8 @@ public class LogicHandler {
     }
 
     /**
-     * Checks the slots of guardians in param player's table. Can be used to
-     * guide attacks or repaint guardian icons.
+     * Checks the slots of guardians in param player's table. Isn't used anywhere
+     * at the moment.
      *
      * @param player Which player's table is checked.
      * @return ArrayList of the guardian slots.
@@ -353,6 +422,9 @@ public class LogicHandler {
         return guardians;
     }
 
+    /**
+     * @return Array of 2 Players where 1. slot is the player whose turn it is.
+     */
     public Player[] checkPlayerTurn() {
         Player[] players = new Player[2];
         players[0] = player1;
@@ -364,6 +436,14 @@ public class LogicHandler {
         return players;
     }
 
+    /**
+     * What happens when player clicks his own table.
+     *
+     * @param x Mouse x-coordinate.
+     * @param y Mouse y-coordinate.
+     * @param playerA Player whose turn it is.
+     * @param playerB The enemy player.
+     */
     public void playerATableClicked(int x, int y, Player playerA, Player playerB) {
         for (int i = 0; i < 8; i++) {
 
@@ -380,6 +460,14 @@ public class LogicHandler {
         clearChosen();
     }
 
+    /**
+     * What happens when player clicks his the enemy table.
+     *
+     * @param x Mouse x-coordinate.
+     * @param y Mouse y-coordinate.
+     * @param playerA Player whose turn it is.
+     * @param playerB The enemy player.
+     */
     public void playerBTableClicked(int x, int y, Player playerA, Player playerB) {
         for (int i = 0; i < 8; i++) {
             if (chosenTableCard != null && playerB.getTable().getMinions()[i] != null
@@ -392,6 +480,13 @@ public class LogicHandler {
         clearChosen();
     }
 
+    /**
+     * What happens when player clicks his own hand.
+     *
+     * @param x Mouse x-coordinate.
+     * @param y Mouse y-coordinate.
+     * @param player Player whose turn it is.
+     */
     public void playerAHandClicked(int x, int y, Player player) {
         for (int i = 0; i < player.getHand().getRemaining(); i++) {
             if (x >= player.getHand().getCards().get(i).getX()
@@ -401,6 +496,64 @@ public class LogicHandler {
             }
         }
         clearChosen();
+    }
+
+    /**
+     * Paints the card bigger if mouse is hovering over it.
+     * 
+     * @param x Mouse x-coordinate.
+     * @param y Mouse y-coordinate.
+     * @param player Player who is controlling the mouse.
+     */
+    public void playerAHandHover(int x, int y, Player player) {
+        if (chosenHandMinion == null && chosenHandOffensiveAOE == null) {
+            for (int i = 0; i < player.getHand().getRemaining(); i++) {
+                if (x >= player.getHand().getCards().get(i).getX()
+                        && x <= player.getHand().getCards().get(i).getX() + Assets.smallWidth) {
+                    player.getHand().getCards().get(i).paintHover(ui.getGraphics());
+                    return;
+                }
+            }
+        }
+        repaint();
+    }
+
+    public void playerBTableHover(int mx, int my, Player playerA, Player playerB) {
+    }
+
+    public void playerATableHover(int mx, int my, Player playerA, Player playerB) {
+    }
+
+    public void changeTurnHover() {
+    }
+
+    /**
+     * Repaint-method which isn't called if AIs are playing against each other.
+     */
+    public void repaint() {
+        if (!AITesting) {
+            ui.repaint();
+        }
+    }
+
+    /**
+     * Checks is the minion in given table and slot guarded by guardian.
+     *
+     * @param minions Table where the minion is
+     * @param slot Slot of the minion
+     * @return Is the minion in given slot guarded by guardian.
+     */
+    public boolean guarded(Minion[] minions, int slot) {
+        if (minions[slot] != null && !minions[slot].getGuardian()
+                && ((slot != 0 && minions[slot - 1] != null && minions[slot - 1].getGuardian())
+                || (slot != 7 && minions[slot + 1] != null && minions[slot + 1].getGuardian()))) {
+            return true;
+        }
+        return false;
+    }
+
+    public void setAITesting(boolean AITesting) {
+        this.AITesting = AITesting;
     }
 
     public int getTurn() {
@@ -478,37 +631,4 @@ public class LogicHandler {
     public UserInterface getUi() {
         return ui;
     }
-
-    public void playerAHandHover(int x, int y, Player player) {
-        if (chosenHandMinion == null && chosenHandOffensiveAOE == null) {
-            for (int i = 0; i < player.getHand().getRemaining(); i++) {
-                if (x >= player.getHand().getCards().get(i).getX()
-                        && x <= player.getHand().getCards().get(i).getX() + Assets.smallWidth) {
-                    player.getHand().getCards().get(i).paintHover(ui.getGraphics());
-                    return;
-                }
-            }
-        }
-        repaint();
-    }
-
-    public void playerBTableHover(int mx, int my, Player playerA, Player playerB) {
-    }
-
-    public void playerATableHover(int mx, int my, Player playerA, Player playerB) {
-    }
-
-    public void changeTurnHover() {
-    }
-
-    public void repaint() {
-        if (!AITesting) {
-            ui.repaint();
-        }
-    }
-
-    public void setAITesting(boolean AITesting) {
-        this.AITesting = AITesting;
-    }
-
 }

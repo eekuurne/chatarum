@@ -4,6 +4,8 @@ import cards.Minion;
 import game.logic.LogicHandler;
 import game.logic.Player;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 
 /**
  * THIS CLASS IS FOR TESTING ONLY. IT WILL MOST LIKELY CONTAIN METHODS THAT
@@ -26,11 +28,12 @@ public class TestAI extends AI {
 
     /**
      * The AI starts with checking if it can finish the game in this turn and
-     * does so if possible. Then it proceeds to play the turns of the minions in
-     * table. Then it plays the hand. Then it plays the new mounted minions.
-     *
-     * This order seems to win most with these methods according to my tests, so
-     * I'll keep it for MediumAI.
+     * does so if possible. Then it tries to attack every target which its
+     * minions can kill with one attack, starting with optimal targets and then
+     * going for overkills. Then it plays the minions from its hand, order
+     * depending on if the enemy table is empty or not. In the end it tries to
+     * attack optimal targets with new mounted minions, and then attacks random
+     * targets with all remaining minion turns.
      */
     @Override
     public void playTurn() {
@@ -48,6 +51,9 @@ public class TestAI extends AI {
         playTableRandomly();
     }
 
+    /**
+     * This method is called to play hand if the enemy player's table is empty.
+     */
     private void playBEmpty() {
         if (guardedSlotsInTable() && checkHandCost() > 190) {
             playWorkers();
@@ -63,6 +69,11 @@ public class TestAI extends AI {
         playWorkers();
     }
 
+    /**
+     * This method is called to play hand if the enemy player's table is not
+     * empty.
+     *
+     */
     private void playBNotEmpty() {
         playMountedsToKill();
 
@@ -82,14 +93,10 @@ public class TestAI extends AI {
         }
     }
 
-    private int checkHandCost() {
-        int cost = 0;
-        for (int i = 0; i < playerA.getHand().getRemaining(); i++) {
-            cost += playerA.getHand().getCards().get(i).getCost();
-        }
-        return cost;
-    }
-
+    /**
+     *
+     *
+     */
     private boolean guardedSlotsInTable() {
         for (int i = 0; i < 8; i++) {
             int nextSlot = normalOrder[i] + 1;
@@ -103,6 +110,18 @@ public class TestAI extends AI {
             }
         }
         return false;
+    }
+
+    /**
+     *
+     *
+     */
+    private int checkHandCost() {
+        int cost = 0;
+        for (int i = 0; i < playerA.getHand().getRemaining(); i++) {
+            cost += playerA.getHand().getCards().get(i).getCost();
+        }
+        return cost;
     }
 
     /**
@@ -189,13 +208,20 @@ public class TestAI extends AI {
      * minions in table.
      */
     private void playMountedsToKill() {
+        playMountedsToKillOptimal();
+        //playMountedsToKillOverkill();
+    }
+
+    /**
+     *
+     *
+     */
+    private void playMountedsToKillOptimal() {
         for (int i = playerA.getHand().getRemaining() - 1; i >= 0; i--) {
             handler.clickHandSlot(i, playerA);
             Minion attacker = handler.getChosenHandMinion();
-
             if (attacker != null && attacker.getTurnleft()) {
                 boolean continueTrying = true;
-
                 for (int j = 0; j < 8; j++) {
                     Minion defender = playerB.getTable().getMinions()[j];
                     if (defender != null && (attacker.getDamage() == defender.getHealth()) && continueTrying) {
@@ -209,6 +235,20 @@ public class TestAI extends AI {
                         }
                     }
                 }
+            }
+        }
+    }
+
+    /**
+     *
+     *
+     */
+    private void playMountedsToKillOverkill() {
+        for (int i = playerA.getHand().getRemaining() - 1; i >= 0; i--) {
+            handler.clickHandSlot(i, playerA);
+            Minion attacker = handler.getChosenHandMinion();
+            if (attacker != null && attacker.getTurnleft()) {
+                boolean continueTrying = true;
                 for (int j = 0; j < 8; j++) {
                     Minion defender = playerB.getTable().getMinions()[j];
                     if (defender != null && attacker.getDamage() > defender.getHealth() && continueTrying) {

@@ -5,11 +5,8 @@ import game.logic.LogicHandler;
 import game.logic.Player;
 
 /**
- *
- *
- *
- *
- *
+ * AdvancedAI is the result of vast testing and improvements made piece by piece.
+ * It's currently the best AI and it wins the other AIs with high win-loss-ratio.
  *
  * @author Eero Kuurne
  */
@@ -24,16 +21,18 @@ public class AdvancedAI extends AI {
 
     /**
      * The AI starts with checking if it can finish the game in this turn and
-     * does so if possible. Then it proceeds to play the turns of the minions in
-     * table. Then it plays the hand. Then it plays the new mounted minions.
-     *
-     * This order seems to win most with these methods according to my tests, so
-     * I'll keep it for MediumAI.
+     * does so if possible. Then it tries to attack every target which its
+     * minions can kill with one attack, starting with optimal targets and then
+     * going for overkills. Then it plays the minions from its hand, order
+     * depending on if the enemy table is empty or not. In the end it tries to
+     * attack optimal targets with new mounted minions, and then attacks random
+     * targets with all remaining minion turns.
      */
     @Override
     public void playTurn() {
         checkLethal();
 
+        tableAttackToKill();
         tableAttackToKill();
 
         if (playerB.getTable().isEmpty()) {
@@ -43,9 +42,13 @@ public class AdvancedAI extends AI {
         }
 
         tableAttackToKill();
+        tableAttackToKill();
         playTableRandomly();
     }
 
+    /**
+     * This method is called to play hand if the enemy player's table is empty.
+     */
     private void playBEmpty() {
         if (guardedSlotsInTable() && checkHandCost() > 190) {
             playWorkers();
@@ -61,7 +64,12 @@ public class AdvancedAI extends AI {
         playWorkers();
     }
 
+    /**
+     * This method is called to play hand if the enemy player's table is not
+     * empty.
+     */
     private void playBNotEmpty() {
+        playMountedsToKill();
         playMountedsToKill();
 
         if (playerB.getTable().isEmpty()) {
@@ -80,6 +88,9 @@ public class AdvancedAI extends AI {
         }
     }
 
+    /**
+     * @return Are there any empty slots next to guardians in table.
+     */
     private boolean guardedSlotsInTable() {
         for (int i = 0; i < 8; i++) {
             int nextSlot = normalOrder[i] + 1;
@@ -95,6 +106,9 @@ public class AdvancedAI extends AI {
         return false;
     }
 
+    /**
+     * @return How much resources the cards in player's hand cost in total.
+     */
     private int checkHandCost() {
         int cost = 0;
         for (int i = 0; i < playerA.getHand().getRemaining(); i++) {
@@ -183,33 +197,19 @@ public class AdvancedAI extends AI {
     }
 
     /**
-     * Plays all the mounted minions who have enough damage to kill enemy
-     * minions in table.
+     * Plays all the mounted minions who have same damage as an enemy minion's
+     * health and attacks with them.
      */
     private void playMountedsToKill() {
         for (int i = playerA.getHand().getRemaining() - 1; i >= 0; i--) {
             handler.clickHandSlot(i, playerA);
             Minion attacker = handler.getChosenHandMinion();
-
             if (attacker != null && attacker.getTurnleft()) {
                 boolean continueTrying = true;
-
                 for (int j = 0; j < 8; j++) {
                     Minion defender = playerB.getTable().getMinions()[j];
-                    if (defender != null && (attacker.getDamage() == defender.getHealth()) && continueTrying) {
-                        for (int k = 0; k < 8; k++) {
-                            if (playerA.getTable().getMinions()[k] == null) {
-                                handler.placeChosenMinionToTable(k, playerA, playerB);
-                                handler.minionAttack(k, j, playerA, playerB);
-                                continueTrying = false;
-                                break;
-                            }
-                        }
-                    }
-                }
-                for (int j = 0; j < 8; j++) {
-                    Minion defender = playerB.getTable().getMinions()[j];
-                    if (defender != null && attacker.getDamage() > defender.getHealth() && continueTrying) {
+                    if (defender != null && !handler.guarded(playerB.getTable().getMinions(), j)
+                            && attacker.getDamage() == defender.getHealth() && continueTrying) {
                         for (int k = 0; k < 8; k++) {
                             if (playerA.getTable().getMinions()[k] == null) {
                                 handler.placeChosenMinionToTable(k, playerA, playerB);

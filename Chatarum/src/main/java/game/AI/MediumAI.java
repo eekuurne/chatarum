@@ -7,11 +7,7 @@ import java.util.ArrayList;
 /**
  * AI which tries to mimic an average player: it tries to play the minions like
  * they are supposed to and uses minions to attack enemy influence if the turn
- * is lethal.
- *
- * Still, it doesn't know which cards are best and when, and who to attack. So
- * in conclusion: this AI doesn't know how to play optimally, but it is not
- * obviously stupid.
+ * is lethal. Before attacking randomly it attacks the targets it can kill.
  *
  * @author Eero Kuurne
  */
@@ -28,15 +24,19 @@ public class MediumAI extends AI {
      * The AI starts with checking if it can finish the game in this turn and
      * does so if possible. Then it proceeds to play the turns of the minions in
      * table. Then it plays the hand. Then it plays the new mounted minions.
-     *
-     * This order seems to win most with these methods according to my tests, so
-     * I'll keep it for MediumAI.
      */
     @Override
     public void playTurn() {
         checkLethal();
-        playTableRandomly();
+        
+        tableAttackToKill();
+        tableAttackToKill();
+        
         playHand();
+        
+        tableAttackToKill();
+        tableAttackToKill();
+        
         playTableRandomly();
     }
     

@@ -25,8 +25,8 @@ public class DeckBuilder {
     }
 
     /**
-     * Builds 2 decks for test usage.
-     *
+     * Builds 2 decks. The decks can be altered by changing the cards in this
+     * method.
      */
     public void init() {
         

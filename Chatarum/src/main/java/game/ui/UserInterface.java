@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 /**
+ * Handles painting all the components of the game to the screen.
  *
  * @author Eero Kuurne
  */
@@ -71,21 +72,11 @@ public class UserInterface extends JPanel {
     }
 
     private void paintProtected(Graphics g, Player player) {
-        ArrayList<Integer> guardians = handler.checkGuardians(player);
-
-        for (int i = 0; i < guardians.size(); i++) {
-            // Paint minions left to guardians.
-            if (guardians.get(i) - 1 >= 0
-                    && player.getTable().getMinions()[guardians.get(i) - 1] != null) {
-                g.drawImage(Assets.guardianIcon,
-                        player.getTable().getMinions()[guardians.get(i) - 1].getX() + Locations.protectedX,
-                        player.getTable().getMinions()[guardians.get(i) - 1].getY() + Locations.protectedY, null);
-            } // Paint minions right to guardians.
-            if (guardians.get(i) + 1 <= 7
-                    && player.getTable().getMinions()[guardians.get(i) + 1] != null) {
-                g.drawImage(Assets.guardianIcon,
-                        player.getTable().getMinions()[guardians.get(i) + 1].getX() + Locations.protectedX,
-                        player.getTable().getMinions()[guardians.get(i) + 1].getY() + Locations.protectedY, null);
+        for (int i = 0; i < 8; i++) {
+            if (handler.guarded(player.getTable().getMinions(), i)) {
+                g.drawImage(Assets.guardianIcon, player.getTable().getMinions()[i].getX() 
+                        + Locations.protectedX, player.getTable().getMinions()[i].getY() 
+                                + Locations.protectedY, null);
             }
         }
     }
