@@ -12,21 +12,10 @@ import java.awt.Graphics;
 public class Axethrower extends Minion {
 
     public Axethrower() {
-        super("Axethrower", 35, 2, 1, false, true, false, 0);
-    }
-
-    @Override
-    public void paintComponent(Graphics g) {
-        g.drawImage(Assets.axethrowerSmall, super.getX(), super.getY(), null);
-    }
-
-    public void paintHover(Graphics g) {
-        if (super.getY() <= Locations.tableSlotsY) {
-            g.drawImage(Assets.axethrowerBig, super.getX() - (Assets.bigWidth - Assets.smallWidth)
-                    / 2, super.getY(), null);
-        } else {
-            g.drawImage(Assets.axethrowerBig, super.getX() - (Assets.bigWidth - Assets.smallWidth)
-                    / 2, super.getY() - (Assets.bigHeight - Assets.smallHeight), null);
-        }
+        super("Axethrower", 35, 2, 1);
+        setRanged(true);
+        
+        setSmallPic(Assets.axethrowerSmall);
+        setBigPic(Assets.axethrowerBig);
     }
 }

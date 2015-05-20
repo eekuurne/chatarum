@@ -21,22 +21,11 @@ import java.util.Random;
 public class PuppetMaster extends Minion {
 
     public PuppetMaster() {
-        super("Puppet Master", 80, 2, 4, false, true, false, 0);
-    }
-
-    @Override
-    public void paintComponent(Graphics g) {
-        g.drawImage(Assets.puppetMasterSmall, super.getX(), super.getY(), null);
-    }
-    
-    public void paintHover(Graphics g) {
-        if (super.getY() <= Locations.tableSlotsY) {
-            g.drawImage(Assets.puppetMasterBig, super.getX() - (Assets.bigWidth - Assets.smallWidth) 
-                    / 2, super.getY(), null);
-        } else {
-            g.drawImage(Assets.puppetMasterBig, super.getX() - (Assets.bigWidth - Assets.smallWidth) 
-                    / 2, super.getY() - (Assets.bigHeight - Assets.smallHeight), null);
-        }
+        super("Puppet Master", 80, 2, 4);
+        setRanged(true);
+        
+        setSmallPic(Assets.puppetMasterSmall);
+        setBigPic(Assets.puppetMasterBig);
     }
 
     /**

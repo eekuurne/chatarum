@@ -89,12 +89,10 @@ public class MouseInput extends MouseInputAdapter {
 
     @Override
     public void mouseEntered(MouseEvent me) {
-        System.out.println("Mouse entered!");
     }
 
     @Override
     public void mouseExited(MouseEvent me) {
-        System.out.println("Mouse exited!");
     }
 
     @Override

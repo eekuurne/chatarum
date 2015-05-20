@@ -12,22 +12,10 @@ import java.awt.Graphics;
 public class Assassin extends Minion {
 
     public Assassin() {
-        super("Assassin", 30, 0, 2, false, false, false, 0);
+        super("Assassin", 30, 0, 2);
         setDeadly(true);
-    }
-
-    @Override
-    public void paintComponent(Graphics g) {
-        g.drawImage(Assets.assassinSmall, super.getX(), super.getY(), null);
-    }
-    
-    public void paintHover(Graphics g) {
-        if (super.getY() <= Locations.tableSlotsY) {
-            g.drawImage(Assets.assassinBig, super.getX() - (Assets.bigWidth - Assets.smallWidth) 
-                    / 2, super.getY(), null);
-        } else {
-            g.drawImage(Assets.assassinBig, super.getX() - (Assets.bigWidth - Assets.smallWidth) 
-                    / 2, super.getY() - (Assets.bigHeight - Assets.smallHeight), null);
-        }
+        
+        setSmallPic(Assets.assassinSmall);
+        setBigPic(Assets.assassinBig);
     }
 }

@@ -21,22 +21,11 @@ import java.util.Random;
 public class VoodooPriest extends Minion {
 
     public VoodooPriest() {
-        super("Voodoo Priest", 55, 2, 2, false, true, false, 0);
-    }
-
-    @Override
-    public void paintComponent(Graphics g) {
-        g.drawImage(Assets.voodooPriestSmall, super.getX(), super.getY(), null);
-    }
-    
-    public void paintHover(Graphics g) {
-        if (super.getY() <= Locations.tableSlotsY) {
-            g.drawImage(Assets.voodooPriestBig, super.getX() - (Assets.bigWidth - Assets.smallWidth) 
-                    / 2, super.getY(), null);
-        } else {
-            g.drawImage(Assets.voodooPriestBig, super.getX() - (Assets.bigWidth - Assets.smallWidth) 
-                    / 2, super.getY() - (Assets.bigHeight - Assets.smallHeight), null);
-        }
+        super("Voodoo Priest", 55, 2, 2);
+        setRanged(true);
+        
+        setSmallPic(Assets.voodooPriestSmall);
+        setBigPic(Assets.voodooPriestBig);
     }
 
     /**

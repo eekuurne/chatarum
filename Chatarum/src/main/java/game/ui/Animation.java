@@ -12,11 +12,21 @@ import javax.swing.Timer;
  */
 public class Animation implements ActionListener {
 
-    Timer timer = new Timer(5, this);
+    private Timer timer;
+    
+    public Animation() {
+        this.timer = new Timer(5, this);
+    }
 
+    
+    
     public void meleeAnimation(Minion attacker, Minion defender) {
         timer.start();
-
+        
+        
+        
+        
+        timer.stop();
     }
 
     public void rangedAnimation(Minion attacker, Minion defender) {
@@ -25,7 +35,7 @@ public class Animation implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        
     }
 
 }
